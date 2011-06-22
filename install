@@ -1,15 +1,19 @@
 cd `dirname $0`
 
-echo "---> Installing .vimrc"
+echo "--->  Installing .vimrc"
 echo "
 set runtimepath=`pwd`/vim/,\$VIMRUNTIME
 source `pwd`/vimrc
 helptags `pwd`/vim/doc/ " > ~/.vimrc
 
-echo "---> Installing .bashrc"
+echo "--->  Installing .basrc but only has a backup to zsh"
 echo ". `pwd`/bashrc" > ~/.bashrc
+echo "--->  Installing .zsh and oh-my-zsh extensions"
+wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+echo "--->  Installing customized zshrc"
+cp zshrc ~/.zshrc
 
-echo "---> Installing fonts. Please be su."
+echo "--->  Installing fonts. Please be su."
 if [ -d "/Library/Fonts" ]; then
   sudo cp fonts/* /Library/Fonts
 fi
@@ -17,5 +21,6 @@ fi
 if [ -d "/usr/share/fonts" ]; then
   sudo cp fonts/* /usr/share/fonts
 fi
+
 
 echo "==== Successfully installed Evan's environment"
