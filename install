@@ -1,0 +1,21 @@
+cd `dirname $0`
+
+echo "---> Installing .vimrc"
+echo "
+set runtimepath=`pwd`/vim/,\$VIMRUNTIME
+source `pwd`/vimrc
+helptags `pwd`/vim/doc/ " > ~/.vimrc
+
+echo "---> Installing .bashrc"
+echo ". `pwd`/bashrc" > ~/.bashrc
+
+echo "---> Installing fonts. Please be su."
+if [ -d "/Library/Fonts" ]; then
+  sudo cp fonts/* /Library/Fonts
+fi
+
+if [ -d "/usr/share/fonts" ]; then
+  sudo cp fonts/* /usr/share/fonts
+fi
+
+echo "==== Successfully installed Evan's environment"

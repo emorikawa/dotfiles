@@ -1,0 +1,9 @@
+Evan's Fine-Tuned Unix Environment
+
+$ ./install
+
+This take-anywhere configuration works on Linux and Mac OSX
+Included are idealized configs for:
+  - vim
+  - bash
+  - fonts
