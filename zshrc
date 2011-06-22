@@ -82,4 +82,4 @@ else
 
 fi
 
-export PATH=$HOME/local/node/bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:$HOME/local/node/bin:$PATH

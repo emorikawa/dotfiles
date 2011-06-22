@@ -9,9 +9,9 @@ helptags `pwd`/vim/doc/ " > ~/.vimrc
 echo "--->  Installing .basrc but only has a backup to zsh"
 echo ". `pwd`/bashrc" > ~/.bashrc
 echo "--->  Installing .zsh and oh-my-zsh extensions"
-wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+sudo wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 echo "--->  Installing customized zshrc"
-cp zshrc ~/.zshrc
+echo ". `pwd`/zshrc" > ~/.zshrc
 
 echo "--->  Installing fonts. Please be su."
 if [ -d "/Library/Fonts" ]; then
