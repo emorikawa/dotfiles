@@ -1,11 +1,12 @@
 # Path to your oh-my-zsh configuration.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/code/environment/oh-my-zsh
+
+# An additional zshrc for local configs that I don't want updated
+source localzshrc
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-export ZSH_THEME="robbyrussell"
+export ZSH_THEME="evan"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -21,16 +22,13 @@ export ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git macports osx pip)
+plugins=(git pip)
 
 source $ZSH/oh-my-zsh.sh
 
-#alias ls='ls -G'
+alias ls='ls -G'
 alias ll='ls -la -G'
-alias su2='cd ~/su2/infrastructure; ls -G'
-
-EVANKEY=21CCB5B8
-RAEEZKEY=6F2F2AE8
+alias rm='rm -i'
 
 SH_ENV="$HOME/.ssh/environment"
 
@@ -81,5 +79,3 @@ else
   fi
 
 fi
-
-export PATH=/opt/local/bin:/opt/local/sbin:$HOME/local/node/bin:$PATH

@@ -1,18 +1,97 @@
+#!/bin/bash
+if [ `whoami` == root ]; then
+	echo "DONT run this script as root, or using sudo"
+	exit
+fi
+
+echo ""
+echo "*************************************"
+echo "* Setting up ideal Unix environment *"
+echo "*************************************"
+echo ""
+
 cd `dirname $0`
 
+if [ "$(ls -A oh-my-zsh)" ]; then
+  echo "---> Git submodule found. Moving on"
+else
+  echo "---> ERROR: please do a git clone --recursive to grab the oh-my-zsh submodule"
+  exit
+fi
+
+echo "--->  Installing core software"
+if [ `uname` == 'Linux' ]; then
+  sudo apt-get -y update
+  sudo apt-get -y upgrade
+  # Key applications and dependencies
+  sudo apt-get install git \
+                       zsh \
+                       curl \
+                       gnupg \
+                       ipython \
+                       python2.7 \
+                       python-pip \
+                       python2.7-dev \
+                       build-essential \
+                       python-setuptools \
+
+  wget -c http://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg#md5=fe1f997bc722265116870bc7919059ea
+  sudo sh setuptools-0.6c11-py2.7.egg
+  sudo python2.7 /usr/local/bin/easy_install-2.7 pip
+  sudo python2.7 /usr/local/bin/pip-2.7 install virtualenv
+
+elif [ `uname` == 'Darwin' ]; then
+  # Key applications and dependencies
+  sudo port install git \
+                    zsh \
+                    wget \
+                    gnupg \
+                    python27 \
+                    python_select +python27 \
+
+  # ensure python27 is the active python
+  sudo python_select python27
+
+  # Get pip and virtualenv
+  sudo /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/easy_install-2.7 pip
+  sudo /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/pip-2.7 install virtualenv
+
+else
+  echo "WARNING, Unsupported operating system"
+fi
+
+# Useful python packages
+pip install ipython \
+            py-bcrypt \
+
+clear
+echo "--->  Software installation is done"
+
+# Installing vim
 echo "--->  Installing .vimrc"
+cp $HOME/.vimrc $HOME/.vimrc.bak
+# Making the default vim script point to this dir
 echo "
 set runtimepath=`pwd`/vim/,\$VIMRUNTIME
 source `pwd`/vimrc
 helptags `pwd`/vim/doc/ " > ~/.vimrc
 
-echo "--->  Installing .basrc but only has a backup to zsh"
+# Installing bash
+echo "--->  Installing .bashrc but only has a backup to zsh"
+cp $HOME/.bashrc $HOME/.bashrc.bak
 echo ". `pwd`/bashrc" > ~/.bashrc
+
+# Installing zsh
 echo "--->  Installing .zsh and oh-my-zsh extensions"
 sudo wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+rm -rf $HOME/.oh-my-zsh # We include it here via submodule instead
 echo "--->  Installing customized zshrc"
 echo ". `pwd`/zshrc" > ~/.zshrc
+echo "--->  Installing customized theme"
+cp evan.zsh-theme oh-my-zsh/themes
+. $HOME/.zshrc
 
+# Installing fonts
 echo "--->  Installing fonts. Please be su."
 if [ -d "/Library/Fonts" ]; then
   sudo cp fonts/* /Library/Fonts
@@ -22,5 +101,4 @@ if [ -d "/usr/share/fonts" ]; then
   sudo cp fonts/* /usr/share/fonts
 fi
 
-
-echo "==== Successfully installed Evan's environment"
+echo "==== Successfully installed environment"

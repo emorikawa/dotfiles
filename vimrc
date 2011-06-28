@@ -23,6 +23,10 @@ noremap <S-l> 5l
 noremap <S-h> 5h
 noremap <c-s> :%s/
 noremap <c-q> :bd<CR>:vsp<CR>:bn<CR>:buffers<CR>
+noremap <PageUp> <c-u>
+noremap <PageDown> <c-d>
+noremap <Home> 0
+noremap <End> $
 noremap j gj
 noremap k gk
 inoremap jk <Esc>
@@ -77,6 +81,7 @@ set mat=2 "two-tenths of a second blink
 set noerrorbells
 set novisualbell
 set nu "Turn on line numbers
+set restorescreen
 
 set laststatus=2
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
@@ -106,6 +111,7 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 set term=ansi
 syntax enable
 set t_Co=256 "Enable colored terminal
+let &t_Co=256
 set encoding=utf8
 colorscheme evan
 
@@ -155,3 +161,28 @@ au FileType python map <buffer> <leader>2 /def
 au FileType python map <buffer> <leader>C ?class
 au FileType python map <buffer> <leader>D ?def
 
+"set t_ti=^[7^[[?47h
+"set t_te=^[[2J^[[?47l^[8
+""
+"if &term =~ "xterm"
+  " SecureCRT versions prior to 6.1.x do not support 4-digit DECSET
+  " let &t_ti = "\<Esc>[?1049h"
+  " let &t_te = "\<Esc>[?1049l"
+  " Use 2-digit DECSET instead
+"  let &t_ti = "\<Esc>[?47h"
+"  let &t_te = "\<Esc>[?47l"
+"endif 
+
+" restore screen after quitting
+"set t_ti=ESC7ESC[rESC[?47h t_te=ESC[?47lESC8
+"if has("terminfo")
+"  let &t_Sf="\ESC[3%p1%dm"
+"  let &t_Sb="\ESC[4%p1%dm"
+"else
+"  let &t_Sf="\ESC[3%dm"
+"  let &t_Sb="\ESC[4%dm"
+"endif
+"set t_ti=^[[?1049h
+"set t_te=^[[?1049l
+set t_ti=
+set t_te=
