@@ -1,9 +1,6 @@
 alias ls='ls -G'
 alias ll='ls -la -G'
-alias su2='cd ~/su2/infrastructure; ls -G'
-
-EVANKEY=21CCB5B8
-RAEEZKEY=6F2F2AE8
+alias rm='rm -i'
 
 SH_ENV="$HOME/.ssh/environment"
 
@@ -54,5 +51,3 @@ else
   fi
 
 fi
-
-export PATH=/opt/local/bin:/opt/local/sbin:$HOME/local/node/bin:$PATH
