@@ -1,8 +1,10 @@
+export MYENV=$HOME/code/environment
+
 # Path to your oh-my-zsh configuration.
-export ZSH=$HOME/code/environment/oh-my-zsh
+export ZSH=$MYENV/oh-my-zsh
 
 # An additional zshrc for local configs that I don't want updated
-source localzshrc
+source $MYENV/localzshrc
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -12,7 +14,7 @@ export ZSH_THEME="evan"
 # export CASE_SENSITIVE="true"
 
 # Comment this out to disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
+export DISABLE_AUTO_UPDATE="true"
 
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
@@ -29,9 +31,10 @@ source $ZSH/oh-my-zsh.sh
 alias ls='ls -G'
 alias ll='ls -la -G'
 alias rm='rm -i'
+alias zrc='vim $MYENV/zshrc'
+alias vrc='vim $MYENV/vimrc'
 
-SH_ENV="$HOME/.ssh/environment"
-
+SSH_ENV="$HOME/.ssh/environment"
 # start the ssh-agent
 function start_agent {
   echo "Initializing new SSH agent..."

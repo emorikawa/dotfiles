@@ -15,6 +15,7 @@ map <c-l> <c-w>l
 
 map 0 ^
 
+" Remap help command
 noremap <C-j> 3<C-e>
 noremap <C-k> 3<C-y>
 noremap <S-j> 3j
@@ -38,6 +39,8 @@ inoremap fd <Esc>:w<CR>
 noremap df :w<CR>
 noremap fd :w<CR>
 
+noremap <c-n> :NERDTreeToggle<CR>
+
 map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans <'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
@@ -47,6 +50,7 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 "" For coffeescript stuff
 call pathogen#runtime_append_all_bundles()
+filetype plugin on
 filetype plugin indent on
 
 "" General behavior things
@@ -164,14 +168,14 @@ au FileType python map <buffer> <leader>D ?def
 "set t_ti=^[7^[[?47h
 "set t_te=^[[2J^[[?47l^[8
 ""
-"if &term =~ "xterm"
+if &term =~ "xterm"
   " SecureCRT versions prior to 6.1.x do not support 4-digit DECSET
-  " let &t_ti = "\<Esc>[?1049h"
-  " let &t_te = "\<Esc>[?1049l"
+  let &t_ti = "\<Esc>[?1049h"
+  let &t_te = "\<Esc>[?1049l"
   " Use 2-digit DECSET instead
-"  let &t_ti = "\<Esc>[?47h"
-"  let &t_te = "\<Esc>[?47l"
-"endif 
+  "let &t_ti = "\<Esc>[?47h"
+  "let &t_te = "\<Esc>[?47l"
+endif 
 
 " restore screen after quitting
 "set t_ti=ESC7ESC[rESC[?47h t_te=ESC[?47lESC8
@@ -184,5 +188,3 @@ au FileType python map <buffer> <leader>D ?def
 "endif
 "set t_ti=^[[?1049h
 "set t_te=^[[?1049l
-set t_ti=
-set t_te=

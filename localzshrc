@@ -1,0 +1,9 @@
+EVANKEY=21CCB5B8
+RAEEZKEY=6F2F2AE8
+JEFFKEY=326970DA
+
+plugins=(git macports osx pip)
+
+alias su2='cd ~/su2/infrastructure; ls -G'
+
+export PATH=/opt/local/bin:/opt/local/sbin:$HOME/local/node/bin:$PATH
