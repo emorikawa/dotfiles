@@ -5,5 +5,8 @@ JEFFKEY=326970DA
 plugins=(git macports osx pip)
 
 alias su2='cd ~/su2/infrastructure; ls -G'
+alias celery='su2; ./script/celery'
+alias live='su2; ./script/live'
+alias client='su2; ./script/client'
 
 export PATH=/opt/local/bin:/opt/local/sbin:$HOME/local/node/bin:$PATH
