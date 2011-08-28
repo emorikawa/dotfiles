@@ -1,3 +1,5 @@
+let mapleader = ","
+
 " shell shortcuts in command mode
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
@@ -61,6 +63,7 @@ set autoread
 " When vimrc is edited, reload it
 autocmd! bufwritepost vimrc source ~/.vimrc
 
+set noswapfile "Don't use swp files
 set nocompatible "Does not use old vi quirks
 set lbr "Wordwrapping doesn't break words in the middle
 set autoindent "Enable automatic alignment during insertions
@@ -72,6 +75,9 @@ set tabstop=2 "Num characters when tab is pushed
 set shiftwidth=2 "sets indent size
 set showmatch "Shows matches on search
 set guioptions-=T "Removes GUI bars
+set guioptions-=l "Removes scrollbars
+set guioptions-=r "Removes scrollbars
+set guioptions-=b "Removes scrollbars
 set vb t_vb= "disables visual bell
 set ruler "Shows the ruler
 set cmdheight=2 "The commandbar height
@@ -111,7 +117,7 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 
 """"" Colors and stuff
-set term=ansi
+"set term=ansi
 syntax enable
 set t_Co=256 "Enable colored terminal
 let &t_Co=256
@@ -169,30 +175,6 @@ au FileType python map <buffer> <leader>1 /class
 au FileType python map <buffer> <leader>2 /def
 au FileType python map <buffer> <leader>C ?class
 au FileType python map <buffer> <leader>D ?def
-
-"set t_ti=^[7^[[?47h
-"set t_te=^[[2J^[[?47l^[8
-""
-"if &term =~ "xterm"
-"  " SecureCRT versions prior to 6.1.x do not support 4-digit DECSET
-"  let &t_ti = "\<Esc>[?1049h"
-"  let &t_te = "\<Esc>[?1049l"
-"  " Use 2-digit DECSET instead
-"  let &t_ti = "\<Esc>[?47h"
-"  let &t_te = "\<Esc>[?47l"
-"endif 
-
-" restore screen after quitting
-"set t_ti=ESC7ESC[rESC[?47h t_te=ESC[?47lESC8
-"if has("terminfo")
-"  let &t_Sf="\ESC[3%p1%dm"
-"  let &t_Sb="\ESC[4%p1%dm"
-"else
-"  let &t_Sf="\ESC[3%dm"
-"  let &t_Sb="\ESC[4%dm"
-"endif
-"set t_ti=^[[?1049h
-"set t_te=^[[?1049l
 
 let &t_Sf="\<Esc>[3%dm"
 let &t_Sb="\<Esc>[4%dm"

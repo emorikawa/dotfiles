@@ -20,7 +20,7 @@ if version > 580
 endif
 let g:colors_name="evan2"
 
-if has("gui_running") || &t_Co == 88 || &t_Co == 256
+if &t_Co == 88 || &t_Co == 256
   " functions {{{
   " returns an approximate grey index for the given grey level
   fun <SID>grey_number(x)
@@ -235,13 +235,19 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
   call <SID>X("Statement",       "669991", "", "bold")
   call <SID>X("Type",            "669991", "", "")
   call <SID>X("PreProc",         "669991", "", "")
+  call <SID>X("htmlTag",         "669991", "", "")
+  call <SID>X("htmlEndTag",      "669991", "", "")
+  call <SID>X("pythonBuiltin",   "669991", "", "")
 
   call <SID>X("Identifier",      "558C57", "", "")
   call <SID>X("Special",         "558C57", "", "")
+  call <SID>X("htmlArg",         "558C57", "", "")
 
   call <SID>X("Function",        "B35E4D", "", "")
   call <SID>X("coffeeObjAssign", "B35E4D", "", "")
   call <SID>X("coffeeConstant",  "B35E4D", "", "")
+  call <SID>X("djangoTagBlock",  "B35E4D", "", "")
+  call <SID>X("djangoStatement", "B35E4D", "", "")
 
   call <SID>X("Comment",         "666666", "", "")
 
@@ -262,6 +268,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
   call <SID>X("StatusLineNC",    "444444", "", "")
   call <SID>X("StatusLine",      "666666", "", "")
 
+
   " delete functions {{{
   delf <SID>X
   delf <SID>rgb
@@ -275,4 +282,42 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
   " }}}
 endif
 
-" vim: set fdl=0 fdm=marker:
+" Set colors for GUI Version
+hi Normal guifg=#D9C7A8 guibg=#222222
+
+hi Statement guifg=#669991
+hi Type guifg=#669991
+hi PreProc guifg=#669991
+hi htmlTag guifg=#669991
+hi htmlEndTag guifg=#669991
+hi pythonBuiltin guifg=#669991
+
+hi Identifier guifg=#558C57
+hi Special guifg=#558C57
+hi htmlArg guifg=#558C57
+
+hi Function guifg=#B35E4D
+hi coffeeObjAssign guifg=#B35E4D
+hi coffeeObject guifg=#B35E4D
+hi coffeeConstant guifg=#B35E4D
+hi djangoTagBlock guifg=#B35E4D
+hi djangoStatement guifg=#B35E4D
+
+hi Comment guifg=#666666
+
+hi String guifg=#D9BF8C
+hi Number guifg=#D9BF8C
+hi Constant guifg=#D9BF8C
+
+hi Error guifg=#B35E4D
+hi Todo guifg=#000000 guibg=#B3893F
+
+hi Visual guibg=#3b3b3b
+
+hi Search guifg=#222222 guibg=#D98F8C
+
+hi ColorColumn guifg=#222222
+hi VertSplit guifg=#444444
+hi LineNr guifg=#444444
+hi StatusLineNC guifg=#444444
+hi StatusLine guifg=#666666

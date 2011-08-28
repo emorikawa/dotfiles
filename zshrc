@@ -18,6 +18,7 @@ export DISABLE_AUTO_UPDATE="true"
 plugins=(git pip)
 
 source $ZSH/oh-my-zsh.sh
+unsetopt correct_all
 
 alias ls='ls -G'
 alias ll='ls -la -G'
