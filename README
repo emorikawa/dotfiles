@@ -1,9 +1,10 @@
 Evan's Fine-Tuned Unix Environment
 
-$ ./install
+Simply run ./install
 
 This take-anywhere configuration works on Linux and Mac OSX
-Included are idealized configs for:
-  - vim
-  - bash
-  - fonts
+The installation will:
+  - Install key software using either apt-get or mac-ports
+  - Install a tweaked out vim
+  - Install zsh
+  - Symlink dotfiles to this directory

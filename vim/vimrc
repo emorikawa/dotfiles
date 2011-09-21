@@ -1,0 +1,210 @@
+"""""""""""""""""""""""""""""""""""
+" The vimrc file of Evan Morikawa "
+"""""""""""""""""""""""""""""""""""
+
+" Key remappings "
+""""""""""""""""""
+let mapleader = ","
+
+"shell shortcuts in command mode
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+"Space bar searching
+map <space> /
+
+"Smart folding on shift-space
+nnoremap <silent> <S-Space> @=(foldlevel('.')?'za':'l')<CR>
+vnoremap <S-Space> zf
+
+"Move between buffers
+map <c-h> <c-w>h
+map <c-l> <c-w>l
+
+noremap <C-S> :%s/
+noremap <C-Q> <esc>:bd<CR>:vsp<CR>:bn<CR>:buffers<CR>
+
+noremap <c-e> :! python %<CR>
+
+"Easier movement around the page
+noremap <C-j> 3<C-e>
+noremap <C-k> 3<C-y>
+noremap <S-j> 3j
+noremap <S-k> 3k
+noremap <S-l> 5l
+noremap <S-h> 5h
+noremap <PageUp> <c-u>
+noremap <PageDown> <c-d>
+noremap <Home> 0
+noremap <End> $
+noremap j gj
+noremap k gk
+map 0 ^
+
+"Quick escape and saving via button-mashing
+inoremap jk <Esc>
+inoremap kj <Esc>
+cnoremap jk <Esc>
+cnoremap kj <Esc>
+inoremap df <Esc>:w<CR>
+inoremap fd <Esc>:w<CR>
+noremap df :w<CR>
+noremap fd :w<CR>
+
+"In visual mode when you press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+
+"Displays the tag type under the cursor. Really useful for generating colors
+map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans <'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+
+" Settings "
+""""""""""""
+filetype plugin on
+filetype indent on
+colorscheme evan
+syntax enable
+
+set nu "Turn on line numbers
+set lbr "Wordwrapping doesn't break words in the middle
+set wrap "wrap lines
+set list
+set ruler "Shows the ruler
+set magic "set magic on, for regular expressions
+set mat=2 "two-tenths of a second blink
+set smarttab
+set wildmenu
+set autoread "Set to auto read when a file is changed from the outside
+set vb t_vb= "disables visual bell
+set hlsearch
+set t_Co=256 "Enable colored terminal
+let &t_Co=256
+set incsearch "Incremental search
+set smartcase "Will switch to case sensitive if a cap is used
+set showmatch "Shows matches on search
+set expandtab "Replaces tabs with spaces
+set tabstop=2 "Num characters when tab is pushed
+set ignorecase "case insensitive search but see next option
+set autoindent "Enable automatic alignment during insertions
+set noswapfile "Don't use swp files
+set smartindent "Tries to recognize code and indent
+set cmdheight=2 "The commandbar height
+set noerrorbells
+set novisualbell
+set nocompatible "Does not use old vi quirks
+set history=1000
+set laststatus=2
+set shiftwidth=2 "sets indent size
+set restorescreen
+set encoding=utf8
+set guioptions-=T "Removes GUI bars
+set guioptions-=l "Removes scrollbars
+set guioptions-=r "Removes scrollbars
+set guioptions-=b "Removes scrollbars
+set wildmode=list:longest,full " bash command line tab completion
+set listchars=tab:\|\ ,trail:-,extends:>,precedes:<,nbsp:+ "Whitespace showing
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+
+
+" Autocommands "
+"""""""""""""""
+autocmd! bufwritepost vimrc source ~/.vimrc "When vimrc is edited, reload it
+autocmd BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
+
+
+" Utility Methods "
+""""""""""""""""""
+function! CurDir()
+  let curdir = substitute(getcwd(), '/Users/amir/', "~/", "g")
+  return curdir
+endfunction
+
+function! HasPaste()
+  if &paste
+    return 'PASTE MODE  '
+  else
+    return ''
+  endif
+endfunction
+
+function! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+function! CmdLine(str)
+  exe "menu Foo.Bar :" . a:str
+  emenu Foo.Bar
+  unmenu Foo
+endfunction
+
+function! VisualSearch(direction) range
+  let l:saved_reg = @"
+  execute "normal! vgvy"
+
+  let l:pattern = escape(@", '\\/.*$^~[]')
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+  if a:direction == 'b'
+    execute "normal ?" . l:pattern . "^M"
+  elseif a:direction == 'gv'
+    call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+  elseif a:direction == 'f'
+    execute "normal /" . l:pattern . "^M"
+  endif
+
+  let @/ = l:pattern
+  let @" = l:saved_reg
+endfunction
+
+
+
+""""""""""""""""""""""""""""""
+" Language Specific Settings "
+""""""""""""""""""""""""""""""
+
+" Python "
+""""""""""
+let python_highlight_all = 1
+au FileType python syn keyword pythonDecorator True None False self
+
+au BufNewFile,BufRead *.jinja set syntax=htmljinja
+au BufNewFile,BufRead *.mako set ft=mako
+au BufNewFile,BufRead *.less set ft=less
+
+au FileType python inoremap <buffer> $r return
+au FileType python inoremap <buffer> $i import
+au FileType python inoremap <buffer> $p print
+au FileType python inoremap <buffer> $f #--- PH ----------------------------------------------<esc>FP2xi
+au FileType python map <buffer> <leader>1 /class
+au FileType python map <buffer> <leader>2 /def
+au FileType python map <buffer> <leader>C ?class
+au FileType python map <buffer> <leader>D ?def
+
+let &t_Sf="\<Esc>[3%dm"
+let &t_Sb="\<Esc>[4%dm"
+let &t_te="\<Esc>[?47l"
+let &t_ti="\<Esc>[?47h"
+
+
+
+"""""""""""
+" PLUGINS "
+"""""""""""
+call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
+
+" NERD TREE "
+"""""""""""""
+noremap <c-n> :NERDTreeToggle<CR>
+

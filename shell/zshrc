@@ -1,10 +1,10 @@
 export MYENV=$HOME/src/environment
 
 # Path to your oh-my-zsh configuration.
-export ZSH=$MYENV/oh-my-zsh
+export ZSH=$MYENV/shell/oh-my-zsh
 
 # An additional zshrc for local configs that I don't want updated
-source $MYENV/localzshrc
+source $MYENV/shell/localzshrc
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -23,8 +23,8 @@ unsetopt correct_all
 alias ls='ls -G'
 alias ll='ls -la -G'
 alias rm='rm -i'
-alias zrc='vim $MYENV/zshrc'
-alias vrc='vim $MYENV/vimrc'
+alias zrc='vim $MYENV/shell/zshrc'
+alias vrc='vim $MYENV/shell/vimrc'
 alias vim3='vim -O3'
 alias www='cd ~/www'
 alias s='cd ~/src; ls -a -G'

@@ -18,7 +18,7 @@ if version > 580
     syntax reset
   endif
 endif
-let g:colors_name="evan2"
+let g:colors_name="evan"
 
 if &t_Co == 88 || &t_Co == 256
   " functions {{{
@@ -255,6 +255,8 @@ if &t_Co == 88 || &t_Co == 256
   call <SID>X("Number",          "D9BF8C", "", "")
   call <SID>X("Constant",        "D9BF8C", "", "")
 
+  call <SID>X("Folded",          "888888", "333333", "")
+
   call <SID>X("Error",           "B35E4D", "", "")
   call <SID>X("Todo",            "000000", "B3893F", "")
 
@@ -309,12 +311,14 @@ hi String guifg=#D9BF8C
 hi Number guifg=#D9BF8C
 hi Constant guifg=#D9BF8C
 
-hi Error guifg=#B35E4D
+hi Folded guifg=#888888 guibg=#333333
+
+hi Error guifg=#222222 guibg=#B35E4D
 hi Todo guifg=#000000 guibg=#B3893F
 
 hi Visual guibg=#3b3b3b
 
-hi Search guifg=#222222 guibg=#D98F8C
+hi Search guifg=#222222 guibg=#CF984F
 
 hi ColorColumn guifg=#222222
 hi VertSplit guifg=#444444

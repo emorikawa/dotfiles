@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ `whoami` == root ]; then
-	echo "DONT run this script as root, or using sudo"
-	exit
+  echo "DONT run this script as root, or using sudo"
+  exit
 fi
 
 echo ""
@@ -12,14 +12,16 @@ echo ""
 
 cd `dirname $0`
 
+cd shell
 if [ "$(ls -A oh-my-zsh)" ]; then
   echo "---> Git submodule found. Moving on"
 else
   echo "---> ERROR: please do a git clone --recursive to grab the oh-my-zsh submodule"
   exit
 fi
+cd ../
 
-echo "--->  Installing core software"
+echo "===>  Installing core software packages  <==="
 if [ `uname` == 'Linux' ]; then
   sudo apt-get -y update
   sudo apt-get -y upgrade
@@ -57,7 +59,8 @@ elif [ `uname` == 'Darwin' ]; then
   sudo /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/pip-2.7 install virtualenv
 
 else
-  echo "WARNING, Unsupported operating system"
+  echo "WARNING, Unsupported operating system. Quitting"
+  exit
 fi
 
 # Useful python packages
@@ -68,31 +71,47 @@ clear
 echo "--->  Software installation is done"
 
 # Installing vim
-echo "--->  Installing .vimrc"
+echo "===>  Installing VIM  <==="
+echo "--->  Backing up any previous .vimrc"
 cp $HOME/.vimrc $HOME/.vimrc.bak
-# Making the default vim script point to this dir
-echo "
-set runtimepath=`pwd`/vim/,\$VIMRUNTIME
-source `pwd`/vimrc
-helptags `pwd`/vim/doc/ " > ~/.vimrc
+echo "--->  Linking .vimrc"
+ln -s `pwd`/vim/vimrc $HOME/.vimrc
+echo "--->  Linking .gvimrc"
+ln -s `pwd`/vim/gvimrc $HOME/.gvimrc
+echo "--->  Linking .vim folder"
+ln -s `pwd`/vim/vim $HOME/.vim
 
 # Installing bash
-echo "--->  Installing .bashrc but only has a backup to zsh"
+echo "===>  Installing bashrc (but only as a backup to zsh)  <==="
+echo "--->  Making backup of bashrc"
 cp $HOME/.bashrc $HOME/.bashrc.bak
-echo ". `pwd`/bashrc" > ~/.bashrc
+echo "--->  Linking bashrc"
+ln -s `pwd`/shell/bashrc $HOME/.bashrc
 
 # Installing zsh
-echo "--->  Installing .zsh and oh-my-zsh extensions"
-sudo wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-rm -rf $HOME/.oh-my-zsh # We include it here via submodule instead
-echo "--->  Installing customized zshrc"
-echo ". `pwd`/zshrc" > ~/.zshrc
+echo "===>  Installing zsh  <==="
+echo "--->  Making backup of zshrc"
+cp $HOME/.zshrc $HOME/.zshrc.bak
+
+# Clear home of any conflicting zsh files
+rm -f $HOME/.zshrc
+rm -rf $HOME/.oh-my-zsh
+
+echo "--->  Linking zshrc"
+ln -s `pwd`/shell/zshrc $HOME/.zshrc
+
 echo "--->  Installing customized theme"
-cp evan.zsh-theme oh-my-zsh/themes
-. $HOME/.zshrc
+cp shell/evan.zsh-theme shell/oh-my-zsh/themes
+
+echo "--->  Changing default shell to zsh"
+chsh -s `which zsh`
+
+/usr/bin/env zsh
+source $HOME/.zshrc
+echo "--->  zsh ready to go"
 
 # Installing fonts
-echo "--->  Installing fonts. Please be su."
+echo "===>  Installing fonts  <==="
 if [ -d "/Library/Fonts" ]; then
   sudo cp fonts/* /Library/Fonts
 fi
@@ -101,4 +120,4 @@ if [ -d "/usr/share/fonts" ]; then
   sudo cp fonts/* /usr/share/fonts
 fi
 
-echo "==== Successfully installed environment"
+echo "====  Successfully installed Evan's environment  ===="
