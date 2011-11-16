@@ -1,3 +1,33 @@
 [submodule "oh-my-zsh"]
 	path = shell/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "vim/vim/bundle/coffeescript"]
+	path = vim/vim/bundle/coffeescript
+	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/vim/bundle/fugitive"]
+	path = vim/vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim/bundle/nerdtree"]
+	path = vim/vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/vim/bundle/peepopen"]
+	path = vim/vim/bundle/peepopen
+	url = https://github.com/topfunky/PeepOpen-EditorSupport.git
+[submodule "vim/vim/bundle/snipmate"]
+	path = vim/vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "vim/vim/bundle/supertab"]
+	path = vim/vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "vim/vim/bundle/surround"]
+	path = vim/vim/bundle/surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/vim/bundle/tcomment"]
+	path = vim/vim/bundle/tcomment
+	url = https://github.com/tomtom/tcomment_vim.git
+[submodule "vim/vim/bundle/vim-rails"]
+	path = vim/vim/bundle/vim-rails
+	url = https://github.com/tpope/vim-rails.git
+[submodule "vim/vim/bundle/zencoding"]
+	path = vim/vim/bundle/zencoding
+	url = https://github.com/mattn/zencoding-vim.git
