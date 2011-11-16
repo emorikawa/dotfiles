@@ -232,6 +232,9 @@ if &t_Co == 88 || &t_Co == 256
   " syntax highlighting groups
   call <SID>X("Normal",          "D9C7A8", "", "")
 
+  call <SID>X("Pmenu",           "A39069", "333333", "")
+  call <SID>X("PmenuSel",        "D9C7A8", "555555", "bold")
+
   call <SID>X("Statement",       "669991", "", "bold")
   call <SID>X("Type",            "669991", "", "")
   call <SID>X("PreProc",         "669991", "", "")
@@ -265,10 +268,15 @@ if &t_Co == 88 || &t_Co == 256
   call <SID>X("Search",          "222222", "D9BF8C", "bold")
 
   call <SID>X("ColorColumn",     "222222", "", "")
+  call <SID>X("cSpaceError",     "444444", "", "")
+  call <SID>X("NonText",         "444444", "", "")
+  call <SID>X("SpecialKey",      "333333", "", "")
   call <SID>X("VertSplit",       "444444", "", "")
   call <SID>X("LineNr",          "444444", "", "")
   call <SID>X("StatusLineNC",    "444444", "", "")
   call <SID>X("StatusLine",      "666666", "", "")
+
+  call <SID>X("LineTooLong",      "", "333333", "")
 
 
   " delete functions {{{
@@ -286,6 +294,8 @@ endif
 
 " Set colors for GUI Version
 hi Normal guifg=#D9C7A8 guibg=#222222
+hi Pmenu guifg=#A39069 guibg=#333333
+hi PmenuSel guifg=#D9C7A8 guibg=#555555 gui=bold
 
 hi Statement guifg=#669991
 hi Type guifg=#669991
@@ -321,7 +331,12 @@ hi Visual guibg=#3b3b3b
 hi Search guifg=#222222 guibg=#CF984F
 
 hi ColorColumn guifg=#222222
+hi cSpaceError guifg=#444444
+hi NonText guifg=#444444
+hi SpecialKey guifg=#333333
 hi VertSplit guifg=#444444
 hi LineNr guifg=#444444
 hi StatusLineNC guifg=#444444
 hi StatusLine guifg=#666666
+
+hi LineTooLong guibg=#333333

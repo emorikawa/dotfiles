@@ -28,6 +28,7 @@ noremap <C-S> :%s/
 noremap <C-Q> <esc>:bd<CR>:vsp<CR>:bn<CR>:buffers<CR>
 
 noremap <c-e> :! python %<CR>
+noremap <F5> :! ruby %<CR>
 
 "Easier movement around the page
 noremap <C-j> 3<C-e>
@@ -66,11 +67,9 @@ map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-
 " Settings "
 """"""""""""
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 colorscheme evan
 syntax enable
 
@@ -111,15 +110,20 @@ set guioptions-=l "Removes scrollbars
 set guioptions-=r "Removes scrollbars
 set guioptions-=b "Removes scrollbars
 set wildmode=list:longest,full " bash command line tab completion
-set listchars=tab:\|\ ,trail:-,extends:>,precedes:<,nbsp:+ "Whitespace showing
+set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
+match LineTooLong /\%>74v.\+/
 
 " Autocommands "
 """""""""""""""
 autocmd! bufwritepost vimrc source ~/.vimrc "When vimrc is edited, reload it
 autocmd BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
 
+" Mixes in html filetype to web languages
+au BufRead,BufNewFile *.php set ft=php.html
+au BufRead,BufNewFile *.erb set ft=eruby.html
+au BufRead,BufNewFile *.coffee set ft=coffee.html
 
 " Utility Methods "
 """"""""""""""""""

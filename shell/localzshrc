@@ -1,12 +1,26 @@
 EVANKEY=21CCB5B8
 RAEEZKEY=6F2F2AE8
 JEFFKEY=326970DA
+WEIPAN=3766A6CB
 
 plugins=(git macports osx pip)
 
 alias su2='cd ~/su2/infrastructure; ls -G'
+alias proximate='cd ~/src/Proximate; ls -G'
 alias celery='su2; ./script/celery'
 alias live='su2; ./script/live'
 alias client='su2; ./script/client'
+alias editsu2='su2; mvim -O3 client/static/web-client/src/*.coffee \
+                             client/static/css/*.less \
+                             client/static/css/lib/*.less \
+                             client/static/css/modules/*.less \
+                             client/templates/layout.html \
+                             client/templates/shadowbox.html \
+                             client/templates/home.html \
+                             client/views/main.py'
 
-export PATH=/opt/local/bin:/opt/local/sbin:$HOME/local/node/bin:$PATH
+alias tmux5='tmux split-window; tmux split-window -h; tmux split-window; tmux split-window -h; tmux split-window; tmux select-layout tiled'
+
+export PATH=$PATH:/Users/emorikawa/.gem/ruby/1.8/bin:/opt/local/bin:/opt/local/sbin:$HOME/local/node/bin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/emorikawa/su2/infrastructure/node_modules/less/bin:/opt/local/lib/postgresql91/bin/
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
