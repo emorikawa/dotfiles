@@ -10,6 +10,8 @@ echo "* Setting up ideal Unix environment *"
 echo "*************************************"
 echo ""
 
+BASEDIR=$(dirname $0)
+
 cd `dirname $0`
 
 cd shell
@@ -21,74 +23,28 @@ else
 fi
 cd ../
 
-echo "===>  Installing core software packages  <==="
-if [ `uname` == 'Linux' ]; then
-  sudo apt-get -y update
-  sudo apt-get -y upgrade
-  # Key applications and dependencies
-  sudo apt-get install git \
-                       zsh \
-                       curl \
-                       gnupg \
-                       ipython \
-                       python2.7 \
-                       python-pip \
-                       python2.7-dev \
-                       build-essential \
-                       python-setuptools \
-
-  wget -c http://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg#md5=fe1f997bc722265116870bc7919059ea
-  sudo sh setuptools-0.6c11-py2.7.egg
-  sudo python2.7 /usr/local/bin/easy_install-2.7 pip
-  sudo python2.7 /usr/local/bin/pip-2.7 install virtualenv
-
-elif [ `uname` == 'Darwin' ]; then
-  # Key applications and dependencies
-  sudo port install git \
-                    zsh \
-                    wget \
-                    gnupg \
-                    python27 \
-                    python_select +python27 \
-
-  # ensure python27 is the active python
-  sudo python_select python27
-
-  # Get pip and virtualenv
-  sudo /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/easy_install-2.7 pip
-  sudo /opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/pip-2.7 install virtualenv
-
-else
-  echo "WARNING, Unsupported operating system. Quitting"
-  exit
-fi
-
-# Useful python packages
-pip install ipython \
-            py-bcrypt \
-
-clear
-echo "--->  Software installation is done"
-
 # Installing vim
+echo ""
 echo "===>  Installing VIM  <==="
 echo "--->  Backing up any previous .vimrc"
 cp $HOME/.vimrc $HOME/.vimrc.bak
 echo "--->  Linking .vimrc"
-ln -s `pwd`/vim/vimrc $HOME/.vimrc
+ln -s $BASEDIR/vim/vimrc $HOME/.vimrc
 echo "--->  Linking .gvimrc"
-ln -s `pwd`/vim/gvimrc $HOME/.gvimrc
+ln -s $BASEDIR/vim/gvimrc $HOME/.gvimrc
 echo "--->  Linking .vim folder"
-ln -s `pwd`/vim/vim $HOME/.vim
+ln -s $BASEDIR/vim/vim $HOME/.vim
 
 # Installing bash
+echo ""
 echo "===>  Installing bashrc (but only as a backup to zsh)  <==="
 echo "--->  Making backup of bashrc"
 cp $HOME/.bashrc $HOME/.bashrc.bak
 echo "--->  Linking bashrc"
-ln -s `pwd`/shell/bashrc $HOME/.bashrc
+ln -s $BASEDIR/shell/bashrc $HOME/.bashrc
 
 # Installing zsh
+echo ""
 echo "===>  Installing zsh  <==="
 echo "--->  Making backup of zshrc"
 cp $HOME/.zshrc $HOME/.zshrc.bak
@@ -98,7 +54,9 @@ rm -f $HOME/.zshrc
 rm -rf $HOME/.oh-my-zsh
 
 echo "--->  Linking zshrc"
-ln -s `pwd`/shell/zshrc $HOME/.zshrc
+ln -s $BASEDIR/shell/zshrc $HOME/.zshrc
+ln -s $BASEDIR/shell/localzshrc $HOME/.localzshrc
+ln -s $BASEDIR/shell/oh-my-zsh $HOME/.oh-my-zsh
 
 echo "--->  Installing customized theme"
 cp shell/evan.zsh-theme shell/oh-my-zsh/themes
@@ -107,17 +65,20 @@ echo "--->  Changing default shell to zsh"
 chsh -s `which zsh`
 
 /usr/bin/env zsh
+echo "--->  Sourcing default zshrc file"
 source $HOME/.zshrc
 echo "--->  zsh ready to go"
 
 # Installing fonts
+echo ""
 echo "===>  Installing fonts  <==="
 if [ -d "/Library/Fonts" ]; then
   sudo cp fonts/* /Library/Fonts
 fi
 
-if [ -d "/usr/share/fonts" ]; then
+if [ -d "/usr/local/share/fonts" ]; then
   sudo cp fonts/* /usr/share/fonts
 fi
 
+echo ""
 echo "====  Successfully installed Evan's environment  ===="
