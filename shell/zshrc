@@ -1,6 +1,8 @@
 ###################################
 # The zshrc file of Evan Morikawa #
 ###################################
+autoload -U colors && colors
+
 # Source localzshrc
 source $HOME/.localzshrc
 
@@ -25,8 +27,16 @@ unsetopt correct_all
 
 # Aliases #
 ###########
-alias ls='ls -G'
-alias ll='ls -la -G'
+if [ `uname` = "Darwin" ]
+then
+  alias ls='ls -G'
+  alias ll='ls -la -G'
+elif [ `uname` = "Linux" ]
+then
+  alias ls='ls --color=auto'
+  alias ll='ls -la --color=auto'
+fi
+
 alias rm='rm -i'
 alias zrc='vim $HOME/.zshrc'
 alias zlocal='vim $HOME/.localzshrc'

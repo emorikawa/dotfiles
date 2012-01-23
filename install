@@ -59,10 +59,6 @@ echo "===>  Installing zsh  <==="
 echo "--->  Making backup of zshrc"
 cp $HOME/.zshrc $HOME/.zshrc.bak
 
-echo "--->  Changing default shell to zsh"
-chsh -s `which zsh`
-/usr/bin/env zsh
-
 # Clear home of any conflicting zsh files
 rm -f $HOME/.zshrc
 rm -rf $HOME/.oh-my-zsh
@@ -75,9 +71,12 @@ ln -sf $BASEDIR/shell/oh-my-zsh $HOME/.oh-my-zsh
 echo "--->  Installing customized theme"
 cp $BASEDIR/shell/evan.zsh-theme $BASEDIR/shell/oh-my-zsh/themes
 
-echo "--->  Sourcing default zshrc file"
-source $HOME/.zshrc
-echo "--->  zsh ready to go"
+echo "--->  Changing default shell to zsh"
+IAM=`whoami`
+sudo chsh -s `which zsh`
+sudo chsh -s `which zsh` $IAM
 
 echo ""
 echo "====  Successfully installed Evan's environment  ===="
+
+/usr/bin/env zsh
