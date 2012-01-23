@@ -10,18 +10,27 @@ echo "* Setting up ideal Unix environment *"
 echo "*************************************"
 echo ""
 
-BASEDIR=$(dirname $0)
+BASEDIR=$(cd "$(dirname "$0")"; pwd)
 
 cd `dirname $0`
 
-cd shell
-if [ "$(ls -A oh-my-zsh)" ]; then
+if [ "$(ls -A $BASEDIR/shell/oh-my-zsh)" ]; then
   echo "---> Git submodule found. Moving on"
 else
   echo "---> ERROR: please do a git clone --recursive to grab the oh-my-zsh submodule"
   exit
 fi
-cd ../
+
+# Installing fonts
+echo ""
+echo "===>  Installing fonts  <==="
+if [ -d "/Library/Fonts" ]; then
+  sudo cp $BASEDIR/fonts/* /Library/Fonts
+fi
+
+if [ -d "/usr/local/share/fonts" ]; then
+  sudo cp $BASEDIR/fonts/* /usr/share/fonts
+fi
 
 # Installing vim
 echo ""
@@ -29,11 +38,11 @@ echo "===>  Installing VIM  <==="
 echo "--->  Backing up any previous .vimrc"
 cp $HOME/.vimrc $HOME/.vimrc.bak
 echo "--->  Linking .vimrc"
-ln -s $BASEDIR/vim/vimrc $HOME/.vimrc
+ln -sf $BASEDIR/vim/vimrc $HOME/.vimrc
 echo "--->  Linking .gvimrc"
-ln -s $BASEDIR/vim/gvimrc $HOME/.gvimrc
+ln -sf $BASEDIR/vim/gvimrc $HOME/.gvimrc
 echo "--->  Linking .vim folder"
-ln -s $BASEDIR/vim/vim $HOME/.vim
+ln -sf $BASEDIR/vim/vim $HOME/.vim
 
 # Installing bash
 echo ""
@@ -41,44 +50,34 @@ echo "===>  Installing bashrc (but only as a backup to zsh)  <==="
 echo "--->  Making backup of bashrc"
 cp $HOME/.bashrc $HOME/.bashrc.bak
 echo "--->  Linking bashrc"
-ln -s $BASEDIR/shell/bashrc $HOME/.bashrc
+ln -sf $BASEDIR/shell/bashrc $HOME/.bashrc
 
 # Installing zsh
 echo ""
 echo "===>  Installing zsh  <==="
+
 echo "--->  Making backup of zshrc"
 cp $HOME/.zshrc $HOME/.zshrc.bak
+
+echo "--->  Changing default shell to zsh"
+chsh -s `which zsh`
+/usr/bin/env zsh
 
 # Clear home of any conflicting zsh files
 rm -f $HOME/.zshrc
 rm -rf $HOME/.oh-my-zsh
 
 echo "--->  Linking zshrc"
-ln -s $BASEDIR/shell/zshrc $HOME/.zshrc
-ln -s $BASEDIR/shell/localzshrc $HOME/.localzshrc
-ln -s $BASEDIR/shell/oh-my-zsh $HOME/.oh-my-zsh
+ln -sf $BASEDIR/shell/zshrc $HOME/.zshrc
+ln -sf $BASEDIR/shell/localzshrc $HOME/.localzshrc
+ln -sf $BASEDIR/shell/oh-my-zsh $HOME/.oh-my-zsh
 
 echo "--->  Installing customized theme"
-cp shell/evan.zsh-theme shell/oh-my-zsh/themes
+cp $BASEDIR/shell/evan.zsh-theme $BASEDIR/shell/oh-my-zsh/themes
 
-echo "--->  Changing default shell to zsh"
-chsh -s `which zsh`
-
-/usr/bin/env zsh
 echo "--->  Sourcing default zshrc file"
 source $HOME/.zshrc
 echo "--->  zsh ready to go"
-
-# Installing fonts
-echo ""
-echo "===>  Installing fonts  <==="
-if [ -d "/Library/Fonts" ]; then
-  sudo cp fonts/* /Library/Fonts
-fi
-
-if [ -d "/usr/local/share/fonts" ]; then
-  sudo cp fonts/* /usr/share/fonts
-fi
 
 echo ""
 echo "====  Successfully installed Evan's environment  ===="
