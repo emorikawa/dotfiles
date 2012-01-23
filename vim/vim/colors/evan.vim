@@ -340,3 +340,9 @@ hi StatusLineNC guifg=#444444
 hi StatusLine guifg=#666666
 
 hi LineTooLong guibg=#333333
+
+hi Title guifg=#D9C865 gui=bold
+hi markdownH1 guifg=#D9C865 guibg=#3d381b gui=bold
+hi markdownH2 guifg=#D9C865 gui=bold
+hi markdownH3 guifg=#D9C866
+hi markdownH4 guifg=#D9C865

@@ -53,6 +53,15 @@ function start_agent {
   ssh-add
 }
 
+# Prepends a directory to the PATH if it's not already there and
+# the directory exists.
+pathprepend() {
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="$1:$PATH"
+    export $PATH
+  fi
+}
+
 # test for identities
 function test_identities {
   # test whether standard identities have been added to the agent already

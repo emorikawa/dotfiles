@@ -28,6 +28,15 @@
 [submodule "vim/vim/bundle/vim-rails"]
 	path = vim/vim/bundle/vim-rails
 	url = https://github.com/tpope/vim-rails.git
-[submodule "vim/vim/bundle/zencoding"]
-	path = vim/vim/bundle/zencoding
-	url = https://github.com/mattn/zencoding-vim.git
+[submodule "vim/vim/bundle/scss"]
+	path = vim/vim/bundle/scss
+	url = https://github.com/cakebaker/scss-syntax.vim.git
+[submodule "vim/vim/bundle/markdown"]
+	path = vim/vim/bundle/markdown
+	url = https://github.com/tpope/vim-markdown.git
+[submodule "vim/vim/bundle/sparkup"]
+	path = vim/vim/bundle/sparkup
+	url = https://github.com/rstacruz/sparkup.git
+[submodule "vim/vim/bundle/powerline"]
+	path = vim/vim/bundle/powerline
+	url = https://github.com/Lokaltog/vim-powerline.git

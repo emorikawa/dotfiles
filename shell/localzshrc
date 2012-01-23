@@ -18,9 +18,36 @@ alias editsu2='su2; mvim -O3 client/static/web-client/src/*.coffee \
                              client/templates/shadowbox.html \
                              client/templates/home.html \
                              client/views/main.py'
+alias worksu2='su2; \
+               editsu2; \
+               mongod &; \
+               sudo ./script/rabbitmq &;\
+               ./script/celery &; \
+               ./script/live &; \
+               ./script/client &'
+
+alias workproximate='cd ~/src/Proximate/public/stylesheets && \
+                     sass -w style.scss:style.css &; \
+                     cd ~/src/Proximate && \
+                     mvim -O3 && \
+                     rails server &; \
+                     open http://localhost:3000'
 
 alias tmux5='tmux split-window; tmux split-window -h; tmux split-window; tmux split-window -h; tmux split-window; tmux select-layout tiled'
 
-export PATH=$PATH:/Users/emorikawa/.gem/ruby/1.8/bin:/opt/local/bin:/opt/local/sbin:$HOME/local/node/bin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/emorikawa/su2/infrastructure/node_modules/less/bin:/opt/local/lib/postgresql91/bin/
+alias ec2='ssh -i $HOME/.ec2/evan_aws_key.pem ubuntu@107.21.224.76'
+
+export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
+export EC2_PRIVATE_KEY="$(/bin/ls $HOME/.ec2/pk-*.pem)"
+export EC2_PRIVATE_KEY="$HOME/.ec2/pk-ZNZYTCO2FEMNHORGB2EHQMTGZQQXYRNV.pem"
+export EC2_CERT="$(/bin/ls $HOME/.ec2/cert-*.pem)"
+export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.2.3/jars"
+
+export PATH=\
+/usr/local/share/python:\
+/usr/local/bin:\
+/usr/local/sbin:\
+/Library/PostgreSQL/9.1/bin:\
+$PATH
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
