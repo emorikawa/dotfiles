@@ -79,6 +79,8 @@ set nu "Turn on line numbers
 set lbr "Wordwrapping doesn't break words in the middle
 set wrap "wrap lines
 set list
+set ts=2
+set sw=2
 set ruler "Shows the ruler
 set magic "set magic on, for regular expressions
 set mat=2 "two-tenths of a second blink
@@ -99,6 +101,7 @@ set autoindent "Enable automatic alignment during insertions
 set noswapfile "Don't use swp files
 set smartindent "Tries to recognize code and indent
 set cmdheight=2 "The commandbar height
+set shiftwidth=2
 set noerrorbells
 set novisualbell
 set nocompatible "Does not use old vi quirks
@@ -213,3 +216,5 @@ call pathogen#runtime_append_all_bundles()
 " NERD TREE "
 """""""""""""
 noremap <c-n> :NERDTreeToggle<CR>
+
+let sparkupNextMapping = '<M-e>'
