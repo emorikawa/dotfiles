@@ -85,7 +85,7 @@ set ruler "Shows the ruler
 set magic "set magic on, for regular expressions
 set mat=2 "two-tenths of a second blink
 set smarttab
-set wildmenu
+set wildmenu "Enhanced tab completion
 set autoread "Set to auto read when a file is changed from the outside
 set vb t_vb= "disables visual bell
 set hlsearch

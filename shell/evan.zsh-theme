@@ -1,5 +1,9 @@
+function collapse_pwd {
+  echo $(pwd | sed -e "s,^$HOME,~,")
+}
+
 PROMPT='[%{$fg[blue]%}%n %{$fg[green]%}%c%{$reset_color%}] %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-RPROMPT='(%! %*)'
+RPROMPT='(${PWD/#$HOME/~} %! %*)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
