@@ -2,6 +2,131 @@
 " The vimrc file of Evan Morikawa "
 """""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""
+" Vundle Packages "
+"""""""""""""""""""
+set nocompatible " Does not use old vi quirks
+filetype off     " Required temporarily for vundle
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" Must start with Vundle. Vundle handles package management
+Bundle 'gmarik/vundle'
+
+" A Git wrapper so awesome, it should be illegal
+Bundle 'tpope/vim-fugitive'
+
+" Helps me see "
+""""""""""""""""
+" A color-cordinated, more helpful statusline
+Bundle 'Lokaltog/vim-powerline'
+
+" Colors CSS tags with the appropriate color.
+Bundle 'skammer/vim-css-color'
+
+" Add CSS3 syntax support to vim's built-in `syntax/css.vim`
+Bundle 'hail2u/vim-css3-syntax'
+
+" HAML, SASS, SCSS support for Vim
+Bundle 'tpope/vim-haml'
+
+" Less syntax support
+Bundle 'groenewege/vim-less'
+
+" CoffeeScript support for vim
+Bundle 'kchmck/vim-coffee-script'
+
+" Markdown syntax for vim
+Bundle 'plasticboy/vim-markdown'
+
+" Helps me move "
+"""""""""""""""""
+" A tree explorer plugin for vim
+" <c-n>
+Bundle 'scrooloose/nerdtree'
+
+" Ruby on Rails power tools
+Bundle 'tpope/vim-rails'
+
+" Extends % operator to match html tags and others.
+Bundle 'tsaleh/vim-matchit'
+
+" Helps me type "
+"""""""""""""""""
+" Quoting/parenthesizing made simple
+" cs<match><replace>
+" ds<match>
+" v<selection>S<replacement>
+Bundle 'tpope/vim-surround'
+
+" Enable repeating supported plugin maps with '.'
+Bundle 'tpope/vim-repeat'
+
+" Write snippets in vim
+" <tab> after a snippet key
+Bundle 'msanders/snipmate.vim'
+
+" A parser for a condensed HTML format
+" <c-e> after a block of sparkup-formatted pre-html
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Easily comment in and out lines
+" <leader>__
+Bundle 'tomtom/tcomment_vim'
+
+" Vim motions on speed. Replaces the <number> in <number><motion>
+" <leader><leader><motion>
+Bundle 'Lokaltog/vim-easymotion'
+
+" Settings "
+""""""""""""
+filetype plugin indent on " Turn on filetype after Vundle is setup
+colorscheme evan
+syntax enable
+
+set nu "Turn on line numbers
+set lbr "Wordwrapping doesn't break words in the middle
+set wrap "wrap lines
+set list "All characters print. Including meta characters
+set ts=2
+set sw=2
+set ruler "Shows the ruler
+set magic "set magic on, for regular expressions
+set mat=2 "two-tenths of a second blink
+set smarttab
+set wildmenu "Enhanced tab completion
+set autoread "Set to auto read when a file is changed from the outside
+set vb t_vb= "disables visual bell
+set hlsearch
+set showmode " Says whether or not paste mode is turned on or off
+set t_Co=256 "Enable colored terminal
+let &t_Co=256
+set incsearch "Incremental search
+set smartcase "Will switch to case sensitive if a cap is used
+set showmatch "Shows matches on search
+set expandtab "Replaces tabs with spaces
+set tabstop=2 "Num characters when tab is pushed
+set ignorecase "case insensitive search but see next option
+set autoindent "Enable automatic alignment during insertions
+set noswapfile "Don't use swp files
+set smartindent "Tries to recognize code and indent
+set cmdheight=2 "The commandbar height
+set shiftwidth=2
+set noerrorbells
+set novisualbell
+set history=1000
+set laststatus=2 "Always show the status line
+set restorescreen
+set encoding=utf8
+set guioptions-=T "Removes GUI bars
+set guioptions-=l "Removes scrollbars
+set guioptions-=r "Removes scrollbars
+set guioptions-=b "Removes scrollbars
+set pastetoggle=<F2> " Binds F2 to pastetoggling
+set wildmode=list:longest,full " bash command line tab completion
+set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+
 " Key remappings "
 """"""""""""""""""
 let mapleader = ","
@@ -16,7 +141,10 @@ cnoremap <C-N> <Down>
 "Space bar searching
 map <space> /
 
-nnoremap <silent> <C-g> :Grep -ri<CR>
+nnoremap <silent> <C-g> :Grep -ri
+
+" Toggles paste mode and shows value of the option
+nnoremap <F2> :set invpaste paste?<CR>
 
 "Smart folding on shift-space
 nnoremap <silent> <S-Space> @=(foldlevel('.')?'za':'l')<CR>
@@ -69,57 +197,6 @@ map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-" Settings "
-""""""""""""
-filetype plugin indent on
-colorscheme evan
-syntax enable
-
-set nu "Turn on line numbers
-set lbr "Wordwrapping doesn't break words in the middle
-set wrap "wrap lines
-set list
-set ts=2
-set sw=2
-set ruler "Shows the ruler
-set magic "set magic on, for regular expressions
-set mat=2 "two-tenths of a second blink
-set smarttab
-set wildmenu "Enhanced tab completion
-set autoread "Set to auto read when a file is changed from the outside
-set vb t_vb= "disables visual bell
-set hlsearch
-set t_Co=256 "Enable colored terminal
-let &t_Co=256
-set incsearch "Incremental search
-set smartcase "Will switch to case sensitive if a cap is used
-set showmatch "Shows matches on search
-set expandtab "Replaces tabs with spaces
-set tabstop=2 "Num characters when tab is pushed
-set ignorecase "case insensitive search but see next option
-set autoindent "Enable automatic alignment during insertions
-set noswapfile "Don't use swp files
-set smartindent "Tries to recognize code and indent
-set cmdheight=2 "The commandbar height
-set shiftwidth=2
-set noerrorbells
-set novisualbell
-set nocompatible "Does not use old vi quirks
-set history=1000
-set laststatus=2
-set shiftwidth=2 "sets indent size
-set restorescreen
-set encoding=utf8
-set guioptions-=T "Removes GUI bars
-set guioptions-=l "Removes scrollbars
-set guioptions-=r "Removes scrollbars
-set guioptions-=b "Removes scrollbars
-set wildmode=list:longest,full " bash command line tab completion
-set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
-
-match LineTooLong /\%>74v.\+/
-
 " Autocommands "
 """""""""""""""
 autocmd! bufwritepost vimrc source ~/.vimrc "When vimrc is edited, reload it
@@ -132,6 +209,8 @@ au BufRead,BufNewFile *.coffee set ft=coffee.html
 
 " Utility Methods "
 """"""""""""""""""
+match LineTooLong /\%>74v.\+/
+
 function! CurDir()
   let curdir = substitute(getcwd(), '/Users/amir/', "~/", "g")
   return curdir
@@ -176,8 +255,6 @@ function! VisualSearch(direction) range
   let @" = l:saved_reg
 endfunction
 
-
-
 """"""""""""""""""""""""""""""
 " Language Specific Settings "
 """"""""""""""""""""""""""""""
@@ -206,15 +283,13 @@ let &t_te="\<Esc>[?47l"
 let &t_ti="\<Esc>[?47h"
 
 
-
 """""""""""
 " PLUGINS "
 """""""""""
-call pathogen#infect()
-call pathogen#runtime_append_all_bundles()
-
-" NERD TREE "
+" Nerd Tree "
 """""""""""""
 noremap <c-n> :NERDTreeToggle<CR>
 
+" Sparkup "
+"""""""""""
 let sparkupNextMapping = '<M-e>'
