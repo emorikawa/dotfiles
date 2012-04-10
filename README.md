@@ -47,7 +47,13 @@ I use [Vundle](https://github.com/gmarik/vundle) to manage vim packages. Check o
 - **[Fugitive](https://github.com/tpope/vim-fugitive):** Awesome git wrapper
 
 ## tmux
-(Readme coming soon)
+Terminal multiplexing ftw
+Take close note a the .tmux.conf file. Be sure it's symlinked to ~/.tmux.conf
+
+Some significant sections of my tmux.conf
+- The prefix is mapped to C-w. This is to make motions between tmux panes similar to moving between vim panes
+- Motion mappings remapped to be very vim-like
+- The reattach-to-user-namespace patch is needed to make copy and paste work on mac OSX
 
 ## zsh
 (Readme coming soon)
