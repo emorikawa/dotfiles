@@ -39,6 +39,10 @@ Bundle 'kchmck/vim-coffee-script'
 " Markdown syntax for vim
 Bundle 'plasticboy/vim-markdown'
 
+" Helps me search "
+"""""""""""""""""""
+Bundle 'grep.vim'
+
 " Helps me move "
 """""""""""""""""
 " A tree explorer plugin for vim
@@ -50,6 +54,9 @@ Bundle 'tpope/vim-rails'
 
 " Extends % operator to match html tags and others.
 Bundle 'tsaleh/vim-matchit'
+
+" Fuzzy file, buffer, mru and tag finder
+Bundle 'kien/ctrlp.vim'
 
 " Helps me type "
 """""""""""""""""
@@ -112,6 +119,7 @@ set noswapfile "Don't use swp files
 set smartindent "Tries to recognize code and indent
 set cmdheight=2 "The commandbar height
 set shiftwidth=2
+set textwidth=74 " Maximum line length at 74 characters. Trigged with gq
 set noerrorbells
 set novisualbell
 set history=1000
@@ -197,6 +205,11 @@ map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
+" Custom commands "
+"""""""""""""""""""
+" Removes all trailing whitespace
+command! Whitespace %s/\s\+$//e
+
 " Autocommands "
 """""""""""""""
 autocmd! bufwritepost vimrc source ~/.vimrc "When vimrc is edited, reload it
@@ -261,6 +274,14 @@ endfunction
 
 " Python "
 """"""""""
+au FileType python setl
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=80
+    \ smarttab
+    \ expandtab
+
 let python_highlight_all = 1
 au FileType python syn keyword pythonDecorator True None False self
 

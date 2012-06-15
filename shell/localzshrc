@@ -5,6 +5,9 @@ WEIPAN=3766A6CB
 
 plugins=(git macports osx pip)
 
+alias mhcmongo='ssh -o ServerAliveInterval=60 -i ~/.ssh/mortar_key.pem -L 31667:ds031667-a0.mongolab.com:31667 -L 31668:ds031667-a1.mongolab.com:31667 ubuntu@dev.m0rtardata.com && mongo -u web -p risks132Hours 127.0.0.1:31667/mhc_dev'
+alias mhcdb='mongo -u web -p risks132Hours ds031667-a1.mongolab.com:31667/mhc_dev'
+
 alias startupschool='cd ~/src/startupschool; ls -G'
 alias psykonect='cd ~/src/psykosoft/psykonect; ls -G'
 alias snippets='cd ~/src/environment/vim/vim/bundle/snipmate/snippets; ls -G'
@@ -56,6 +59,142 @@ alias workproximate='cd ~/src/Proximate/public/stylesheets && \
                      mvim -O3 && \
                      rails server &; \
                      open http://localhost:3000'
+alias changemac2='ifconfig; \
+                 cd /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources; \
+                 sudo ./airport -z; \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:95 && \
+                 ifconfig'
+alias changemac='ifconfig; \
+                 cd /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources; \
+                 sudo ./airport -z; \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 sudo ifconfig en1 ether a4:40:c1:d8:ff:94 && \
+                 ifconfig'
 
 alias tmux5='tmux split-window; tmux split-window -h; tmux split-window; tmux split-window -h; tmux split-window; tmux select-layout tiled'
 
@@ -75,3 +214,5 @@ export PATH=\
 $PATH
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+
+[[ -s "$HOME/.tmuxinator/scripts/tmuxinator" ]] && . "$HOME/.tmuxinator/scripts/tmuxinator" # This loads up tmuxinator
