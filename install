@@ -76,6 +76,17 @@ IAM=`whoami`
 sudo chsh -s `which zsh`
 sudo chsh -s `which zsh` $IAM
 
+# Installing tmux
+echo ""
+echo "===>  Installing tmux <==="
+echo "--->  Making backup of .tmux.conf"
+cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
+echo "--->  Linking .tmux.conf"
+ln -sf $BASEDIR/tmux/.tmux.conf $HOME/.tmux.conf
+echo "--->  Linking .tmux folder"
+ln -sf $BASEDIR/tmux/.tmux $HOME/.tmux
+
+
 echo ""
 echo "===>  Installing zsh  <==="
 echo "--->  Linking .tmux/"
