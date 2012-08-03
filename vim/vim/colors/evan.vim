@@ -6,6 +6,13 @@
 " colors for key elements and weak, but balanced colors for more common
 " elements
 "
+" COLOR SCHEME:
+" red   - #B35E4D at 20% #402E2B
+" green - #558C57 at 20% #2b372e
+" blue  - #669991 at 20% #2f3a38
+" tan   - #D9BF8C at 20% #474138
+" camel - #CF984F at 20% #463a2d
+"
 " The functions in this theme that convert hex color codes to the nearest
 " terminal color were developed by Henry So, Jr. 
 
@@ -293,56 +300,67 @@ if &t_Co == 88 || &t_Co == 256
 endif
 
 " Set colors for GUI Version
-hi Normal guifg=#D9C7A8 guibg=#222222
-hi Pmenu guifg=#A39069 guibg=#333333
+hi Normal   guifg=#D9C7A8 guibg=#222222
+
+hi Pmenu    guifg=#A39069 guibg=#333333
 hi PmenuSel guifg=#D9C7A8 guibg=#555555 gui=bold
 
-hi Statement guifg=#669991
-hi Type guifg=#669991
-hi PreProc guifg=#669991
-hi htmlTag guifg=#669991
-hi htmlEndTag guifg=#669991
+hi Statement     guifg=#669991
+hi Type          guifg=#669991
+hi PreProc       guifg=#669991
+hi htmlTag       guifg=#669991
+hi htmlEndTag    guifg=#669991
 hi pythonBuiltin guifg=#669991
 
 hi Identifier guifg=#558C57
-hi Special guifg=#558C57
-hi htmlArg guifg=#558C57
+hi Special    guifg=#558C57
+hi htmlArg    guifg=#558C57
 
-hi Function guifg=#B35E4D
+hi Function        guifg=#B35E4D
 hi coffeeObjAssign guifg=#B35E4D
-hi coffeeObject guifg=#B35E4D
-hi coffeeConstant guifg=#B35E4D
-hi djangoTagBlock guifg=#B35E4D
+hi coffeeObject    guifg=#B35E4D
+hi coffeeConstant  guifg=#B35E4D
+hi djangoTagBlock  guifg=#B35E4D
 hi djangoStatement guifg=#B35E4D
 
-hi Comment guifg=#666666
+hi Comment  guifg=#666666
 
-hi String guifg=#D9BF8C
-hi Number guifg=#D9BF8C
+hi String   guifg=#D9BF8C
+hi Number   guifg=#D9BF8C
 hi Constant guifg=#D9BF8C
 
-hi Folded guifg=#888888 guibg=#333333
+hi Folded   guifg=#888888 guibg=#333333
 
-hi Error guifg=#222222 guibg=#B35E4D
-hi Todo guifg=#000000 guibg=#B3893F
+hi Error    guifg=#222222 guibg=#B35E4D
+hi Todo     guifg=#000000 guibg=#B3893F
 
-hi Visual guibg=#3b3b3b
+hi Visual   guibg=#3b3b3b
 
-hi Search guifg=#222222 guibg=#CF984F
+hi Search   guifg=#222222 guibg=#CF984F
 
-hi ColorColumn guifg=#222222
-hi cSpaceError guifg=#444444
-hi NonText guifg=#444444
-hi SpecialKey guifg=#333333
-hi VertSplit guifg=#444444
-hi LineNr guifg=#444444
+hi ColorColumn  guifg=#222222
+hi cSpaceError  guifg=#444444
+hi NonText      guifg=#444444
+hi SpecialKey   guifg=#333333
+hi VertSplit    guifg=#444444
+hi LineNr       guifg=#444444
 hi StatusLineNC guifg=#444444
-hi StatusLine guifg=#666666
+hi StatusLine   guifg=#666666
 
-hi LineTooLong guibg=#333333
+hi LineTooLong  guibg=#333333
 
-hi Title guifg=#D9C865 gui=bold
-hi markdownH1 guifg=#D9C865 guibg=#3d381b gui=bold
-hi markdownH2 guifg=#D9C865 gui=bold
-hi markdownH3 guifg=#D9C866
-hi markdownH4 guifg=#D9C865
+hi Title        guifg=#D9C865 gui=bold
+hi markdownH1   guifg=#D9C865 guibg=#3d381b gui=bold
+hi markdownH2   guifg=#D9C865 gui=bold
+hi markdownH3   guifg=#D9C866
+hi markdownH4   guifg=#D9C865
+
+hi DiffAdd      guibg=#2f3d2f
+hi DiffChange   guibg=#342c36
+hi DiffText     guibg=#56415c
+hi DiffDelete   guifg=#723b30 guibg=#46312d
+
+" hi DiffAdd      guibg=#2b372e
+" hi DiffChange   guibg=#2f3a38
+" hi DiffText     guibg=#463a2d
+" hi DiffDelete   guibg=#402E2B

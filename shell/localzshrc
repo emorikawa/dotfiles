@@ -1,9 +1,24 @@
 EVANKEY=21CCB5B8
 RAEEZKEY=6F2F2AE8
 JEFFKEY=326970DA
-WEIPAN=3766A6CB
+WEI_KEY=3766A6CB
+SOFIA_KEY=907606F7
+ROBB_KEY=43705ADD
+EVAN_KEY=21CCB5B8
 
 plugins=(git macports osx pip)
+
+alias editproxpass='cd ~/src/proximate_secure && \
+                    gpg -d -o tmp.md proximate_login_info.gpg && \
+                    mvim tmp.md'
+alias encryptproxpass='cd ~/src/proximate_secure && \
+                       gpg -e --armor --sign -o proximate_login_info.gpg \
+                       -r $SOFIA_KEY \
+                       -r $EVAN_KEY \
+                       -r $WEI_KEY \
+                       -r $ROBB_KEY \
+                       tmp.md && \
+                       rm -f tmp.md'
 
 alias mhcmongo='ssh -o ServerAliveInterval=60 -i ~/.ssh/mortar_key.pem -L 31667:ds031667-a0.mongolab.com:31667 -L 31668:ds031667-a1.mongolab.com:31667 ubuntu@dev.m0rtardata.com && mongo -u web -p risks132Hours 127.0.0.1:31667/mhc_dev'
 alias mhcdb='mongo -u web -p risks132Hours ds031667-a1.mongolab.com:31667/mhc_dev'

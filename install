@@ -77,6 +77,20 @@ sudo chsh -s `which zsh`
 sudo chsh -s `which zsh` $IAM
 
 echo ""
+echo "===>  Installing zsh  <==="
+echo "--->  Linking .tmux/"
+mv -rf $HOME/.tmux $HOME/.tmux.bak
+ln -sf $BASEDIR/tmux/.tmux $HOME/.tmux
+
+echo "--->  Linking .tmux.conf"
+mv -rf $HOME/.tmux.conf $HOME/.tmux.conf.bak
+ln -sf $BASEDIR/tmux/.tmux.conf $HOME/.tmux.conf
+
+echo "--->  Linking .gitconfig"
+mv -rf $HOME/.gitconfig $HOME/.gitconfig.bak
+ln -sf $BASEDIR/git/.gitconfig $HOME/.gitconfig
+
+echo ""
 echo "====  Successfully installed Evan's environment  ===="
 
 /usr/bin/env zsh

@@ -1,0 +1,22 @@
+[user]
+	name = Evan Morikawa
+	email = evan@evanmorikawa.com
+[github]
+	user = emorikawa
+	token = 11918e7dd6c74f0504c0a05f6c2f4aba
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+[merge]
+	tool = mvim
+[mergetool "mvim"]
+  cmd = /usr/local/bin/mvim -d -g $LOCAL $MERGED $REMOTE
+  keepbackup = false
+[mergetool "diffmerge"]
+  cmd = diffmerge -r $MERGED -t1=$LOCAL -t2=$BASE -t3=$REMOTE $LOCAL $BASE $REMOTE
+	trustExitCode = false
