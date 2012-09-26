@@ -119,7 +119,7 @@ set noswapfile "Don't use swp files
 set smartindent "Tries to recognize code and indent
 set cmdheight=2 "The commandbar height
 set shiftwidth=2
-set textwidth=75 " Maximum line length at 74 characters. Trigged with gq
+set textwidth=74 " Maximum line length at 74 characters. Trigged with gq
 set noerrorbells
 set novisualbell
 set history=1000
@@ -130,7 +130,7 @@ set guioptions-=T "Removes GUI bars
 set guioptions-=l "Removes scrollbars
 set guioptions-=r "Removes scrollbars
 set guioptions-=b "Removes scrollbars
-set colorcolumn=75 "Have a line of at 80 characters wide
+set colorcolumn=75 "Have a line of at 75 characters wide. The max width is 74 characters
 set pastetoggle=<F2> " Binds F2 to pastetoggling
 set wildmode=list:longest,full " bash command line tab completion
 set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing

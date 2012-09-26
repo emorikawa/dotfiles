@@ -274,7 +274,7 @@ if &t_Co == 88 || &t_Co == 256
 
   call <SID>X("Search",          "222222", "D9BF8C", "bold")
 
-  call <SID>X("ColorColumn",     "333333", "333333", "")
+  call <SID>X("ColorColumn",     "", "333333", "")
   call <SID>X("cSpaceError",     "444444", "", "")
   call <SID>X("NonText",         "444444", "", "")
   call <SID>X("SpecialKey",      "333333", "", "")
@@ -338,7 +338,7 @@ hi Visual   guibg=#3b3b3b
 
 hi Search   guifg=#222222 guibg=#CF984F
 
-hi ColorColumn  guifg=#333333 guibg=#333333
+hi ColorColumn  guibg=#333333
 hi cSpaceError  guifg=#444444
 hi NonText      guifg=#444444
 hi SpecialKey   guifg=#333333
