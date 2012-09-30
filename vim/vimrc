@@ -5,6 +5,9 @@
 """""""""""""""""""
 " Vundle Packages "
 """""""""""""""""""
+
+" Simply type :BundleInstall to install everything.
+
 set nocompatible " Does not use old vi quirks
 filetype off     " Required temporarily for vundle
 set rtp+=~/.vim/bundle/vundle
@@ -57,6 +60,9 @@ Bundle 'tsaleh/vim-matchit'
 
 " Fuzzy file, buffer, mru and tag finder
 Bundle 'kien/ctrlp.vim'
+
+" Fast and fuzzy finder. Uses peepopen application
+Bundle 'shemerey/vim-peepopen'
 
 " Helps me type "
 """""""""""""""""
@@ -149,6 +155,11 @@ cnoremap <C-N> <Down>
 
 "Space bar searching
 map <space> /
+
+if has("gui_macvim")
+  macmenu &File.New\ Tab key=<nop>
+  map <C-t> <Plug>PeepOpen
+end
 
 nnoremap <silent> <C-g> :Grep -ri
 
