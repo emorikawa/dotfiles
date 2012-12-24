@@ -1,6 +1,8 @@
 ###################################
 # The zshrc file of Evan Morikawa #
 ###################################
+# Look at the ~/.localzshrc file for computer-specific configs
+
 autoload -U colors && colors
 
 # Source localzshrc
@@ -16,7 +18,8 @@ export ZSH=$HOME/.oh-my-zsh
 export ZSH_THEME="evan"
 
 # Comment this out to disable weekly auto-update checks
-export DISABLE_AUTO_UPDATE="true"
+# export DISABLE_AUTO_UPDATE="true"
+export UPDATE_ZSH_DAYS=7
 
 # Set default editor
 export EDITOR='/usr/bin/vim'
@@ -27,6 +30,15 @@ plugins=(git pip)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
+
+# Common $PATH variables #
+##########################
+# Check .localzshrc for more custom $PATH setups
+export PATH=\
+/usr/local/bin:\
+/usr/local/sbin:\
+/usr/local/share/python:\
+$PATH
 
 # Aliases #
 ###########
@@ -47,6 +59,10 @@ alias vrc='vim $HOME/.vimrc'
 
 # Utility Methods #
 ##################
+function gr {
+  grep -ErinI --exclude-dir=log --exclude-dir=tmp $1 *
+}
+
 # Prepends a directory to the PATH if it's not already there and
 # the directory exists.
 pathprepend() {

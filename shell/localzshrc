@@ -230,9 +230,6 @@ alias tmux5='tmux split-window; tmux split-window -h; tmux split-window; tmux sp
 # export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.2.3/jars"
 
 export PATH=\
-/usr/local/share/python:\
-/usr/local/bin:\
-/usr/local/sbin:\
 /Library/PostgreSQL/9.1/bin:\
 $PATH
 
