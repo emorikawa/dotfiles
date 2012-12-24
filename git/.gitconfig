@@ -7,16 +7,21 @@
 [alias]
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [difftool "Kaleidoscope"]
-	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
 	prompt = false
 [diff]
 	tool = Kaleidoscope
 [merge]
-	tool = mvim
+	tool = Kaleidoscope
 [mergetool "mvim"]
   cmd = /usr/local/bin/mvim -d -g $LOCAL $MERGED $REMOTE
   keepbackup = false
 [mergetool "diffmerge"]
   cmd = diffmerge -r $MERGED -t1=$LOCAL -t2=$BASE -t3=$REMOTE $LOCAL $BASE $REMOTE
 	trustExitCode = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false

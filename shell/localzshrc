@@ -8,6 +8,13 @@ EVAN_KEY=21CCB5B8
 
 plugins=(git macports osx pip)
 
+function gr {
+  grep -ErinI --exclude-dir=log --exclude-dir=tmp $1 *
+}
+
+alias console='cd ~/src/Proximate && \
+               heroku run console -a proximate-production'
+
 alias editproxpass='cd ~/src/proximate_secure && \
                     gpg -d -o tmp.md proximate_login_info.gpg && \
                     mvim tmp.md'
@@ -49,6 +56,7 @@ alias editmortardata='cd ~/src/mortardata.com; ls -G; \
                                app/assets/stylesheets/*.less \
                                app/assets/stylesheets/mortar/*.less;'
 alias proximate='cd ~/src/Proximate; ls -G'
+alias π='cd ~/src/proximate_pi; ls -G'
 alias celery='su2; ./script/celery'
 alias live='su2; ./script/live'
 alias client='su2; ./script/client'
