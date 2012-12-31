@@ -53,7 +53,7 @@ cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
 echo "--->  Linking .tmux.conf"
 ln -sf $BASEDIR/tmux/.tmux.conf $HOME/.tmux.conf
 echo "--->  Making backup of .tmux folder"
-mv -rf $HOME/.tmux $HOME/.tmux.bak
+mv -f $HOME/.tmux $HOME/.tmux_bak
 echo "--->  Linking .tmux folder"
 ln -sf $BASEDIR/tmux/.tmux $HOME/.tmux
 
@@ -85,6 +85,7 @@ else
   sudo chsh -s `which zsh`
   sudo chsh -s `which zsh` $IAM
   /usr/bin/env zsh
+  source ~/.zshrc
 fi
 
 echo ""

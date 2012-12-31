@@ -60,8 +60,8 @@ Bundle 'tpope/vim-rails'
 " Extends % operator to match html tags and others.
 Bundle 'tsaleh/vim-matchit'
 
-" Fast and fuzzy finder. Uses peepopen application
-Bundle 'tsaleh/vim-matchitn'
+" Peepopen quickly finds and open files
+Bundle 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
 
 " Helps me type "
 """""""""""""""""
