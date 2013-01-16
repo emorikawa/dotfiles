@@ -31,7 +31,8 @@ plugins=(git pip)
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
-export NODE_PATH="/usr/local/lib/node"
+export NODE_PATH="/usr/local/lib/node:$NODE_PATH"
+export PYTHONPATH="/usr/local/include:$PYTHONPATH"
 
 # Common $PATH variables #
 ##########################
@@ -80,3 +81,5 @@ if [[ -n $STY ]] then
     . ~/.zsh-$STY[(ws:.:)2]
   fi
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
