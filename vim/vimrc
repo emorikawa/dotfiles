@@ -13,9 +13,6 @@ filetype off     " Required temporarily for vundle
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-" Must start with Vundle. Vundle handles package management
-Bundle 'gmarik/vundle'
-
 " Helps me collaborate "
 """"""""""""""""""""""""
 " A Git wrapper so awesome, it should be illegal
@@ -23,9 +20,6 @@ Bundle 'tpope/vim-fugitive'
 
 " Helps me see "
 """"""""""""""""
-" A color-cordinated, more helpful statusline
-Bundle 'Lokaltog/vim-powerline'
-
 " Colors CSS tags with the appropriate color.
 Bundle 'skammer/vim-css-color'
 
