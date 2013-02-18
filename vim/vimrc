@@ -57,6 +57,9 @@ Bundle 'tsaleh/vim-matchit'
 " Peepopen quickly finds and open files
 Bundle 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
 
+" Unload/delete/wipe a buffer, keep its window(s)
+Bundle 'bufkill.vim'
+
 " Helps me type "
 """""""""""""""""
 " Quoting/parenthesizing made simple
@@ -68,7 +71,7 @@ Bundle 'tpope/vim-surround'
 " Enable repeating supported plugin maps with '.'
 Bundle 'tpope/vim-repeat'
 
-" Write snippets in vim
+" Write snippets in vim.
 " <tab> after a snippet key
 Bundle 'msanders/snipmate.vim'
 
@@ -83,6 +86,92 @@ Bundle 'tomtom/tcomment_vim'
 " Vim motions on speed. Replaces the <number> in <number><motion>
 " <leader><leader><motion>
 Bundle 'Lokaltog/vim-easymotion'
+
+" Key remappings"
+"""""""""""""""""
+" Space bar searching
+map <space> /
+
+"Quick escape and saving via button-mashing
+inoremap jk <Esc>
+inoremap kj <Esc>
+cnoremap jk <Esc>
+cnoremap kj <Esc>
+inoremap df <Esc>:w<CR>
+inoremap fd <Esc>:w<CR>
+noremap df :w<CR>
+noremap fd :w<CR>
+
+" Peep open to search between files
+if has("gui_macvim")
+  macmenu &File.New\ Tab key=<nop>
+  map <C-e> <Plug>PeepOpen
+end
+
+"Easier movement around the page
+noremap <C-j> 3<C-e>
+noremap <C-k> 3<C-y>
+noremap <S-j> 3j
+noremap <S-k> 3k
+noremap <S-l> 5l
+noremap <S-h> 5h
+noremap <PageUp> <c-u>
+noremap <PageDown> <c-d>
+noremap <Home> 0
+noremap <End> $
+noremap j gj
+noremap k gk
+map 0 ^
+
+" noremap <C-Q> <esc>:bd<CR>:vsp<CR>:bn<CR>:buffers<CR>
+noremap <C-Q> <esc>:bd<CR>
+
+"Git commands
+nnoremap gs :Gstatus<CR>
+nnoremap ga :Gwrite<CR>
+nnoremap gc :Gcommit -a<CR>
+nnoremap gd :Gdiff<CR>
+nnoremap gl :Gdiff HEAD~1<CR>
+nnoremap gb :Gbrowse<CR>
+
+"Info about the character undernath cursor
+nnoremap gi ga
+
+"In visual mode when you press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+
+" Toggles paste mode and shows value of the option
+nnoremap <F2> :set invpaste paste?<CR>
+"Move between buffers
+map <c-h> <c-w>h
+map <c-l> <c-w>l
+
+noremap <C-S> :%s/
+
+"Smart folding on shift-space
+nnoremap <silent> <S-Space> @=(foldlevel('.')?'za':'l')<CR>
+vnoremap <S-Space> zf
+
+"shell shortcuts in command mode
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+"Sparkup to create HTML
+let g:sparkupExecuteMapping = '<c-t>'
+
+"Displays the tag type under the cursor. Really useful for generating colors
+map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans <'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+let mapleader = ","
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Settings "
 """"""""""""
@@ -134,91 +223,15 @@ set pastetoggle=<F2> " Binds F2 to pastetoggling
 set wildmode=list:longest,full " bash command line tab completion
 set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-" Key remappings "
-""""""""""""""""""
-let mapleader = ","
-
-"shell shortcuts in command mode
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
-cnoremap <C-K> <C-U>
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
-
-" Space bar searching
-map <space> /
-
-" Peep open to search between files
-if has("gui_macvim")
-  macmenu &File.New\ Tab key=<nop>
-  map <C-e> <Plug>PeepOpen
-end
-
-" Search the word under the cursor in Grep
-noremap <C-8> :call Gr foo *<CR>
-
-nnoremap <silent> <C-g> :Grep -ri
-
-" Toggles paste mode and shows value of the option
-nnoremap <F2> :set invpaste paste?<CR>
-
-"Smart folding on shift-space
-nnoremap <silent> <S-Space> @=(foldlevel('.')?'za':'l')<CR>
-vnoremap <S-Space> zf
-
-"Move between buffers
-map <c-h> <c-w>h
-map <c-l> <c-w>l
-
-noremap <C-S> :%s/
-noremap <C-Q> <esc>:bd<CR>:vsp<CR>:bn<CR>:buffers<CR>
-
-"Easier movement around the page
-noremap <C-j> 3<C-e>
-noremap <C-k> 3<C-y>
-noremap <S-j> 3j
-noremap <S-k> 3k
-noremap <S-l> 5l
-noremap <S-h> 5h
-noremap <PageUp> <c-u>
-noremap <PageDown> <c-d>
-noremap <Home> 0
-noremap <End> $
-noremap j gj
-noremap k gk
-map 0 ^
-
-"Quick escape and saving via button-mashing
-inoremap jk <Esc>
-inoremap kj <Esc>
-cnoremap jk <Esc>
-cnoremap kj <Esc>
-inoremap df <Esc>:w<CR>
-inoremap fd <Esc>:w<CR>
-noremap df :w<CR>
-noremap fd :w<CR>
-
-"In visual mode when you press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
-
-let g:sparkupExecuteMapping = '<c-t>'
-
-"Displays the tag type under the cursor. Really useful for generating colors
-map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans <'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Custom commands "
 """""""""""""""""""
 " Removes all trailing whitespace
 command! Whitespace %s/\s\+$//e
 
-command! -nargs=1 Gr Grep -ErinI --exclude-dir=log --exclude-dir=tmp <args> *
+command! -nargs=1 Gr Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage <args> *
 
 " Autocommands "
 """""""""""""""

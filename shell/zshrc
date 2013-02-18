@@ -60,6 +60,8 @@ alias rm='rm -i'
 alias zrc='vim $HOME/.zshrc'
 alias zlocal='vim $HOME/.localzshrc'
 alias vrc='vim $HOME/.vimrc'
+alias rake='noglob rake'
+alias heroku='noglob heroku'
 
 # Utility Methods #
 ##################
@@ -83,3 +85,6 @@ if [[ -n $STY ]] then
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
