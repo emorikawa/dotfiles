@@ -38,6 +38,9 @@ Bundle 'kchmck/vim-coffee-script'
 " Markdown syntax for vim
 Bundle 'tpope/vim-markdown'
 
+" A Vim plugin which shows a git diff in the gutter (sign column)
+" Bundle 'airblade/vim-gitgutter'
+
 " Helps me search "
 """""""""""""""""""
 Bundle 'grep.vim'
@@ -87,11 +90,12 @@ Bundle 'tomtom/tcomment_vim'
 " <leader><leader><motion>
 Bundle 'Lokaltog/vim-easymotion'
 
-" Key remappings"
-"""""""""""""""""
-" Space bar searching
-map <space> /
+" Helps me execute "
+""""""""""""""""""""
+Bundle 'skwp/vim-rspec'
 
+" Key remappings ordered by approximate frequency of use"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Quick escape and saving via button-mashing
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -101,12 +105,6 @@ inoremap df <Esc>:w<CR>
 inoremap fd <Esc>:w<CR>
 noremap df :w<CR>
 noremap fd :w<CR>
-
-" Peep open to search between files
-if has("gui_macvim")
-  macmenu &File.New\ Tab key=<nop>
-  map <C-e> <Plug>PeepOpen
-end
 
 "Easier movement around the page
 noremap <C-j> 3<C-e>
@@ -123,8 +121,31 @@ noremap j gj
 noremap k gk
 map 0 ^
 
-" noremap <C-Q> <esc>:bd<CR>:vsp<CR>:bn<CR>:buffers<CR>
-noremap <C-Q> <esc>:bd<CR>
+"Move between buffers
+map <c-h> <c-w>h
+map <c-l> <c-w>l
+
+" Peep open to search between files
+if has("gui_macvim")
+  " macmenu &File.New\ Tab key=<nop>
+  map <C-e> <Plug>PeepOpen
+end
+
+""""" AWESOME SEARCHING
+"In visual mode when you press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+" Search and highlight what's under the cursor. Also automatically copies
+" the word to both yank and the mac paste buffer thanks to
+" clipboard=unnamed
+map <C-f> *<S-n>ye
+" Search via grep what's under the cursor.
+map <D-F> *<S-n>ye:Gr <C-r>"<CR>
+" Unhighlight
+noremap <S-Space> :nohl<CR>
+" Space bar searching
+noremap <space> /
+
 
 "Git commands
 nnoremap gs :Gstatus<CR>
@@ -134,24 +155,30 @@ nnoremap gd :Gdiff<CR>
 nnoremap gl :Gdiff HEAD~1<CR>
 nnoremap gb :Gbrowse<CR>
 
+"Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" Re-source vimrc
+" Command + Shift + y = <D-Y>
+noremap <D-C> :source ~/.vimrc<CR>
+" Puts current file name in the mac paste buffer. Useful for operating on
+" the file from the command line.
+noremap <D-Y> :CopyTitle<CR><CR>
+
+" noremap <C-Q> <esc>:bd<CR>:vsp<CR>:bn<CR>:buffers<CR>
+noremap <C-Q> <esc>:bd<CR>
+
 "Info about the character undernath cursor
 nnoremap gi ga
 
-"In visual mode when you press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
-
 " Toggles paste mode and shows value of the option
 nnoremap <F2> :set invpaste paste?<CR>
-"Move between buffers
-map <c-h> <c-w>h
-map <c-l> <c-w>l
-
 noremap <C-S> :%s/
 
 "Smart folding on shift-space
-nnoremap <silent> <S-Space> @=(foldlevel('.')?'za':'l')<CR>
-vnoremap <S-Space> zf
+nnoremap <silent> zz @=(foldlevel('.')?'za':'l')<CR>
+vnoremap zz zf
 
 "shell shortcuts in command mode
 cnoremap <C-A> <Home>
@@ -214,17 +241,18 @@ set history=1000
 set laststatus=2 "Always show the status line
 set restorescreen
 set encoding=utf8
+set shell=/bin/sh "Use bash shell
 set guioptions-=T "Removes GUI bars
 set guioptions-=l "Removes scrollbars
 set guioptions-=r "Removes scrollbars
 set guioptions-=b "Removes scrollbars
 set colorcolumn=75 "Have a line of at 75 characters wide. The max width is 74 characters
 set pastetoggle=<F2> " Binds F2 to pastetoggling
+set clipboard=unnamed " All yank commands now go to mac clipboard
 set wildmode=list:longest,full " bash command line tab completion
 set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
 " Custom commands "
 """""""""""""""""""
@@ -232,6 +260,8 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 command! Whitespace %s/\s\+$//e
 
 command! -nargs=1 Gr Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage <args> *
+
+command! CopyTitle !echo "%\c" | pbcopy
 
 " Autocommands "
 """""""""""""""
@@ -241,7 +271,7 @@ autocmd BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
 " Mixes in html filetype to web languages
 au BufRead,BufNewFile *.php set ft=php.html
 au BufRead,BufNewFile *.erb set ft=eruby.html
-au BufRead,BufNewFile *.coffee set ft=coffee.html
+au BufRead,BufNewFile *.coffee set ft=coffee
 
 " Utility Methods "
 """"""""""""""""""
@@ -326,6 +356,11 @@ let &t_Sb="\<Esc>[4%dm"
 let &t_te="\<Esc>[?47l"
 let &t_ti="\<Esc>[?47h"
 
+" Rabl "
+""""""""
+au BufRead,BufNewFile *.rabl setf ruby
+au BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
+au BufRead,BufNewFile *.rabl hi def link rubyRabl Function
 
 """""""""""
 " PLUGINS "
