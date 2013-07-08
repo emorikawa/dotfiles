@@ -286,6 +286,9 @@ if &t_Co == 88 || &t_Co == 256
 
   call <SID>X("LineTooLong",      "", "333333", "")
 
+  call <SID>X("IndentGuidesEvent",    "", "1c1c1c", "")
+  call <SID>X("IndentGuidesOdd",      "", "1f1f1f", "")
+
 
   " delete functions {{{
   delf <SID>X
@@ -361,6 +364,14 @@ hi DiffAdd      guibg=#2f3d2f
 hi DiffChange   guibg=#342c36
 hi DiffText     guibg=#56415c
 hi DiffDelete   guifg=#723b30 guibg=#46312d
+
+" Indent highlighting
+hi IndentGuidesEven guibg=#1c1c1c
+hi IndentGuidesOdd  guibg=#1f1f1f
+
+  " Foo bar
+  "   Foo bar baz
+  "     Foo bar baz
 
 " hi DiffAdd      guibg=#2b372e
 " hi DiffChange   guibg=#2f3a38

@@ -38,6 +38,17 @@ Bundle 'kchmck/vim-coffee-script'
 " Markdown syntax for vim
 Bundle 'tpope/vim-markdown'
 
+" Shows indent level
+Bundle 'nathanaelkane/vim-indent-guides'
+
+" Solarized color schemes. We use Evan's color scheme for dark and
+" Solarized for light bg.
+Bundle 'altercation/vim-colors-solarized'
+
+" Live Markdown preview
+" https://github.com/suan/vim-instant-markdown
+" Bundle 'suan/vim-instant-markdown'
+
 " A Vim plugin which shows a git diff in the gutter (sign column)
 " Bundle 'airblade/vim-gitgutter'
 
@@ -90,12 +101,18 @@ Bundle 'tomtom/tcomment_vim'
 " <leader><leader><motion>
 Bundle 'Lokaltog/vim-easymotion'
 
+" Awesome autocomplete
+" http://valloric.github.io/YouCompleteMe/
+Bundle 'Lokaltog/vim-easymotion'
+
 " Helps me execute "
 """"""""""""""""""""
-Bundle 'skwp/vim-rspec'
+Bundle 'Valloric/YouCompleteMe'
 
 " Key remappings ordered by approximate frequency of use"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","
+
 "Quick escape and saving via button-mashing
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -119,17 +136,23 @@ noremap <Home> 0
 noremap <End> $
 noremap j gj
 noremap k gk
-map 0 ^
+noremap 0 ^
 
 "Move between buffers
-map <c-h> <c-w>h
-map <c-l> <c-w>l
+noremap <c-h> <c-w>h
+noremap <c-l> <c-w>l
 
 " Peep open to search between files
 if has("gui_macvim")
   " macmenu &File.New\ Tab key=<nop>
   map <C-e> <Plug>PeepOpen
 end
+
+"Change to light bg
+noremap <leader>l :set background=light<cr>:colorscheme solarized<cr>
+
+"Change to dark bg
+noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
 
 """"" AWESOME SEARCHING
 "In visual mode when you press * or # to search for the current selection
@@ -138,30 +161,34 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 " Search and highlight what's under the cursor. Also automatically copies
 " the word to both yank and the mac paste buffer thanks to
 " clipboard=unnamed
-map <C-f> *<S-n>ye
+noremap <C-f> *<S-n>ye
 " Search via grep what's under the cursor.
-map <D-F> *<S-n>ye:Gr <C-r>"<CR>
+noremap <D-F> *<S-n>ye:Gr <C-r>"<CR>
 " Unhighlight
 noremap <S-Space> :nohl<CR>
 " Space bar searching
 noremap <space> /
 
+noremap <F1> <nop>
+
 
 "Git commands
-nnoremap gs :Gstatus<CR>
-nnoremap ga :Gwrite<CR>
-nnoremap gc :Gcommit -a<CR>
-nnoremap gd :Gdiff<CR>
-nnoremap gl :Gdiff HEAD~1<CR>
-nnoremap gb :Gbrowse<CR>
+noremap gs :Gstatus<CR>
+noremap ga :Gwrite<CR>
+noremap gc :Gcommit -a<CR>
+noremap gd :Gdiff<CR>
+noremap gl :Gdiff HEAD~1<CR>
+noremap gb :Gbrowse<CR>
 
 "Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
 
+" Edit Vimrc
+" $MYVIMRC points to the ~/.vimrc file
+nnoremap <leader>ev :e $MYVIMRC<CR>
 " Re-source vimrc
-" Command + Shift + y = <D-Y>
-noremap <D-C> :source ~/.vimrc<CR>
+nnoremap  <leader>sv :source $MYVIMRC<CR>
 " Puts current file name in the mac paste buffer. Useful for operating on
 " the file from the command line.
 noremap <D-Y> :CopyTitle<CR><CR>
@@ -194,8 +221,6 @@ let g:sparkupExecuteMapping = '<c-t>'
 map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans <'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-let mapleader = ","
 
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
@@ -265,13 +290,13 @@ command! CopyTitle !echo "%\c" | pbcopy
 
 " Autocommands "
 """""""""""""""
-autocmd! bufwritepost vimrc source ~/.vimrc "When vimrc is edited, reload it
-autocmd BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
-
 " Mixes in html filetype to web languages
-au BufRead,BufNewFile *.php set ft=php.html
-au BufRead,BufNewFile *.erb set ft=eruby.html
-au BufRead,BufNewFile *.coffee set ft=coffee
+augroup html_mixin
+  autocmd!
+  au BufRead,BufNewFile *.php set ft=php.html
+  au BufRead,BufNewFile *.erb set ft=eruby.html
+  au BufRead,BufNewFile *.coffee set ft=coffee
+augroup END
 
 " Utility Methods "
 """"""""""""""""""
@@ -327,29 +352,22 @@ endfunction
 
 " Python "
 """"""""""
-au FileType python setl
-    \ tabstop=4
-    \ softtabstop=4
-    \ shiftwidth=4
-    \ textwidth=80
-    \ smarttab
-    \ expandtab
+augroup python_helpers
+  autocmd!
+  au FileType python setl
+      \ tabstop=4
+      \ softtabstop=4
+      \ shiftwidth=4
+      \ textwidth=80
 
-let python_highlight_all = 1
-au FileType python syn keyword pythonDecorator True None False self
+  au BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
+  let python_highlight_all = 1
+  au FileType python syn keyword pythonDecorator True None False self
 
-au BufNewFile,BufRead *.jinja set syntax=htmljinja
-au BufNewFile,BufRead *.mako set ft=mako
-au BufNewFile,BufRead *.less set ft=less
-
-au FileType python inoremap <buffer> $r return
-au FileType python inoremap <buffer> $i import
-au FileType python inoremap <buffer> $p print
-au FileType python inoremap <buffer> $f #--- PH ----------------------------------------------<esc>FP2xi
-au FileType python map <buffer> <leader>1 /class
-au FileType python map <buffer> <leader>2 /def
-au FileType python map <buffer> <leader>C ?class
-au FileType python map <buffer> <leader>D ?def
+  au BufNewFile,BufRead *.jinja set syntax=htmljinja
+  au BufNewFile,BufRead *.mako set ft=mako
+  au BufNewFile,BufRead *.less set ft=less
+augroup END
 
 let &t_Sf="\<Esc>[3%dm"
 let &t_Sb="\<Esc>[4%dm"
@@ -358,9 +376,12 @@ let &t_ti="\<Esc>[?47h"
 
 " Rabl "
 """"""""
-au BufRead,BufNewFile *.rabl setf ruby
-au BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
-au BufRead,BufNewFile *.rabl hi def link rubyRabl Function
+augroup rabl_helpers
+  autocmd!
+  au BufRead,BufNewFile *.rabl setf ruby
+  au BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
+  au BufRead,BufNewFile *.rabl hi def link rubyRabl Function
+augroup END
 
 """""""""""
 " PLUGINS "
@@ -372,3 +393,11 @@ noremap <c-n> :NERDTreeToggle<CR>
 " Sparkup "
 """""""""""
 let sparkupNextMapping = '<M-e>'
+
+" Vim Indent Guides "
+"""""""""""""""""""""
+let g:indent_guides_auto_colors = 0
+augroup indent_guides
+  autocmd!
+  au BufRead,BufNewFile * IndentGuidesEnable
+augroup END

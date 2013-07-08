@@ -49,11 +49,11 @@ $PATH
 if [ `uname` = "Darwin" ]
 then
   alias ls='ls -G'
-  alias ll='ls -la -G'
+  alias ll='ls -lha -G'
 elif [ `uname` = "Linux" ]
 then
   alias ls='ls --color=auto'
-  alias ll='ls -la --color=auto'
+  alias ll='ls -lha --color=auto'
 fi
 
 alias rm='rm -i'
