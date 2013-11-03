@@ -26,13 +26,12 @@ export EDITOR='/usr/bin/vim'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git pip)
+plugins=(git osx pip ruby rails)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
 export NODE_PATH="/usr/local/lib/node:$NODE_PATH"
-export PYTHONPATH="/usr/local/include:$PYTHONPATH"
 
 # Common $PATH variables #
 ##########################
@@ -40,8 +39,6 @@ export PYTHONPATH="/usr/local/include:$PYTHONPATH"
 export PATH=\
 /usr/local/bin:\
 /usr/local/sbin:\
-/usr/local/share/python:\
-/usr/local/share/npm/bin:\
 $PATH
 
 # Aliases #
@@ -56,7 +53,6 @@ then
   alias ll='ls -lha --color=auto'
 fi
 
-alias rm='rm -i'
 alias zrc='vim $HOME/.zshrc'
 alias zlocal='vim $HOME/.localzshrc'
 alias vrc='vim $HOME/.vimrc'

@@ -46,16 +46,16 @@ echo "--->  Linking .vim folder"
 ln -sf $BASEDIR/vim/vim $HOME/.vim
 
 # Installing tmux
-echo ""
-echo "===>  Installing tmux <==="
-echo "--->  Making backup of .tmux.conf"
-cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
-echo "--->  Linking .tmux.conf"
-ln -sf $BASEDIR/tmux/.tmux.conf $HOME/.tmux.conf
-echo "--->  Making backup of .tmux folder"
-mv -f $HOME/.tmux $HOME/.tmux_bak
-echo "--->  Linking .tmux folder"
-ln -sf $BASEDIR/tmux/.tmux $HOME/.tmux
+# echo ""
+# echo "===>  Installing tmux <==="
+# echo "--->  Making backup of .tmux.conf"
+# cp $HOME/.tmux.conf $HOME/.tmux.conf.bak
+# echo "--->  Linking .tmux.conf"
+# ln -sf $BASEDIR/tmux/.tmux.conf $HOME/.tmux.conf
+# echo "--->  Making backup of .tmux folder"
+# mv -f $HOME/.tmux $HOME/.tmux_bak
+# echo "--->  Linking .tmux folder"
+# ln -sf $BASEDIR/tmux/.tmux $HOME/.tmux
 
 # Installing zsh
 echo ""
