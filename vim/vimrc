@@ -101,13 +101,13 @@ Bundle 'tomtom/tcomment_vim'
 " <leader><leader><motion>
 Bundle 'Lokaltog/vim-easymotion'
 
-" Awesome autocomplete
-" http://valloric.github.io/YouCompleteMe/
-Bundle 'Lokaltog/vim-easymotion'
-
 " Helps me execute "
 """"""""""""""""""""
-Bundle 'Valloric/YouCompleteMe'
+" Awesome autocomplete
+" http://valloric.github.io/YouCompleteMe/
+if has("gui_macvim")
+  Bundle 'Valloric/YouCompleteMe'
+end
 
 " Key remappings ordered by approximate frequency of use"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
