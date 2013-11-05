@@ -76,6 +76,7 @@ Bundle 'bufkill.vim'
 
 " Helps me type "
 """""""""""""""""
+
 " Quoting/parenthesizing made simple
 " cs<match><replace>
 " ds<match>
@@ -84,10 +85,6 @@ Bundle 'tpope/vim-surround'
 
 " Enable repeating supported plugin maps with '.'
 Bundle 'tpope/vim-repeat'
-
-" Write snippets in vim.
-" <tab> after a snippet key
-Bundle 'msanders/snipmate.vim'
 
 " A parser for a condensed HTML format
 " <c-e> after a block of sparkup-formatted pre-html
@@ -108,6 +105,12 @@ Bundle 'Lokaltog/vim-easymotion'
 if has("gui_macvim")
   Bundle 'Valloric/YouCompleteMe'
 end
+
+" Write snippets in vim.
+" <tab> after a snippet key
+" Bundle 'msanders/snipmate.vim'
+Bundle 'SirVer/ultisnips'
+
 
 " Key remappings ordered by approximate frequency of use"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -188,7 +191,7 @@ vnoremap > >gv
 " $MYVIMRC points to the ~/.vimrc file
 nnoremap <leader>ev :e $MYVIMRC<CR>
 " Re-source vimrc
-nnoremap  <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 " Puts current file name in the mac paste buffer. Useful for operating on
 " the file from the command line.
 noremap <D-Y> :CopyTitle<CR><CR>
@@ -388,7 +391,7 @@ augroup END
 """""""""""
 " Nerd Tree "
 """""""""""""
-noremap <c-n> :NERDTreeToggle<CR>
+" noremap <c-n> :NERDTreeToggle<CR>
 
 " Sparkup "
 """""""""""
@@ -401,3 +404,25 @@ augroup indent_guides
   autocmd!
   au BufRead,BufNewFile * IndentGuidesEnable
 augroup END
+
+" YouCompleteMe and UltiSnips "
+"""""""""""""""""""""
+" https://github.com/Valloric/YouCompleteMe/issues/36
+function! g:UltiSnips_Complete()
+  call UltiSnips_ExpandSnippet()
+  if g:ulti_expand_res == 0
+    if pumvisible()
+      return "\<C-n>"
+    else
+      call UltiSnips_JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        return "\<TAB>"
+      endif
+    endif
+  endif
+  return ""
+endfunction
+au BufRead,BufNewFile,BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
