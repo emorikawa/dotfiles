@@ -1,12 +1,10 @@
 ###################################
 # The zshrc file of Evan Morikawa #
 ###################################
-# Look at the ~/.localzshrc file for computer-specific configs
+# Look at the ~/.localzshrc file for computer-specific or one-off configs
+source $HOME/.localzshrc
 
 autoload -U colors && colors
-
-# Source localzshrc
-source $HOME/.localzshrc
 
 # Variables and Setup #
 #######################
@@ -30,16 +28,6 @@ plugins=(git osx pip ruby rails)
 
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
-
-export NODE_PATH="/usr/local/lib/node:$NODE_PATH"
-
-# Common $PATH variables #
-##########################
-# Check .localzshrc for more custom $PATH setups
-export PATH=\
-/usr/local/bin:\
-/usr/local/sbin:\
-$PATH
 
 # Aliases #
 ###########
@@ -68,9 +56,9 @@ function gr {
 # Prepends a directory to the PATH if it's not already there and
 # the directory exists.
 pathprepend() {
-  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+  if [ -d "$1" ]; then
     PATH="$1:$PATH"
-    export $PATH
+    export PATH
   fi
 }
 
@@ -80,8 +68,14 @@ if [[ -n $STY ]] then
   fi
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Path Management #
+##########################
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
+pathprepend "$HOME/.rvm/bin" # RVM (for managing rubies)
+pathprepend "/usr/loca/heroku/bin" # Heroku Toolbelt
+pathprepend "/usr/local/bin" # For Homebrew
+
+# Initialize Scripts #
+##########################
+eval "$(pyenv init -)"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
