@@ -22,9 +22,6 @@ export UPDATE_ZSH_DAYS=7
 # Set default editor
 export EDITOR='/usr/bin/vim'
 
-# Used for weather plugin
-export WUNDERGROUND_APIKEY="b31799b4a9020d8c"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git osx pip ruby rails)
