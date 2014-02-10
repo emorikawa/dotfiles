@@ -45,6 +45,9 @@ Bundle 'nathanaelkane/vim-indent-guides'
 " Solarized for light bg.
 Bundle 'altercation/vim-colors-solarized'
 
+" Scala support
+Bundle 'derekwyatt/vim-scala'
+
 " Live Markdown preview
 " https://github.com/suan/vim-instant-markdown
 " Bundle 'suan/vim-instant-markdown'
@@ -277,6 +280,7 @@ set guioptions-=b "Removes scrollbars
 set colorcolumn=75 "Have a line of at 75 characters wide. The max width is 74 characters
 set pastetoggle=<F2> " Binds F2 to pastetoggling
 set clipboard=unnamed " All yank commands now go to mac clipboard
+set backspace+=start,eol,indent " Make backspace work properly on vim
 set wildmode=list:longest,full " bash command line tab completion
 set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -287,7 +291,7 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " Removes all trailing whitespace
 command! Whitespace %s/\s\+$//e
 
-command! -nargs=1 Gr Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage <args> *
+command! -nargs=1 Gr Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage <args> .
 
 command! CopyTitle !echo "%\c" | pbcopy
 
@@ -426,3 +430,5 @@ au BufRead,BufNewFile,BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTr
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+
+au FileType sh set tw=0
