@@ -48,6 +48,14 @@ alias vrc='vim $HOME/.vimrc'
 alias rake='noglob rake'
 alias heroku='noglob heroku'
 
+
+# Unicode Input #
+#################
+# http://www.zsh.org/mla/users/2008/msg01159.html
+autoload insert-unicode-char
+zle -N insert-unicode-char
+bindkey ^X insert-unicode-char
+
 # Utility Methods #
 ##################
 function gr {
@@ -116,3 +124,5 @@ pathprepend "/usr/local/bin" # For Homebrew
 ##########################
 eval "$(pyenv init -)"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

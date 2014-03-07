@@ -5,12 +5,13 @@ WEI_KEY=3766A6CB
 SOFIA_KEY=907606F7
 ROBB_KEY=43705ADD
 EVAN_KEY=21CCB5B8
+JOHN_KEY=42E51BE2
 
 PRODUCTION_DB=data-services-ef45c141
 STAGING_DB=data-services-6561bc7a
 
 alias console='cd ~/Code/Proximate && \
-               heroku run console -a proximate-production'
+               heroku run rails console -a proximate-production'
 alias logs='cd ~/Code/Proximate && \
                heroku logs --tail -a proximate-production'
 

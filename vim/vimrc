@@ -34,6 +34,7 @@ Bundle 'groenewege/vim-less'
 
 " CoffeeScript support for vim
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'mintplant/vim-literate-coffeescript'
 
 " Markdown syntax for vim
 Bundle 'tpope/vim-markdown'
@@ -106,7 +107,7 @@ Bundle 'Lokaltog/vim-easymotion'
 " Awesome autocomplete
 " http://valloric.github.io/YouCompleteMe/
 if has("gui_macvim")
-  Bundle 'Valloric/YouCompleteMe'
+  " Bundle 'Valloric/YouCompleteMe'
 end
 
 " Write snippets in vim.
