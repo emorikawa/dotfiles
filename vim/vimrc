@@ -115,7 +115,6 @@ end
 " Bundle 'msanders/snipmate.vim'
 Bundle 'SirVer/ultisnips'
 
-
 " Key remappings ordered by approximate frequency of use"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
@@ -149,17 +148,27 @@ noremap 0 ^
 noremap <c-h> <c-w>h
 noremap <c-l> <c-w>l
 
+""""" FILE MANAGEMENT
+" Close buffer but keep split open
+" Uses bufkill.vim
+noremap <C-Q> :BD<CR>
+
+" Create (or edit) another file in the same directory as the current file
+map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
+
+" Rename the file. We do this via the git plugin. This only works in git
+" directories.
+map <Leader>r :call RenameFile()<cr>
+
+" Delete the buffer from disk and close the buffer
+" Uses bufkill.vim
+map <Leader>dd :call delete(expand('%'))<CR>:BD<CR>
+
 " Peep open to search between files
 if has("gui_macvim")
   " macmenu &File.New\ Tab key=<nop>
   map <C-e> <Plug>PeepOpen
 end
-
-"Change to light bg
-noremap <leader>l :set background=light<cr>:colorscheme solarized<cr>
-
-"Change to dark bg
-noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
 
 """"" AWESOME SEARCHING
 "In visual mode when you press * or # to search for the current selection
@@ -175,9 +184,6 @@ noremap <D-F> *<S-n>ye:Gr <C-r>"<CR>
 noremap <S-Space> :nohl<CR>
 " Space bar searching
 noremap <space> /
-
-noremap <F1> <nop>
-
 
 "Git commands
 noremap gs :Gstatus<CR>
@@ -200,14 +206,15 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 " the file from the command line.
 noremap <D-Y> :CopyTitle<CR><CR>
 
-" noremap <C-Q> <esc>:bd<CR>:vsp<CR>:bn<CR>:buffers<CR>
-noremap <C-Q> <esc>:bd<CR>
 
 "Info about the character undernath cursor
 nnoremap gi ga
 
 " Toggles paste mode and shows value of the option
 nnoremap <F2> :set invpaste paste?<CR>
+" Don't accidentally open help when going for F2 or q
+noremap <F1> <nop>
+
 noremap <C-S> :%s/
 
 "Smart folding on shift-space
@@ -231,6 +238,13 @@ map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+"Change to light bg
+noremap <leader>l :set background=light<cr>:colorscheme solarized<cr>
+
+"Change to dark bg
+noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
+
 
 " Settings "
 """"""""""""
@@ -292,7 +306,8 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " Removes all trailing whitespace
 command! Whitespace %s/\s\+$//e
 
-command! -nargs=1 Gr Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage <args> .
+command! -nargs=1 Gri Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
+command! -nargs=1 Gr Grep -ErnI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
 
 command! CopyTitle !echo "%\c" | pbcopy
 
@@ -354,6 +369,19 @@ function! VisualSearch(direction) range
   let @" = l:saved_reg
 endfunction
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE (thanks Gary Bernhardt)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+
 """"""""""""""""""""""""""""""
 " Language Specific Settings "
 """"""""""""""""""""""""""""""
@@ -381,15 +409,6 @@ let &t_Sf="\<Esc>[3%dm"
 let &t_Sb="\<Esc>[4%dm"
 let &t_te="\<Esc>[?47l"
 let &t_ti="\<Esc>[?47h"
-
-" Rabl "
-""""""""
-augroup rabl_helpers
-  autocmd!
-  au BufRead,BufNewFile *.rabl setf ruby
-  au BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
-  au BufRead,BufNewFile *.rabl hi def link rubyRabl Function
-augroup END
 
 """""""""""
 " PLUGINS "
@@ -433,3 +452,13 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
 au FileType sh set tw=0
+
+" Rabl "
+""""""""
+augroup rabl_helpers
+  autocmd!
+  au BufRead,BufNewFile *.rabl setf ruby
+  au BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
+  au BufRead,BufNewFile *.rabl hi def link rubyRabl Function
+augroup END
+

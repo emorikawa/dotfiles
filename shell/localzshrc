@@ -26,6 +26,10 @@ alias encryptproxpass='cd ~/Code/secure && \
                        tmp.md && \
                        rm -f tmp.md'
 
+alias useproddb='gpg -d -o config/database.yml config/database-prod.yml.gpg'
+alias usedevdb='gpg -d -o config/database.yml config/database-dev.yml.gpg'
+alias prodconsole='gpg -d -o config/database.yml config/database-prod.yml.gpg && rails console; -d -o config/database.yml config/database-dev.yml.gpg'
+
 alias snippets='cd ~/Code/environment/vim/vim/bundle/snipmate/snippets; ls -G'
 alias mysql='/Applications/MAMP/Library/bin/mysql --host=localhost -uroot -proot'
 alias src='cd ~/Code; ls -G'

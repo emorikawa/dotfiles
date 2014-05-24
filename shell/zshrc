@@ -4,8 +4,6 @@
 # Look at the ~/.localzshrc file for computer-specific or one-off configs
 source $HOME/.localzshrc
 
-autoload -U colors && colors
-
 # Variables and Setup #
 #######################
 # Path to your oh-my-zsh configuration.
@@ -29,9 +27,57 @@ plugins=(git osx pip ruby rails)
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
+autoload -U colors && colors
+
+# Use VIM mode #
+################
+# http://dougblack.io/words/zsh-vi-mode.html
+bindkey -v
+
+# Enables `ciw` and surround commands https://github.com/hchbaw/opp.zsh
+source $HOME/.opp/opp.zsh
+source $HOME/.opp/surround.zsh
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '^b' vi-backward-word
+bindkey '^w' vi-forward-word
+bindkey '^u' kill-whole-line
+bindkey '^k' kill-line
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^r' history-incremental-search-backward
+
+function zle-line-init zle-keymap-select {
+    #VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    #RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $RPROMPT"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1
 
 # Aliases #
 ###########
+alias z='vim ~/.zshrc' # edit zshrc
+alias zl='vim ~/.localzshrc' # edit zshrc
+alias zs='source ~/.zshrc'
+alias f='foreman start -f Procfile.dev'
+alias v='mvim'
+alias v3='mvim -O3'
+alias v4='mvim -O4'
+alias h='history | less'
+
+alias gl='git lg'
+alias gs='git status'
+alias gc='git commit -a'
+alias ga='git add -A'
+alias gf='git fetch origin'
+alias gd='git difftool'
+
 if [ `uname` = "Darwin" ]
 then
   alias ls='ls -G'
@@ -54,7 +100,7 @@ alias heroku='noglob heroku'
 # http://www.zsh.org/mla/users/2008/msg01159.html
 autoload insert-unicode-char
 zle -N insert-unicode-char
-bindkey ^X insert-unicode-char
+# bindkey ^X insert-unicode-char
 
 # Utility Methods #
 ##################
