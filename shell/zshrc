@@ -71,12 +71,19 @@ alias v3='mvim -O3'
 alias v4='mvim -O4'
 alias h='history | less'
 
+alias rc='rails console'
+
 alias gl='git lg'
 alias gs='git status'
 alias gc='git commit -a'
 alias ga='git add -A'
 alias gf='git fetch origin'
 alias gd='git difftool'
+alias gr='git remote -v'
+# With hub. Requires `brew install hub`
+alias gh='git browse' # gh for GitHub
+alias ghc='git browse -- commits' # gh for GitHub
+alias gcmp='git compare'
 
 if [ `uname` = "Darwin" ]
 then
@@ -94,6 +101,8 @@ alias vrc='vim $HOME/.vimrc'
 alias rake='noglob rake'
 alias heroku='noglob heroku'
 
+vimdecrypt() { gpg -d "$1" | vim - -n -i "NONE" "+set filetype=$2"; }
+alias vd="vimdecrypt"
 
 # Unicode Input #
 #################
@@ -172,3 +181,5 @@ eval "$(pyenv init -)"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+eval "$(hub alias -s)"

@@ -42,19 +42,15 @@ Bundle 'tpope/vim-markdown'
 " Shows indent level
 Bundle 'nathanaelkane/vim-indent-guides'
 
-" Solarized color schemes. We use Evan's color scheme for dark and
-" Solarized for light bg.
-Bundle 'altercation/vim-colors-solarized'
-
 " Scala support
 Bundle 'derekwyatt/vim-scala'
+
+" Lean & mean status/tabline for vim that's light as air
+Bundle 'bling/vim-airline'
 
 " Live Markdown preview
 " https://github.com/suan/vim-instant-markdown
 " Bundle 'suan/vim-instant-markdown'
-
-" A Vim plugin which shows a git diff in the gutter (sign column)
-" Bundle 'airblade/vim-gitgutter'
 
 " Helps me search "
 """""""""""""""""""
@@ -62,10 +58,6 @@ Bundle 'grep.vim'
 
 " Helps me move "
 """""""""""""""""
-" A tree explorer plugin for vim
-" <c-n>
-Bundle 'scrooloose/nerdtree'
-
 " Ruby on Rails power tools
 Bundle 'tpope/vim-rails'
 
@@ -77,6 +69,15 @@ Bundle 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
 
 " Unload/delete/wipe a buffer, keep its window(s)
 Bundle 'bufkill.vim'
+
+" New text object at the same indent level
+Bundle 'michaeljsmith/vim-indent-object'
+
+" New text object for a function argument
+Bundle 'vim-scripts/argtextobj.vim'
+
+" A camel-case detecting motion
+Bundle 'bkad/CamelCaseMotion'
 
 " Helps me type "
 """""""""""""""""
@@ -102,17 +103,27 @@ Bundle 'tomtom/tcomment_vim'
 " <leader><leader><motion>
 Bundle 'Lokaltog/vim-easymotion'
 
+" True Sublime Text style multiple selections for Vim
+" Mapped to C-n
+Bundle 'terryma/vim-multiple-cursors'
+
+" Syntax checking hacks for vim
+Bundle 'scrooloose/syntastic'
+
 " Helps me execute "
 """"""""""""""""""""
 " Awesome autocomplete
 " http://valloric.github.io/YouCompleteMe/
 if has("gui_macvim")
-  " Bundle 'Valloric/YouCompleteMe'
+  " Need to point to the currently used libpython library and the include
+  " directory. Since I am using pyenv, I had to manually set the paths in the
+  " YCM install.sh file
+  " echo '/Users/evanmorikawa/.pyenv/versions/2.7.5/lib/libpython2.7.a /Users/evanmorikawa/.pyenv/versions/2.7.5/include/python2.7'
+  Bundle 'Valloric/YouCompleteMe'
 end
 
 " Write snippets in vim.
 " <tab> after a snippet key
-" Bundle 'msanders/snipmate.vim'
 Bundle 'SirVer/ultisnips'
 
 " Key remappings ordered by approximate frequency of use"
@@ -143,6 +154,9 @@ noremap <End> $
 noremap j gj
 noremap k gk
 noremap 0 ^
+
+"And by lowercase everything I mean undo
+noremap U u
 
 "Move between buffers
 noremap <c-h> <c-w>h
@@ -297,8 +311,9 @@ set pastetoggle=<F2> " Binds F2 to pastetoggling
 set clipboard=unnamed " All yank commands now go to mac clipboard
 set backspace+=start,eol,indent " Make backspace work properly on vim
 set wildmode=list:longest,full " bash command line tab completion
+set guifont=Meslo\ LG\ S\ for\ Powerline:h11
 set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
 " Custom commands "
@@ -306,8 +321,17 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " Removes all trailing whitespace
 command! Whitespace %s/\s\+$//e
 
+" Grep case insensitive
 command! -nargs=1 Gri Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
+
+" Grep case sensitive
 command! -nargs=1 Gr Grep -ErnI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
+
+" Grep through coffeescript
+command! -nargs=1 Grc Grep -ErinI --include=\*.coffee --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
+
+" Grep through ruby
+command! -nargs=1 Grr Grep -ErinI --include=\*.rb --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
 
 command! CopyTitle !echo "%\c" | pbcopy
 
@@ -451,6 +475,11 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
+" https://github.com/Valloric/YouCompleteMe/issues/759
+" let g:ycm_path_to_python_interpreter = '/Users/evanmorikawa/.pyenv/versions/2.7.5/bin/python'
+" https://groups.google.com/forum/#!topic/ycm-users/l-d6Wfe-kgk
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+
 au FileType sh set tw=0
 
 " Rabl "
@@ -462,3 +491,32 @@ augroup rabl_helpers
   au BufRead,BufNewFile *.rabl hi def link rubyRabl Function
 augroup END
 
+" Airline "
+"""""""""""
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#checks = [ 'indent' ]
+let g:airline#extensions#fugitive#enabled = 1
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+let g:airline_theme="tomorrow"
+function! AirlineThemePatch(palette)
+  " This is based off of the 'tomorrow' theme with some inspiration from
+  " zenburn
+  let s:IA = airline#themes#get_highlight('NonText')
+
+  let s:N1 = airline#themes#get_highlight2(['DbgCurrent', 'bg'], ['Folded', 'fg'], 'bold')
+  let s:N2 = airline#themes#get_highlight('Folded')
+  let s:N3 = airline#themes#get_highlight('NonText')
+  let a:palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
+
+  let a:palette.insert.airline_c = s:IA
+  let a:palette.insert.airline_x = s:IA
+  let a:palette.replace.airline_c = s:IA
+  let a:palette.replace.airline_x = s:IA
+  let a:palette.visual.airline_c = s:IA
+  let a:palette.visual.airline_x = s:IA
+
+  let s:MOD = airline#themes#get_highlight2(['Error','bg'], ['NonText', 'bg'])
+  let a:palette.normal_modified.airline_c = s:MOD
+
+  let a:palette.inactive = airline#themes#generate_color_map(s:IA, s:IA, s:IA)
+endfunction

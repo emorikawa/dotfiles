@@ -66,7 +66,7 @@ alias workproximate='cd ~/Code/Proximate/public/stylesheets && \
 
 # alias ec2='ssh -i $HOME/.ec2/evan_aws_key.pem ubuntu@107.21.224.76'
 
-# export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home"
 # export EC2_PRIVATE_KEY="$(/bin/ls $HOME/.ec2/pk-*.pem)"
 # export EC2_PRIVATE_KEY="$HOME/.ec2/pk-ZNZYTCO2FEMNHORGB2EHQMTGZQQXYRNV.pem"
 # export EC2_CERT="$(/bin/ls $HOME/.ec2/cert-*.pem)"
