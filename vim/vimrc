@@ -1,11 +1,10 @@
-"""""""""""""""""""""""""""""""""""
-" The vimrc file of Evan Morikawa "
-"""""""""""""""""""""""""""""""""""
+" The vimrc file of Evan Morikawa
+" evan@evanmorikawa.com
+" @e0m
 
-"""""""""""""""""""
-" Vundle Packages "
-"""""""""""""""""""
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""" Vundle Packages """""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Simply type :BundleInstall to install everything.
 
 set nocompatible " Does not use old vi quirks
@@ -13,91 +12,49 @@ filetype off     " Required temporarily for vundle
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-" Helps me collaborate "
-""""""""""""""""""""""""
-" A Git wrapper so awesome, it should be illegal
-Bundle 'tpope/vim-fugitive'
-
-" Helps me see "
-""""""""""""""""
-" Colors CSS tags with the appropriate color.
-Bundle 'skammer/vim-css-color'
-
-" Add CSS3 syntax support to vim's built-in `syntax/css.vim`
-Bundle 'hail2u/vim-css3-syntax'
-
-" HAML, SASS, SCSS support for Vim
-Bundle 'tpope/vim-haml'
-
-" Less syntax support
-Bundle 'groenewege/vim-less'
-
-" CoffeeScript support for vim
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'mintplant/vim-literate-coffeescript'
-
-" Markdown syntax for vim
-Bundle 'tpope/vim-markdown'
-
-" Shows indent level
-Bundle 'nathanaelkane/vim-indent-guides'
-
-" Scala support
-Bundle 'derekwyatt/vim-scala'
-
-" Lean & mean status/tabline for vim that's light as air
-Bundle 'bling/vim-airline'
-
-" Live Markdown preview
-" https://github.com/suan/vim-instant-markdown
-" Bundle 'suan/vim-instant-markdown'
-
-" Helps me search "
-"""""""""""""""""""
-Bundle 'grep.vim'
 
 " Helps me move "
 """""""""""""""""
+" Unload/delete/wipe a buffer, keep its window(s)
+Bundle 'bufkill.vim'
+
 " Ruby on Rails power tools
 Bundle 'tpope/vim-rails'
 
 " Extends % operator to match html tags and others.
 Bundle 'tsaleh/vim-matchit'
 
-" Peepopen quickly finds and open files
-Bundle 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
-
-" Unload/delete/wipe a buffer, keep its window(s)
-Bundle 'bufkill.vim'
-
-" New text object at the same indent level
-Bundle 'michaeljsmith/vim-indent-object'
+" A camel-case detecting motion
+Bundle 'bkad/CamelCaseMotion'
 
 " New text object for a function argument
 Bundle 'vim-scripts/argtextobj.vim'
 
-" A camel-case detecting motion
-Bundle 'bkad/CamelCaseMotion'
+" Peepopen quickly finds and open files
+Bundle 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
+
+" New text object at the same indent level
+Bundle 'michaeljsmith/vim-indent-object'
+
 
 " Helps me type "
 """""""""""""""""
-
-" Quoting/parenthesizing made simple
-" cs<match><replace>
-" ds<match>
-" v<selection>S<replacement>
-Bundle 'tpope/vim-surround'
+" Write snippets in vim.
+" <tab> after a snippet key
+Bundle 'SirVer/ultisnips'
 
 " Enable repeating supported plugin maps with '.'
 Bundle 'tpope/vim-repeat'
 
-" A parser for a condensed HTML format
-" <c-e> after a block of sparkup-formatted pre-html
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Quoting/parenthesizing made simple
+Bundle 'tpope/vim-surround'
 
 " Easily comment in and out lines
 " <leader>__
 Bundle 'tomtom/tcomment_vim'
+
+" Syntax checking hacks for vim
+Bundle 'scrooloose/syntastic'
 
 " Vim motions on speed. Replaces the <number> in <number><motion>
 " <leader><leader><motion>
@@ -107,82 +64,144 @@ Bundle 'Lokaltog/vim-easymotion'
 " Mapped to C-n
 Bundle 'terryma/vim-multiple-cursors'
 
-" Syntax checking hacks for vim
-Bundle 'scrooloose/syntastic'
+" A parser for a condensed HTML format
+" <c-e> after a block of sparkup-formatted pre-html
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-" Helps me execute "
-""""""""""""""""""""
 " Awesome autocomplete
 " http://valloric.github.io/YouCompleteMe/
 if has("gui_macvim")
-  " Need to point to the currently used libpython library and the include
-  " directory. Since I am using pyenv, I had to manually set the paths in the
-  " YCM install.sh file
-  " echo '/Users/evanmorikawa/.pyenv/versions/2.7.5/lib/libpython2.7.a /Users/evanmorikawa/.pyenv/versions/2.7.5/include/python2.7'
+  " When compiling YCM, install.sh needs to be changed to point to
+  " libpython and the python include directory. It by default can't detect
+  " pyenv's path structure
   Bundle 'Valloric/YouCompleteMe'
 end
 
-" Write snippets in vim.
-" <tab> after a snippet key
-Bundle 'SirVer/ultisnips'
 
-" Key remappings ordered by approximate frequency of use"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Helps me see "
+""""""""""""""""
+" HAML, SASS, SCSS support for Vim
+Bundle 'tpope/vim-haml'
+
+" Lean & mean status/tabline for vim that's light as air
+Bundle 'bling/vim-airline'
+
+" Markdown syntax for vim
+Bundle 'tpope/vim-markdown'
+
+" Less syntax support
+Bundle 'groenewege/vim-less'
+
+" Scala support
+Bundle 'derekwyatt/vim-scala'
+
+" Colors CSS tags with the appropriate color.
+Bundle 'skammer/vim-css-color'
+
+" Add CSS3 syntax support to vim's built-in `syntax/css.vim`
+Bundle 'hail2u/vim-css3-syntax'
+
+" CoffeeScript support for vim
+Bundle 'kchmck/vim-coffee-script'
+
+" Shows indent level
+Bundle 'nathanaelkane/vim-indent-guides'
+
+" Literate CoffeeScript support for vim
+Bundle 'mintplant/vim-literate-coffeescript'
+
+
+" Helps me search "
+"""""""""""""""""""
+Bundle 'grep.vim'
+
+
+" Helps me collaborate "
+""""""""""""""""""""""""
+" A Git wrapper so awesome, it should be illegal
+Bundle 'tpope/vim-fugitive'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""" KEY MAPPINGS """"""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Keymappings are ordered first by frequency of use.
+
 let mapleader = ","
 
-"Quick escape and saving via button-mashing
+" Quick escaping
 inoremap jk <Esc>
 inoremap kj <Esc>
 cnoremap jk <Esc>
 cnoremap kj <Esc>
-inoremap df <Esc>:w<CR>
-inoremap fd <Esc>:w<CR>
+
+" Quick saving
 noremap df :w<CR>
 noremap fd :w<CR>
+inoremap df <Esc>:w<CR>
+inoremap fd <Esc>:w<CR>
 
-"Easier movement around the page
-noremap <C-j> 3<C-e>
-noremap <C-k> 3<C-y>
+" Easier movement around the page
+noremap 0 ^
+noremap k gk
+noremap j gj
+noremap <End> $
+noremap <Home> 0
 noremap <S-j> 3j
 noremap <S-k> 3k
 noremap <S-l> 5l
 noremap <S-h> 5h
+noremap <C-j> 3<C-e>
+noremap <C-k> 3<C-y>
 noremap <PageUp> <c-u>
 noremap <PageDown> <c-d>
-noremap <Home> 0
-noremap <End> $
-noremap j gj
-noremap k gk
-noremap 0 ^
 
-"And by lowercase everything I mean undo
+" Unix line shell navigation
+cnoremap <C-p> <Up>
+inoremap <C-e> <End>
+cnoremap <C-e> <End>
+cnoremap <C-n> <Down>
+inoremap <C-a> <Home>
+cnoremap <C-a> <Home>
+cnoremap <C-k> <C-U>
+inoremap <C-k> <esc>C
+
+" And by lowercase everything I mean undo
 noremap U u
 
-"Move between buffers
+" Move between buffers
 noremap <c-h> <c-w>h
 noremap <c-l> <c-w>l
 
+" Quick quoting. Uses tpope/vim-surround
+nnoremap <leader>" ysiw"e
+nnoremap <leader>' ysiw'e
+
+" A new motion that selects in the next or prev set of parenthesis
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F)vi(<cr>
+
 """"" FILE MANAGEMENT
+" Peep open to search between files
+if has("gui_macvim")
+  map <C-e> <Plug>PeepOpen
+end
+
 " Close buffer but keep split open
 " Uses bufkill.vim
 noremap <C-Q> :BD<CR>
 
-" Create (or edit) another file in the same directory as the current file
-map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
-
 " Rename the file. We do this via the git plugin. This only works in git
 " directories.
-map <Leader>r :call RenameFile()<cr>
+nnoremap <Leader>r :call RenameFile()<cr>
 
 " Delete the buffer from disk and close the buffer
 " Uses bufkill.vim
-map <Leader>dd :call delete(expand('%'))<CR>:BD<CR>
+nnoremap <Leader>dd :call delete(expand('%'))<CR>:BD<CR>
 
-" Peep open to search between files
-if has("gui_macvim")
-  " macmenu &File.New\ Tab key=<nop>
-  map <C-e> <Plug>PeepOpen
-end
+" Create (or edit) another file in the same directory as the current file
+nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
+
 
 """"" AWESOME SEARCHING
 "In visual mode when you press * or # to search for the current selection
@@ -193,19 +212,21 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 " clipboard=unnamed
 noremap <C-f> *<S-n>ye
 " Search via grep what's under the cursor.
-noremap <D-F> *<S-n>ye:Gr <C-r>"<CR>
+nnoremap <D-F> *<S-n>ye:Gr <C-r>"<CR>
+
 " Unhighlight
 noremap <S-Space> :nohl<CR>
 " Space bar searching
 noremap <space> /
 
-"Git commands
-noremap gs :Gstatus<CR>
-noremap ga :Gwrite<CR>
-noremap gc :Gcommit -a<CR>
+
+""""" GIT COMMANDS
 noremap gd :Gdiff<CR>
-noremap gl :Gdiff HEAD~1<CR>
+noremap ga :Gwrite<CR>
 noremap gb :Gbrowse<CR>
+noremap gs :Gstatus<CR>
+noremap gc :Gcommit -a<CR>
+noremap gl :Gdiff HEAD~1<CR>
 
 "Reselect visual block after indent/outdent
 vnoremap < <gv
@@ -214,18 +235,20 @@ vnoremap > >gv
 " Edit Vimrc
 " $MYVIMRC points to the ~/.vimrc file
 nnoremap <leader>ev :e $MYVIMRC<CR>
+
 " Re-source vimrc
 nnoremap <leader>sv :source $MYVIMRC<CR>
+
 " Puts current file name in the mac paste buffer. Useful for operating on
 " the file from the command line.
 noremap <D-Y> :CopyTitle<CR><CR>
-
 
 "Info about the character undernath cursor
 nnoremap gi ga
 
 " Toggles paste mode and shows value of the option
 nnoremap <F2> :set invpaste paste?<CR>
+
 " Don't accidentally open help when going for F2 or q
 noremap <F1> <nop>
 
@@ -235,18 +258,11 @@ noremap <C-S> :%s/
 nnoremap <silent> zz @=(foldlevel('.')?'za':'l')<CR>
 vnoremap zz zf
 
-"shell shortcuts in command mode
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
-cnoremap <C-K> <C-U>
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
-
 "Sparkup to create HTML
 let g:sparkupExecuteMapping = '<c-t>'
 
 "Displays the tag type under the cursor. Really useful for generating colors
-map <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans <'
+noremap <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans <'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
@@ -260,64 +276,70 @@ noremap <leader>l :set background=light<cr>:colorscheme solarized<cr>
 noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
 
 
-" Settings "
-""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""" SETTINGS """"""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on " Turn on filetype after Vundle is setup
 colorscheme evan
 syntax enable
 
-set nu "Turn on line numbers
-set lbr "Wordwrapping doesn't break words in the middle
-set wrap "wrap lines
-set list "All characters print. Including meta characters
-set ts=2
-set sw=2
-set ruler "Shows the ruler
-set magic "set magic on, for regular expressions
-set mat=2 "two-tenths of a second blink
-set smarttab
-set wildmenu "Enhanced tab completion
-set autoread "Set to auto read when a file is changed from the outside
-set vb t_vb= "disables visual bell
-set hlsearch
+set wrap " Wrap lines
+set list " Show characters for tabs, spaces, end of line
+set ruler " Shows line & column numbers
+set number " Turn on line numbers
+set smarttab " <Tab> inserts correct number of spaces
+set wildmenu " Enhanced tab completion
+set autoread " Reload file when a file is changed from the outside
+set vb t_vb= " Disables visual bell on term
+set hlsearch " Highlight search matches
 set showmode " Says whether or not paste mode is turned on or off
-set t_Co=256 "Enable colored terminal
-let &t_Co=256
-set incsearch "Incremental search
-set smartcase "Will switch to case sensitive if a cap is used
-set showmatch "Shows matches on search
-set expandtab "Replaces tabs with spaces
-set tabstop=2 "Num characters when tab is pushed
-set ignorecase "case insensitive search but see next option
-set autoindent "Enable automatic alignment during insertions
-set noswapfile "Don't use swp files
-set smartindent "Tries to recognize code and indent
-set cmdheight=2 "The commandbar height
-set shiftwidth=2
+set t_Co=256 " Enable colored terminal
+let &t_Co=256 " Number of term colors
+set linebreak " Wordwrapping doesn't break words in the middle
+set incsearch " Incremental search as typing
+set smartcase " Will switch to case sensitive if a cap is used
+set showmatch " Shows matches on search
+set expandtab " Replaces tabs with spaces
+set tabstop=2 " Number of spaces that a tab counts for
+set ignorecase " Case insensitive search but see next option
+set autoindent " Enable automatic alignment during insertions
+set noswapfile " Don't use swp files
+set smartindent " Tries to recognize code and indent
+set matchtime=2 " two-tenths of a second blink
+set cmdheight=2 " The commandbar height
+set shiftwidth=2 " Number of spaces to use for each (auto)indent
 set textwidth=74 " Maximum line length at 74 characters. Trigged with gq
-set noerrorbells
-set novisualbell
-set history=1000
-set laststatus=2 "Always show the status line
-set restorescreen
-set encoding=utf8
-set shell=/bin/sh "Use bash shell
-set guioptions-=T "Removes GUI bars
-set guioptions-=l "Removes scrollbars
-set guioptions-=r "Removes scrollbars
-set guioptions-=b "Removes scrollbars
-set colorcolumn=75 "Have a line of at 75 characters wide. The max width is 74 characters
+set history=1000 " History length of ':' commands
+set laststatus=2 " Always show the status line
+set encoding=utf8 " UTF-8 FTW
+set shell=/bin/sh " Use bash shell
+set guioptions-=T " Removes GUI bars
+set guioptions-=l " Removes scrollbars
+set guioptions-=r " Removes scrollbars
+set guioptions-=b " Removes scrollbars
+set colorcolumn=75 " Have a line of at 75 characters.
 set pastetoggle=<F2> " Binds F2 to pastetoggling
 set clipboard=unnamed " All yank commands now go to mac clipboard
+let &t_Sf="\<Esc>[3%dm" " Term foreground color
+let &t_Sb="\<Esc>[4%dm" " Term background color
+let &t_te="\<Esc>[?47l" " Output of termcap mode
+let &t_ti="\<Esc>[?47h" " Term in termcap mode
 set backspace+=start,eol,indent " Make backspace work properly on vim
-set wildmode=list:longest,full " bash command line tab completion
-set guifont=Meslo\ LG\ S\ for\ Powerline:h11
-set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+ "Whitespace showing
+set wildmode=list:longest,full " Bash command line tab completion
+set guifont=Meslo\ LG\ S\ for\ Powerline:h11 " With Powerline extension
+set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+
+
+if has("gui_macvim")
+  match LineTooLong /\%>74v.\+/ " 74 character lines.
+endif
+
+" We use Airline now. These are kept here for future reference.
 " set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
-" Custom commands "
-"""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""" CUSTOM COMMANDS """""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Removes all trailing whitespace
 command! Whitespace %s/\s\+$//e
 
@@ -335,20 +357,91 @@ command! -nargs=1 Grr Grep -ErinI --include=\*.rb --exclude-dir=log --exclude-di
 
 command! CopyTitle !echo "%\c" | pbcopy
 
-" Autocommands "
-"""""""""""""""
-" Mixes in html filetype to web languages
-augroup html_mixin
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""" LANGUAGE SPECIFIC SETTINGS """""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Coffeescript "
+""""""""""""""""
+augroup filetype_coffee
   autocmd!
-  au BufRead,BufNewFile *.php set ft=php.html
-  au BufRead,BufNewFile *.erb set ft=eruby.html
-  au BufRead,BufNewFile *.coffee set ft=coffee
+  autocmd BufRead,BufNewFile *.coffee set ft=coffee
 augroup END
 
-" Utility Methods "
-""""""""""""""""""
-match LineTooLong /\%>74v.\+/
+" Python "
+""""""""""
+augroup filetype_python
+  autocmd!
+  autocmd FileType python setlocal
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=80
 
+  autocmd BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
+  let python_highlight_all = 1
+  autocmd FileType python syn keyword pythonDecorator True None False self
+
+  autocmd BufNewFile,BufRead *.jinja setlocal syntax=htmljinja
+  autocmd BufNewFile,BufRead *.mako setlocal ft=mako
+  autocmd BufNewFile,BufRead *.less setlocal ft=less
+augroup END
+
+" HTML "
+""""""""
+augroup filetype_html
+  autocmd!
+  autocmd BufRead,BufNewFile *.erb set ft=eruby.html
+  autocmd FileType html,eruby.html iabbrev <buffer> --- &mdash;
+augroup END
+
+" Bash "
+""""""""
+augroup filetype_bash
+  autocmd!
+  autocmd FileType sh set tw=0
+augroup END
+
+" Rabl "
+""""""""
+augroup filetype_rabl
+  autocmd!
+  autocmd BufRead,BufNewFile *.rabl set ft=ruby
+  autocmd BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
+  autocmd BufRead,BufNewFile *.rabl hi def link rubyRabl Function
+augroup END
+
+" Markdown "
+""""""""""""
+augroup filetype_markdown
+  autocmd!
+
+  " change inside heading
+  autocmd FileType markdown onoremap <buffer> ih :<c-u>execute "normal!?^==\\+$\r:nohlsearch\rkvg_"<cr>
+
+  " change around heading
+  autocmd FileType markdown onoremap <buffer> ah :<c-u>execute "normal! ?^==\\+\r:nohlsearch\rg_vk0"<cr>
+
+augroup END
+
+" Vimscript "
+"""""""""""""
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""" ABBREVIATIONS """""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+iabbrev waht what
+iabbrev tehn then
+iabbrev adn and
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""" UTILITY METHODS """""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! CurDir()
   let curdir = substitute(getcwd(), '/Users/amir/', "~/", "g")
   return curdir
@@ -393,9 +486,7 @@ function! VisualSearch(direction) range
   let @" = l:saved_reg
 endfunction
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE (thanks Gary Bernhardt)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Rename current file (thanks Gary Bernhardt)
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -406,40 +497,10 @@ function! RenameFile()
     endif
 endfunction
 
-""""""""""""""""""""""""""""""
-" Language Specific Settings "
-""""""""""""""""""""""""""""""
 
-" Python "
-""""""""""
-augroup python_helpers
-  autocmd!
-  au FileType python setl
-      \ tabstop=4
-      \ softtabstop=4
-      \ shiftwidth=4
-      \ textwidth=80
-
-  au BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
-  let python_highlight_all = 1
-  au FileType python syn keyword pythonDecorator True None False self
-
-  au BufNewFile,BufRead *.jinja set syntax=htmljinja
-  au BufNewFile,BufRead *.mako set ft=mako
-  au BufNewFile,BufRead *.less set ft=less
-augroup END
-
-let &t_Sf="\<Esc>[3%dm"
-let &t_Sb="\<Esc>[4%dm"
-let &t_te="\<Esc>[?47l"
-let &t_ti="\<Esc>[?47h"
-
-"""""""""""
-" PLUGINS "
-"""""""""""
-" Nerd Tree "
-"""""""""""""
-" noremap <c-n> :NERDTreeToggle<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""" PLUGIN SETTINGS """""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Sparkup "
 """""""""""
@@ -450,11 +511,11 @@ let sparkupNextMapping = '<M-e>'
 let g:indent_guides_auto_colors = 0
 augroup indent_guides
   autocmd!
-  au BufRead,BufNewFile * IndentGuidesEnable
+  autocmd BufRead,BufNewFile * IndentGuidesEnable
 augroup END
 
 " YouCompleteMe and UltiSnips "
-"""""""""""""""""""""
+"""""""""""""""""""""""""""""""
 " https://github.com/Valloric/YouCompleteMe/issues/36
 function! g:UltiSnips_Complete()
   call UltiSnips_ExpandSnippet()
@@ -470,26 +531,19 @@ function! g:UltiSnips_Complete()
   endif
   return ""
 endfunction
-au BufRead,BufNewFile,BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+
+augroup utilisnip_au
+  autocmd!
+  autocmd BufRead,BufNewFile,BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+augroup END
 
 " https://github.com/Valloric/YouCompleteMe/issues/759
 " let g:ycm_path_to_python_interpreter = '/Users/evanmorikawa/.pyenv/versions/2.7.5/bin/python'
 " https://groups.google.com/forum/#!topic/ycm-users/l-d6Wfe-kgk
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-
-au FileType sh set tw=0
-
-" Rabl "
-""""""""
-augroup rabl_helpers
-  autocmd!
-  au BufRead,BufNewFile *.rabl setf ruby
-  au BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
-  au BufRead,BufNewFile *.rabl hi def link rubyRabl Function
-augroup END
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
 " Airline "
 """""""""""
