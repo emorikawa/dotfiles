@@ -38,6 +38,7 @@ Bundle 'michaeljsmith/vim-indent-object'
 """""""""""""""""
 " Write snippets in vim.
 " <tab> after a snippet key
+" http://vimcasts.org/episodes/meet-ultisnips/
 Bundle 'SirVer/ultisnips'
 
 " Enable repeating supported plugin maps with '.'
@@ -46,12 +47,22 @@ Bundle 'tpope/vim-repeat'
 " Quoting/parenthesizing made simple
 Bundle 'tpope/vim-surround'
 
+" Easily search for, substitute, & abbreviate multiple variants of a word
+" https://github.com/tpope/vim-abolish
+" http://vimcasts.org/episodes/enhanced-abbreviations-with-abolish/
+Bundle 'tpope/vim-abolish'
+
 " Easily comment in and out lines
 " <leader>__
 Bundle 'tomtom/tcomment_vim'
 
 " Syntax checking hacks for vim
 Bundle 'scrooloose/syntastic'
+
+" Easy text exchange operator for Vim
+" Mapped to cx
+" http://vimcasts.org/episodes/swapping-two-regions-of-text-with-exchange-vim/
+Bundle 'tommcdo/vim-exchange'
 
 " Vim motions on speed. Replaces the <number> in <number><motion>
 " <leader><leader><motion>
@@ -211,19 +222,26 @@ nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
 """"" AWESOME SEARCHING
 "In visual mode when you press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
+vnoremap <silent> * :call VisualSearch('f')<CR>n<S-n>
+vnoremap <silent> # :call VisualSearch('b')<CR>n<S-n>
+vnoremap <silent> <C-f> :call VisualSearch('f')<CR>n<S-n>
+vnoremap <silent> <S-f> :call VisualSearch('f')<CR>n<S-n>:Gr <C-r>/<CR>
+
 " Search and highlight what's under the cursor. Also automatically copies
 " the word to both yank and the mac paste buffer thanks to
 " clipboard=unnamed
-noremap <C-f> *<S-n>ye
+nnoremap <C-f> yiw:Subvert/<C-r>"<CR><S-n>
+
 " Search via grep what's under the cursor.
 nnoremap <D-F> *<S-n>ye:Gr <C-r>"<CR>
 
 " Unhighlight
 noremap <S-Space> :nohl<CR>
-" Space bar searching
-noremap <space> /
+
+" Space bar searching via Subvert
+" Part of Tim Pope's Abolish plugin
+" http://vimcasts.org/episodes/smart-search-with-subvert/
+noremap <space> :Subvert/
 
 
 """"" GIT COMMANDS
@@ -266,6 +284,12 @@ vnoremap zz zf
 
 "Sparkup to create HTML
 let g:sparkupExecuteMapping = '<c-t>'
+
+" How to create repeatable mappings
+" http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
+nnoremap <silent> <Plug>TransposeCharacters xp
+\:call repeat#set("\<Plug>TransposeCharacters")<CR>
+nmap cp <Plug>TransposeCharacters
 
 "Displays the tag type under the cursor. Really useful for generating colors
 noremap <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans <'
@@ -450,10 +474,47 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""" ABBREVIATIONS """""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iabbrev waht what
-iabbrev tehn then
-iabbrev adn and
-
+" Use Abolish instead of iabbrev
+" http://vimcasts.org/episodes/enhanced-abbreviations-with-abolish/
+" https://github.com/tpope/vim-abolish
+" https://github.com/tpope/tpope/blob/338a4e89494bfe4928d3a0221c3ea1a7f09937cb/.vim/after/plugin/abolish_tpope.vim
+if has("gui_macvim")
+Abolish waht what
+Abolish tehn then
+Abolish adn and
+Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+Abolish afterword{,s}                         afterward{}
+Abolish anomol{y,ies}                         anomal{}
+Abolish austrail{a,an,ia,ian}                 austral{ia,ian}
+Abolish cal{a,e}nder{,s}                      cal{e}ndar{}
+Abolish {c,m}arraige{,s}                      {}arriage{}
+Abolish {,in}consistan{cy,cies,t,tly}         {}consisten{}
+Abolish destionation{,s}                      destination{}
+Abolish delimeter{,s}                         delimiter{}
+Abolish {,non}existan{ce,t}                   {}existen{}
+Abolish despara{te,tely,tion}                 despera{}
+Abolish d{e,i}screp{e,a}nc{y,ies}             d{i}screp{a}nc{}
+Abolish euphamis{m,ms,tic,tically}            euphemis{}
+Abolish hense                                 hence
+Abolish {,re}impliment{,s,ing,ed,ation}       {}implement{}
+Abolish improvment{,s}                        improvement{}
+Abolish inherant{,ly}                         inherent{}
+Abolish lastest                               latest
+Abolish {les,compar,compari}sion{,s}          {les,compari,compari}son{}
+Abolish {,un}nec{ce,ces,e}sar{y,ily}          {}nec{es}sar{}
+Abolish {,un}orgin{,al}                       {}origin{}
+Abolish persistan{ce,t,tly}                   persisten{}
+Abolish referesh{,es}                         refresh{}
+Abolish {,ir}releven{ce,cy,t,tly}             {}relevan{}
+Abolish rec{co,com,o}mend{,s,ed,ing,ation}    rec{om}mend{}
+Abolish reproducable                          reproducible
+Abolish resouce{,s}                           resource{}
+Abolish restraunt{,s}                         restaurant{}
+Abolish seperat{e,es,ed,ing,ely,ion,ions,or}  separat{}
+Abolish segument{,s,ed,ation}                 segment{}
+Abolish qbf The quick, brown fox jumps over the lazy dog
+Abolish lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""" UTILITY METHODS """""""""""""""""""""""""""""""
