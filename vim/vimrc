@@ -561,6 +561,10 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
+" Edit UltiSnips for this file
+" You must first symlink ~/.vim/UltiSnips to the master snips folder.
+nnoremap <leader>es :UltiSnipsEdit<CR>
+
 " Syntastic "
 """""""""""""
 let g:syntastic_ignore_files = ['\m.*_templates\.html\.erb']

@@ -1,3 +1,13 @@
+snippet context "rspec: context block"
+context "$1" do
+${0:${VISUAL:# assertions...}}
+end
+endsnippet
+
+snippet /pri[vate]*/ "private with hash line break" r
+private `!v repeat("#", &textwidth - virtcol("."))`
+endsnippet
+
 snippet "^#!" "#!/usr/bin/env ruby" r
 #!/usr/bin/env ruby
 $0
@@ -8,8 +18,6 @@ snippet "^# ?[uU][tT][fF]-?8" "# encoding: UTF-8" r
 # encoding: UTF-8
 $0
 endsnippet
-
-
 
 snippet If "<command> if <expression>"
 ${1:command} if ${0:expression}
