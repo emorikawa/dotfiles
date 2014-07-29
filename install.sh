@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 if [ `whoami` == root ]; then
   echo "DONT run this script as root, or using sudo"
   exit

@@ -18,9 +18,6 @@ call vundle#rc()
 " Unload/delete/wipe a buffer, keep its window(s)
 Bundle 'bufkill.vim'
 
-" Ruby on Rails power tools
-Bundle 'tpope/vim-rails'
-
 " Extends % operator to match html tags and others.
 Bundle 'tsaleh/vim-matchit'
 
@@ -109,6 +106,15 @@ Bundle 'nathanaelkane/vim-indent-guides'
 
 " Literate CoffeeScript support for vim
 Bundle 'mintplant/vim-literate-coffeescript'
+
+
+" Helps my workflow "
+"""""""""""""""""""""
+" Ruby on Rails power tools
+Bundle 'tpope/vim-rails'
+
+" Run Rspec specs from Vim
+Bundle 'thoughtbot/vim-rspec'
 
 
 " Helps me search "
@@ -411,6 +417,16 @@ augroup filetype_rabl
   autocmd BufRead,BufNewFile *.rabl hi def link rubyRabl Function
 augroup END
 
+" RSpec "
+""""""""
+augroup filetype_rspec
+  autocmd!
+  autocmd BufRead,BufNewFile *_spec.rb syn keyword rubyRspecFn describe context expect is_expected before after shared_examples include_examples it_behaves_like
+  autocmd BufRead,BufNewFile *_spec.rb syn keyword rubyRspecKw it let to to_not subject
+  autocmd BufRead,BufNewFile *_spec.rb hi def link rubyRspecFn Function
+  autocmd BufRead,BufNewFile *_spec.rb hi def link rubyRspecKw Statement
+augroup END
+
 " Markdown "
 """"""""""""
 augroup filetype_markdown
@@ -544,6 +560,10 @@ let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+
+" Syntastic "
+"""""""""""""
+let g:syntastic_ignore_files = ['\m.*_templates\.html\.erb']
 
 " Airline "
 """""""""""

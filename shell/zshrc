@@ -76,10 +76,13 @@ alias rc='rails console'
 alias gl='git lg'
 alias gs='git status'
 alias gc='git commit -a'
+alias gcl='git clone'
 alias ga='git add -A'
-alias gf='git fetch origin'
+alias gf='git fetch'
 alias gd='git difftool'
-alias gr='git remote -v'
+alias grem='git remote -v'
+alias gres='git reset'
+alias greb='git rebase'
 # With hub. Requires `brew install hub`
 alias gh='git browse' # gh for GitHub
 alias ghc='git browse -- commits' # gh for GitHub
