@@ -51,7 +51,7 @@ def main():
         f = urllib2.urlopen(geourl)
     #except urllib2.HTTPError, urllib2.URLError:
     except urllib2.URLError,  err:
-        print("The Geolocation URL is not reachable: {}".format(err))
+        print("")
         sys.exit(-1)
 
     j = json.loads(str(f.read()))
@@ -63,7 +63,7 @@ def main():
     try:
         f = urllib2.urlopen(WURL)
     except urllib2.HTTPError, urllib2.URLError:
-        print("The Weather URL is not reachable")
+        print("")
         sys.exit(-1)
 
     j = json.loads(urllib2.urlopen(WURL).read())
@@ -94,7 +94,7 @@ def main():
         try:
             f = urllib2.urlopen(alertsurl)
         except urllib2.HTTPError, urllib2.URLError:
-            print("The Alerts URL is not reachable")
+            print("")
             sys.exit(-1)
 
         alerts = json.loads(urllib2.urlopen(alertsurl).read())

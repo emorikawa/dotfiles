@@ -87,6 +87,7 @@ alias greb='git rebase'
 alias gh='git browse' # gh for GitHub
 alias ghc='git browse -- commits' # gh for GitHub
 alias gcmp='git compare'
+alias gday="git compare @{1day}...$(git rev-parse --abbrev-ref HEAD)"
 
 if [ `uname` = "Darwin" ]
 then

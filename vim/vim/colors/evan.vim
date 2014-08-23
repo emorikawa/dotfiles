@@ -366,8 +366,8 @@ hi DiffText     guibg=#56415c
 hi DiffDelete   guifg=#723b30 guibg=#46312d
 
 " Indent highlighting
-hi IndentGuidesEven guibg=#1c1c1c
-hi IndentGuidesOdd  guibg=#1f1f1f
+hi IndentGuidesEven guifg=#333333 guibg=#1a1a1a
+hi IndentGuidesOdd  guifg=#333333 guibg=#1e1e1e
 
   " Foo bar
   "   Foo bar baz

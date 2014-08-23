@@ -56,6 +56,10 @@ Bundle 'tpope/vim-abolish'
 " <leader>__
 Bundle 'tomtom/tcomment_vim'
 
+" Convert ruby blocks
+" <leader>b
+Bundle 'jgdavey/vim-blockle'
+
 " Syntax checking hacks for vim
 Bundle 'scrooloose/syntastic'
 
@@ -305,6 +309,9 @@ noremap <leader>l :set background=light<cr>:colorscheme solarized<cr>
 "Change to dark bg
 noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
 
+" Convert RSpec should to expect syntax
+nnoremap <Leader>cse :call ConvertShouldToExpect()<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""" SETTINGS """"""""""""""""""""""""""""""""""
@@ -479,42 +486,44 @@ augroup END
 " https://github.com/tpope/vim-abolish
 " https://github.com/tpope/tpope/blob/338a4e89494bfe4928d3a0221c3ea1a7f09937cb/.vim/after/plugin/abolish_tpope.vim
 if has("gui_macvim")
-Abolish waht what
-Abolish tehn then
-Abolish adn and
-Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
-Abolish afterword{,s}                         afterward{}
-Abolish anomol{y,ies}                         anomal{}
-Abolish austrail{a,an,ia,ian}                 austral{ia,ian}
-Abolish cal{a,e}nder{,s}                      cal{e}ndar{}
-Abolish {c,m}arraige{,s}                      {}arriage{}
-Abolish {,in}consistan{cy,cies,t,tly}         {}consisten{}
-Abolish destionation{,s}                      destination{}
-Abolish delimeter{,s}                         delimiter{}
-Abolish {,non}existan{ce,t}                   {}existen{}
-Abolish despara{te,tely,tion}                 despera{}
-Abolish d{e,i}screp{e,a}nc{y,ies}             d{i}screp{a}nc{}
-Abolish euphamis{m,ms,tic,tically}            euphemis{}
-Abolish hense                                 hence
-Abolish {,re}impliment{,s,ing,ed,ation}       {}implement{}
-Abolish improvment{,s}                        improvement{}
-Abolish inherant{,ly}                         inherent{}
-Abolish lastest                               latest
-Abolish {les,compar,compari}sion{,s}          {les,compari,compari}son{}
-Abolish {,un}nec{ce,ces,e}sar{y,ily}          {}nec{es}sar{}
-Abolish {,un}orgin{,al}                       {}origin{}
-Abolish persistan{ce,t,tly}                   persisten{}
-Abolish referesh{,es}                         refresh{}
-Abolish {,ir}releven{ce,cy,t,tly}             {}relevan{}
-Abolish rec{co,com,o}mend{,s,ed,ing,ation}    rec{om}mend{}
-Abolish reproducable                          reproducible
-Abolish resouce{,s}                           resource{}
-Abolish restraunt{,s}                         restaurant{}
-Abolish seperat{e,es,ed,ing,ely,ion,ions,or}  separat{}
-Abolish segument{,s,ed,ation}                 segment{}
-Abolish qbf The quick, brown fox jumps over the lazy dog
-Abolish lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-end
+  Abolish waht what
+  Abolish adn and
+  Abolish rteurn return
+  Abolish reutrn return
+  Abolish retrun return
+  Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+  Abolish afterword{,s}                         afterward{}
+  Abolish anomol{y,ies}                         anomal{}
+  Abolish austrail{a,an,ia,ian}                 austral{ia,ian}
+  Abolish cal{a,e}nder{,s}                      cal{e}ndar{}
+  Abolish {c,m}arraige{,s}                      {}arriage{}
+  Abolish {,in}consistan{cy,cies,t,tly}         {}consisten{}
+  Abolish destionation{,s}                      destination{}
+  Abolish delimeter{,s}                         delimiter{}
+  Abolish {,non}existan{ce,t}                   {}existen{}
+  Abolish despara{te,tely,tion}                 despera{}
+  Abolish d{e,i}screp{e,a}nc{y,ies}             d{i}screp{a}nc{}
+  Abolish euphamis{m,ms,tic,tically}            euphemis{}
+  Abolish hense                                 hence
+  Abolish {,re}impliment{,s,ing,ed,ation}       {}implement{}
+  Abolish improvment{,s}                        improvement{}
+  Abolish inherant{,ly}                         inherent{}
+  Abolish lastest                               latest
+  Abolish {les,compar,compari}sion{,s}          {les,compari,compari}son{}
+  Abolish {,un}nec{ce,ces,e}sar{y,ily}          {}nec{es}sar{}
+  Abolish {,un}orgin{,al}                       {}origin{}
+  Abolish persistan{ce,t,tly}                   persisten{}
+  Abolish referesh{,es}                         refresh{}
+  Abolish {,ir}releven{ce,cy,t,tly}             {}relevan{}
+  Abolish rec{co,com,o}mend{,s,ed,ing,ation}    rec{om}mend{}
+  Abolish reproducable                          reproducible
+  Abolish resouce{,s}                           resource{}
+  Abolish restraunt{,s}                         restaurant{}
+  Abolish seperat{e,es,ed,ing,ely,ion,ions,or}  separat{}
+  Abolish segument{,s,ed,ation}                 segment{}
+  Abolish qbf The quick, brown fox jumps over the lazy dog
+  Abolish lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""" UTILITY METHODS """""""""""""""""""""""""""""""
@@ -574,6 +583,18 @@ function! RenameFile()
     endif
 endfunction
 
+function! ConvertShouldToExpect()
+  let rspec_conversions = {
+        \ 'should': 'to',
+        \ 'should_not': 'not_to',
+        \ 'should_receive': 'to receive',
+        \ 'should_not_receive': 'not_to receive',
+        \ }
+ 
+  for [old, new] in items(rspec_conversions)
+    execute "normal! " . ':%s/\v^(\s+)(.+)\.' . old . '>/\1expect(\2).' . new . '/ge' . "\<CR>"
+  endfor
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""" PLUGIN SETTINGS """""""""""""""""""""""""""""""
