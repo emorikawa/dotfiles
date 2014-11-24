@@ -10,6 +10,12 @@ JOHN_KEY=42E51BE2
 PRODUCTION_DB=data-services-ef45c141
 STAGING_DB=data-services-6561bc7a
 
+alias c="cd ~/Code && ls"
+alias e="cd ~/Code/edgehill && ls"
+alias vpn="gpg -d ~/.inbox-vpn.gpg | less"
+export ATOM_SHELL_PATH="/Users/evanmorikawa/Code/atom-shell/bin/Atom.app/Contents/MacOS/Atom"
+export EDGEHILL_PATH="/Users/evanmorikawa/Code/edgehill"
+alias atom-shell="$ATOM_SHELL_PATH . --dev"
 alias console='cd ~/Code/Proximate && \
                heroku run rails console -a proximate-production'
 alias logs='cd ~/Code/Proximate && \

@@ -74,11 +74,12 @@ alias h='history | less'
 alias rc='rails console'
 
 alias gl='git lg'
+alias gpl='git pull'
 alias gs='git status'
 alias gc='git commit -a'
 alias gcl='git clone'
 alias ga='git add -A'
-alias gf='git fetch'
+alias gf='git fetch -p'
 alias gd='git difftool'
 alias grem='git remote -v'
 alias gres='git reset'
@@ -187,3 +188,7 @@ eval "$(pyenv init -)"
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 eval "$(hub alias -s)"
+
+# https://secure.phabricator.com/book/phabricator/article/arcanist/#installing-arcanist
+# arcanist auto complete
+source /Users/evanmorikawa/Code/arcanist/arcanist/resources/shell/bash-completion

@@ -369,10 +369,6 @@ hi DiffDelete   guifg=#723b30 guibg=#46312d
 hi IndentGuidesEven guifg=#333333 guibg=#1a1a1a
 hi IndentGuidesOdd  guifg=#333333 guibg=#1e1e1e
 
-  " Foo bar
-  "   Foo bar baz
-  "     Foo bar baz
-
 " hi DiffAdd      guibg=#2b372e
 " hi DiffChange   guibg=#2f3a38
 " hi DiffText     guibg=#463a2d
