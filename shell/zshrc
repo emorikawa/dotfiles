@@ -73,6 +73,7 @@ alias h='history | less'
 
 alias rc='rails console'
 
+# git config --global alias.lg "log --color --graph --branches --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gl='git lg'
 alias gpl='git pull'
 alias gs='git status'
@@ -191,4 +192,4 @@ eval "$(hub alias -s)"
 
 # https://secure.phabricator.com/book/phabricator/article/arcanist/#installing-arcanist
 # arcanist auto complete
-source /Users/evanmorikawa/Code/arcanist/arcanist/resources/shell/bash-completion
+source /Users/evanmorikawa/Code/arcanist/resources/shell/bash-completion
