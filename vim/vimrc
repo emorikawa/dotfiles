@@ -19,7 +19,7 @@ call vundle#rc()
 Bundle 'bufkill.vim'
 
 " Extends % operator to match html tags and others.
-Bundle 'tsaleh/vim-matchit'
+Bundle 'tmhedberg/matchit'
 
 " A camel-case detecting motion
 Bundle 'bkad/CamelCaseMotion'
@@ -369,8 +369,8 @@ let &t_ti="\<Esc>[?47h" " Term in termcap mode
 if has("gui_macvim")
   set backspace+=start,eol,indent " Make backspace work properly on vim
 endif
+set guifont=Menlo\ for\ Powerline " See Install folder
 set wildmode=list:longest,full " Bash command line tab completion
-set guifont=Meslo\ LG\ S\ for\ Powerline:h11 " With Powerline extension
 set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+
 
 if has("gui_macvim")

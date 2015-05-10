@@ -24,8 +24,8 @@ fi
 # Installing fonts
 echo ""
 echo "===>  Installing fonts  <==="
-if [ -d "/Library/Fonts" ]; then
-  sudo cp $BASEDIR/fonts/* /Library/Fonts
+if [ -d "$HOME/Library/Fonts" ]; then
+  sudo cp $BASEDIR/fonts/* $HOME/Library/Fonts
 fi
 
 if [ -d "/usr/local/share/fonts" ]; then
