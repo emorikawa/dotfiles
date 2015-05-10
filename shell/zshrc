@@ -1,8 +1,8 @@
 ###################################
 # The zshrc file of Evan Morikawa #
 ###################################
-# Look at the ~/.localzshrc file for computer-specific or one-off configs
-source $HOME/.localzshrc
+# Look at the ~/.local.zsh file for computer-specific or one-off configs
+source $HOME/.local.zsh
 
 # Variables and Setup #
 #######################
@@ -18,25 +18,17 @@ export ZSH_THEME="evan"
 export UPDATE_ZSH_DAYS=7
 
 # Set default editor
-export EDITOR='/usr/bin/vim'
+export EDITOR='/usr/bin/env vim'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git osx pip ruby rails)
 
 source $ZSH/oh-my-zsh.sh
+
+#disable oh-my-zsh auto correct
 unsetopt correct_all
 
 autoload -U colors && colors
-
-# Use VIM mode #
-################
-# http://dougblack.io/words/zsh-vi-mode.html
-bindkey -v
-
-# Enables `ciw` and surround commands https://github.com/hchbaw/opp.zsh
-source $HOME/.opp/opp.zsh
-source $HOME/.opp/surround.zsh
 
 bindkey '^P' up-history
 bindkey '^N' down-history
@@ -50,29 +42,35 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^r' history-incremental-search-backward
 
-function zle-line-init zle-keymap-select {
-    #VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-    #RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $RPROMPT"
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-export KEYTIMEOUT=1
-
 # Aliases #
 ###########
-alias z='vim ~/.zshrc' # edit zshrc
-alias zl='vim ~/.localzshrc' # edit zshrc
+## Zsh
+alias z='vim ~/.zshrc'
+alias zrc='vim $HOME/.zshrc'
+alias zl='vim ~/.local.zsh'
+alias zlocal='vim $HOME/.local.zsh'
 alias zs='source ~/.zshrc'
-alias f='foreman start -f Procfile.dev'
+if [ `uname` = "Darwin" ]
+then
+  alias ls='ls -G'
+  alias ll='ls -lha -G'
+elif [ `uname` = "Linux" ]
+then
+  alias ls='ls --color=auto'
+  alias ll='ls -lha --color=auto'
+fi
+
+## Vim
+alias vrc='vim $HOME/.vimrc'
 alias v='mvim'
+alias v2='mvim -O2'
 alias v3='mvim -O3'
 alias v4='mvim -O4'
 alias h='history | less'
+vimdecrypt() { gpg -d "$1" | vim - -n -i "NONE" "+set filetype=$2"; }
+alias vd="vimdecrypt"
 
-alias rc='rails console'
-
+## Git
 # git config --global alias.lg "log --color --graph --branches --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gl='git lg'
 alias gpl='git pull'
@@ -89,26 +87,7 @@ alias greb='git rebase'
 alias gh='git browse' # gh for GitHub
 alias ghc='git browse -- commits' # gh for GitHub
 alias gcmp='git compare'
-alias gday="git compare @{1day}...$(git rev-parse --abbrev-ref HEAD)"
-
-if [ `uname` = "Darwin" ]
-then
-  alias ls='ls -G'
-  alias ll='ls -lha -G'
-elif [ `uname` = "Linux" ]
-then
-  alias ls='ls --color=auto'
-  alias ll='ls -lha --color=auto'
-fi
-
-alias zrc='vim $HOME/.zshrc'
-alias zlocal='vim $HOME/.localzshrc'
-alias vrc='vim $HOME/.vimrc'
-alias rake='noglob rake'
-alias heroku='noglob heroku'
-
-vimdecrypt() { gpg -d "$1" | vim - -n -i "NONE" "+set filetype=$2"; }
-alias vd="vimdecrypt"
+# alias gday="git compare @{1day}...$(git rev-parse --abbrev-ref HEAD)"
 
 # Unicode Input #
 #################
@@ -132,64 +111,25 @@ pathprepend() {
   fi
 }
 
-if [[ -n $STY ]] then
-  if [[ -f ~/.zsh-$STY[(ws:.:)2] ]] then
-    . ~/.zsh-$STY[(ws:.:)2]
-  fi
-fi
-
-# A plugin that grabs and displays the weather.
-# See the weather folder.
-# Expects the ~/.weather file to be filled with the text
-weather()
-{
-  w=$(cat ~/.weather)
-
-  if [[ -z "$w" ]]; then
-    echo -ne ""
-  else
-    temp=$(cut -d. -f1 ~/.weather | awk '{ print $NF}')
-
-    color="%{$fg_bold[white]%}"
-    if [[ $temp -gt 38 ]]; then
-      color="%{$fg_bold[magenta]%}"
-    elif [[ $temp -gt 29 && $temp -le 38 ]]; then
-      color="%{$fg_bold[red]%}"
-    elif [[ $temp -gt 24 && $temp -le 29 ]]; then
-      color="%{$fg_bold[red]%}"
-    elif [[ $temp -gt 18 && $temp -le 24 ]]; then
-      color="%{$fg_bold[yellow]%}"
-    elif [[ $temp -gt 10 && $temp -le 18 ]]; then
-      color="%{$fg_bold[green]%}"
-    elif [[ $temp -gt 2 && $temp -le 10 ]]; then
-      color="%{$fg_no_bold[green]%}"
-    elif [[ $temp -gt "-8" && $temp -le 2 ]]; then
-      color="%{$fg_no_bold[cyan]%}"
-    elif [[ $temp -gt "-13" && $temp -le "-8" ]]; then
-      color="%{$fg_bold[cyan]%}"
-    elif [[ $temp -le "-13" ]]; then
-      color="%{$fg_bold[blue]%}"
-    fi
-    echo -ne "${color}${w}%{$reset_color%}"
-  fi
-}
+# Weather Utility #
+##################
+source $HOME/.weather/weather.zsh
 
 # Path Management #
 ##########################
-
-pathprepend "$HOME/.rvm/bin" # RVM (for managing rubies)
-pathprepend "/usr/loca/heroku/bin" # Heroku Toolbelt
 pathprepend "/usr/local/bin" # For Homebrew
 
 # Initialize Scripts #
 ##########################
-eval "$(pyenv init -)"
+# Github Hub
+if command -v hub >/dev/null 2>&1; then
+  eval "$(hub alias -s)"
+fi
+
+# Pyenv
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-eval "$(hub alias -s)"
-
-# https://secure.phabricator.com/book/phabricator/article/arcanist/#installing-arcanist
-# arcanist auto complete
-source /Users/evanmorikawa/Code/arcanist/resources/shell/bash-completion

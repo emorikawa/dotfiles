@@ -76,7 +76,12 @@ else
   ln -sf $BASEDIR/shell/zshrc $HOME/.zshrc
   ln -sf $BASEDIR/shell/localzshrc $HOME/.localzshrc
   ln -sf $BASEDIR/shell/oh-my-zsh $HOME/.oh-my-zsh
-  ln -sf $BASEDIR/shell/opp $HOME/.opp
+
+  echo "--->  Installing weather plugin"
+  ln -sf $BASEDIR/shell/weather $HOME/.weather
+  if [[ -d $HOME/Library/LaunchAgents ]]; then
+    cp $BASEDIR/shell/weather/e0m.weather.plist $HOME/Library/LaunchAgents
+  fi
 
   echo "--->  Installing customized theme"
   cp $BASEDIR/shell/evan.zsh-theme $BASEDIR/shell/oh-my-zsh/themes
