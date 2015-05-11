@@ -44,6 +44,7 @@ echo "--->  Linking .gvimrc"
 ln -sf $BASEDIR/vim/gvimrc $HOME/.gvimrc
 echo "--->  Linking .vim folder"
 ln -sf $BASEDIR/vim/vim $HOME/.vim
+ln -sf $BASEDIR/vim/UltiSnips $HOME/.vim/UltiSnips
 
 # Installing tmux
 # echo ""

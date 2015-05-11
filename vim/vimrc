@@ -42,7 +42,10 @@ Bundle 'michaeljsmith/vim-indent-object'
 " Write snippets in vim.
 " <tab> after a snippet key
 " http://vimcasts.org/episodes/meet-ultisnips/
-" Bundle 'SirVer/ultisnips'
+Bundle 'SirVer/ultisnips'
+
+" Snippets are separated from the engine.
+Bundle 'honza/vim-snippets'
 
 " Enable repeating supported plugin maps with '.'
 Bundle 'tpope/vim-repeat'
@@ -85,12 +88,12 @@ Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Awesome autocomplete
 " http://valloric.github.io/YouCompleteMe/
-" if has("gui_macvim")
-"   " When compiling YCM, install.sh needs to be changed to point to
-"   " libpython and the python include directory. It by default can't detect
-"   " pyenv's path structure
-"   Bundle 'Valloric/YouCompleteMe'
-" end
+if has("gui_macvim")
+  " Once installed you have to also run the install.sh script inside of
+  " the plugin folder. If you are using pyenv, there are additional steps.
+  " See below in the YouCompleteMe section
+  Bundle 'Valloric/YouCompleteMe'
+end
 
 
 " Helps me see "
@@ -573,39 +576,55 @@ augroup indent_guides
 augroup END
 
 " YouCompleteMe and UltiSnips "
-"""""""""""""""""""""""""""""""
-" https://github.com/Valloric/YouCompleteMe/issues/36
-" function! g:UltiSnips_Complete()
-"   call UltiSnips_ExpandSnippet()
-"   if g:ulti_expand_res == 0
-"     if pumvisible()
-"       return "\<C-n>"
-"     else
-"       call UltiSnips_JumpForwards()
-"       if g:ulti_jump_forwards_res == 0
-"         return "\<TAB>"
-"       endif
-"     endif
-"   endif
-"   return ""
-" endfunction
-
-" augroup utilisnip_au
-"   autocmd!
-"   autocmd BufRead,BufNewFile,BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-" augroup END
-
+""""""""""""""""""""""""""""""
 " https://github.com/Valloric/YouCompleteMe/issues/759
+" When compiling YCM, install.sh needs to be changed to point to
+" libpython and the python include directory. It by default can't detect
+" pyenv's path structure
+
 " let g:ycm_path_to_python_interpreter = '/Users/evanmorikawa/.pyenv/versions/2.7.5/bin/python'
 " https://groups.google.com/forum/#!topic/ycm-users/l-d6Wfe-kgk
 " let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+
+" How to integrate UltiSnips and YouCompleteMe
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" Enable tabbing through list of results
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+" Expand snippet or return
+let g:ulti_expand_res = 0
+function! Ulti_ExpandOrEnter()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res
+        return ''
+    else
+        return "\<return>"
+endfunction
+
+" Set <space> as primary trigger
+inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 "
 " Edit UltiSnips for this file
 " You must first symlink ~/.vim/UltiSnips to the master snips folder.
-" nnoremap <leader>es :UltiSnipsEdit<CR>
+nnoremap <leader>es :UltiSnipsEdit<CR>
 
 " Syntastic "
 """""""""""""

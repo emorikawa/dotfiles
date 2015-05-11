@@ -11,9 +11,12 @@ alias e="cd ~/Code/edgehill && ls"
 alias ee="cd ~/Code/edgehill && edgehill --dev"
 alias et="cd ~/Code/edgehill && edgehill --test"
 alias vpn="gpg -d ~/.inbox-vpn.gpg | less"
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 # source $HOME/Code/arcanist/resources/shell/bash-completion
 
 ##### Proximate
+alias p="cd ~/Code/proximate && ls"
 alias console='cd ~/Code/Proximate && \
                heroku run rails console -a proximate-production'
 alias useproddb='gpg -d -o config/database.yml config/database-prod.yml.gpg'
