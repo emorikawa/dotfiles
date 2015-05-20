@@ -159,6 +159,9 @@ Bundle 'tpope/vim-fugitive'
 
 let mapleader = ","
 
+" Execute current file
+nnoremap <F5> :call ExecuteFile()<CR>
+
 " Quick escaping
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -220,6 +223,9 @@ end
 " Close buffer but keep split open
 " Uses bufkill.vim
 noremap <C-Q> :BD<CR>
+
+" Close buffer
+noremap <C-c> :bd<CR>
 
 " Rename the file. We do this via the git plugin. This only works in git
 " directories.
@@ -404,6 +410,7 @@ command! -nargs=1 Grr Grep -ErinI --include=\*.rb --exclude-dir=log --exclude-di
 
 command! CopyTitle !echo "%\c" | pbcopy
 
+command! -complete=shellcmd -nargs=+ Shell call RunShellCommand(<q-args>)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" LANGUAGE SPECIFIC SETTINGS """""""""""""""""""""""""
@@ -557,6 +564,37 @@ function! ConvertShouldToExpect()
   for [old, new] in items(rspec_conversions)
     execute "normal! " . ':%s/\v^(\s+)(.+)\.' . old . '>/\1expect(\2).' . new . '/ge' . "\<CR>"
   endfor
+endfunction
+
+function! RunShellCommand(cmdline)
+  echo a:cmdline
+  let expanded_cmdline = a:cmdline
+  for part in split(a:cmdline, ' ')
+     if part[0] =~ '\v[%#<]'
+        let expanded_part = fnameescape(expand(part))
+        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+     endif
+  endfor
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:    ' . a:cmdline)
+  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
+  call setline(3,substitute(getline(2),'.','=','g'))
+  execute '$read !'. expanded_cmdline
+  setlocal nomodifiable
+  1
+endfunction
+
+function! ExecuteFile()
+  let filetype_to_command = {
+  \   'javascript': 'node',
+  \   'coffee': 'coffee',
+  \   'python': 'python',
+  \   'html': 'open',
+  \   'sh': 'sh'
+  \ }
+  let cmd = get(filetype_to_command, &filetype, &filetype)
+  call RunShellCommand(cmd." %s")
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
