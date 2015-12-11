@@ -5,13 +5,19 @@
 extends javascript
 
 snippet des "Describe (js)" b
-describe('${1:description}', function() {
+describe('${1:description}', () => {
 	$0
 });
 endsnippet
 
 snippet it "it (js)" b
-it('${1:description}', function() {
+it("${1:description}", () => {
+	$0
+});
+endsnippet
+
+snippet ita "it async (js)" b
+it("${1:description}", (done) => {
 	$0
 });
 endsnippet

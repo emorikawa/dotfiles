@@ -74,7 +74,9 @@ alias vd="vimdecrypt"
 # git config --global alias.lg "log --color --graph --branches --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gl='git lg'
 alias gpl='git pull'
+alias yolo='git push --force'
 alias gs='git status'
+alias gmb='git merge-base HEAD master'
 alias gc='git commit -a'
 alias gcl='git clone'
 alias ga='git add -A'
@@ -133,3 +135,8 @@ fi
 
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /Users/evanmorikawa/.travis/travis.sh ] && source /Users/evanmorikawa/.travis/travis.sh

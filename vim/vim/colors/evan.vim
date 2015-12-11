@@ -16,6 +16,12 @@
 " The functions in this theme that convert hex color codes to the nearest
 " terminal color were developed by Henry So, Jr. 
 
+let red   = '#B35E4D'
+let green = '#558C57'
+let blue  = '#669991'
+let tan   = '#D9BF8C'
+let camel = '#CF984F'
+
 set background=dark
 if version > 580
   " no guarantees for version 5.8 and below, but this makes it stop
@@ -252,6 +258,9 @@ if &t_Co == 88 || &t_Co == 256
   call <SID>X("Identifier",      "558C57", "", "")
   call <SID>X("Special",         "558C57", "", "")
   call <SID>X("htmlArg",         "558C57", "", "")
+  call <SID>X("javaScriptParens", "558C57", "", "")
+  call <SID>X("javaScriptBraces", "558C57", "", "")
+  call <SID>X("javaScriptEndColons", "558C57", "", "")
 
   call <SID>X("Function",        "B35E4D", "", "")
   call <SID>X("coffeeObjAssign", "B35E4D", "", "")
@@ -309,7 +318,7 @@ hi Normal   guifg=#D9C7A8 guibg=#222222
 hi Pmenu    guifg=#A39069 guibg=#333333
 hi PmenuSel guifg=#D9C7A8 guibg=#555555 gui=bold
 
-hi Statement     guifg=#669991
+hi Statement     guifg=#669991 gui=bold
 hi Type          guifg=#669991
 hi PreProc       guifg=#669991
 hi htmlTag       guifg=#669991
@@ -319,6 +328,9 @@ hi pythonBuiltin guifg=#669991
 hi Identifier guifg=#558C57
 hi Special    guifg=#558C57
 hi htmlArg    guifg=#558C57
+hi javaScriptParens guifg=#558C57
+hi javaScriptBraces guifg=#558C57
+hi javaScriptEndColons guifg=#558C57
 
 hi Function        guifg=#B35E4D
 hi coffeeObjAssign guifg=#B35E4D

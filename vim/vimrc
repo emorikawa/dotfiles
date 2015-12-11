@@ -21,6 +21,9 @@ Bundle 'bufkill.vim'
 " Extends % operator to match html tags and others.
 Bundle 'tmhedberg/matchit'
 
+" unimpaired.vim: pairs of handy bracket mappings
+Bundle 'tpope/vim-unimpaired'
+
 " A camel-case detecting motion
 Bundle 'bkad/CamelCaseMotion'
 
@@ -35,6 +38,7 @@ Bundle 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
 
 " New text object at the same indent level
 Bundle 'michaeljsmith/vim-indent-object'
+
 
 
 " Helps me type "
@@ -65,6 +69,9 @@ Bundle 'tomtom/tcomment_vim'
 " Convert ruby blocks
 " <leader>b
 Bundle 'jgdavey/vim-blockle'
+
+" Automatically complete brackets
+Bundle 'jiangmiao/auto-pairs'
 
 " Syntax checking hacks for vim
 Bundle 'scrooloose/syntastic'
@@ -98,8 +105,14 @@ end
 
 " Helps me see "
 """"""""""""""""
+" JSX files. React JSX
+Bundle 'mxw/vim-jsx'
+
 " HAML, SASS, SCSS support for Vim
 Bundle 'tpope/vim-haml'
+
+" Better ES6 support
+Bundle 'isRuslan/vim-es6'
 
 " Lean & mean status/tabline for vim that's light as air
 Bundle 'bling/vim-airline'
@@ -122,8 +135,14 @@ Bundle 'skammer/vim-css-color'
 " Add CSS3 syntax support to vim's built-in `syntax/css.vim`
 Bundle 'hail2u/vim-css3-syntax'
 
+" Javascript & ES6 support for vim
+Bundle 'pangloss/vim-javascript'
+
 " CoffeeScript support for vim
 Bundle 'kchmck/vim-coffee-script'
+
+" Typescript support"
+Bundle 'leafgarland/typescript-vim'
 
 " Shows indent level
 Bundle 'nathanaelkane/vim-indent-guides'
@@ -145,11 +164,19 @@ Bundle 'thoughtbot/vim-rspec'
 """""""""""""""""""
 Bundle 'grep.vim'
 
+" Faster, better search built on top of `ag` aka `the_silver_searcher`
+Bundle 'rking/ag.vim'
+
 
 " Helps me collaborate "
 """"""""""""""""""""""""
 " A Git wrapper so awesome, it should be illegal
 Bundle 'tpope/vim-fugitive'
+
+" Helps me track my work "
+""""""""""""""""""""""""""
+" Awesome time/productivity tracker.
+Bundle 'wakatime/vim-wakatime'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -178,10 +205,13 @@ noremap k gk
 noremap j gj
 noremap <End> $
 noremap <Home> 0
+
+" Note, cmd-shift-j does line concatenation.
 noremap <S-j> 3j
 noremap <S-k> 3k
 noremap <S-l> 5l
 noremap <S-h> 5h
+
 noremap <C-j> 3<C-e>
 noremap <C-k> 3<C-y>
 noremap <PageUp> <c-u>
@@ -197,8 +227,31 @@ cnoremap <C-a> <Home>
 cnoremap <C-k> <C-U>
 inoremap <C-k> <esc>C
 
+" Move lines up or down via 'alt/option/⌥ key + j/k'
+" http://vim.wikia.com/wiki/Moving_lines_up_or_down
+" On Mac you can't do <A-j> or <A-k>. Instead you use the hack below:
+" alt-key fix: http://stackoverflow.com/a/15399297/793472
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
 " And by lowercase everything I mean undo
 noremap U u
+vnoremap U <Esc>u
+
+" Use null buffer with change command
+noremap c "_c
+
+"" bubble single lines
+nnoremap <C-Up> [e
+nnoremap <C-Down> ]e
+
+"" bubble multiple lines
+vnoremap <C-Up> [egv
+vnoremap <C-Down> ]egv
 
 " Move between buffers
 noremap <c-h> <c-w>h
@@ -242,7 +295,7 @@ nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 vnoremap <silent> * :call VisualSearch('f')<CR>n<S-n>
 vnoremap <silent> # :call VisualSearch('b')<CR>n<S-n>
 vnoremap <silent> <C-f> :call VisualSearch('f')<CR>n<S-n>
-vnoremap <silent> <S-f> :call VisualSearch('f')<CR>n<S-n>:Gr <C-r>/<CR>
+vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Ag <C-r>"<CR>
 
 " Search and highlight what's under the cursor. Also automatically copies
 " the word to both yank and the mac paste buffer thanks to
@@ -250,7 +303,7 @@ vnoremap <silent> <S-f> :call VisualSearch('f')<CR>n<S-n>:Gr <C-r>/<CR>
 nnoremap <C-f> yiw:Subvert/<C-r>"<CR><S-n>
 
 " Search via grep what's under the cursor.
-nnoremap <D-F> *<S-n>ye:Gr <C-r>"<CR>
+nnoremap <D-F> *<S-n>ye:Ag <C-r>"<CR>
 
 " Unhighlight
 noremap <S-Space> :nohl<CR>
@@ -276,6 +329,14 @@ vnoremap > >gv
 " Edit Vimrc
 " $MYVIMRC points to the ~/.vimrc file
 nnoremap <leader>ev :e $MYVIMRC<CR>
+
+" Edit UltiSnips for this file
+" You must first symlink ~/.vim/UltiSnips to the master snips folder.
+nnoremap <leader>es :UltiSnipsEdit<CR>
+
+" Edit theme
+" You must first symlink ~/.vim/UltiSnips to the master snips folder.
+nnoremap <leader>et :e ~/.vim/colors/evan.vim<CR>
 
 " Re-source vimrc
 nnoremap <leader>sv :source $MYVIMRC<CR>
@@ -398,7 +459,7 @@ command! Whitespace %s/\s\+$//e
 command! -nargs=1 Gri Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
 
 " Grep case sensitive
-command! -nargs=1 Gr Grep -ErnI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=saved_state <args> .
+command! -nargs=1 Gr Grep -ErnI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=saved_state --exclude-dir=Electron.app <args> .
 
 " Grep through coffeescript
 command! -nargs=1 Grc Grep -ErinI --include=\*.coffee --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
@@ -417,6 +478,14 @@ augroup filetype_coffee
   autocmd!
   autocmd BufRead,BufNewFile *.coffee set ft=coffee
 augroup END
+
+" ES6 "
+""""""""""""""""
+augroup filetype_es6
+  autocmd!
+  autocmd BufRead,BufNewFile *.es6 set ft=javascript.jsx
+augroup END
+
 
 " Python "
 """"""""""
@@ -675,10 +744,6 @@ endfunction
 
 " Set <space> as primary trigger
 inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
-"
-" Edit UltiSnips for this file
-" You must first symlink ~/.vim/UltiSnips to the master snips folder.
-nnoremap <leader>es :UltiSnipsEdit<CR>
 
 " Syntastic "
 """""""""""""

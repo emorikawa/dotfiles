@@ -6,11 +6,15 @@ EVAN_KEY=21CCB5B8
 alias c="cd ~/Code && ls"
 
 ##### Nylas
-export EDGEHILL_PATH="/Users/evanmorikawa/Code/edgehill"
-alias e="cd ~/Code/edgehill && ls"
-alias ee="cd ~/Code/edgehill && edgehill --dev"
-alias et="cd ~/Code/edgehill && edgehill --test"
+alias e="cd ~/Code/N1/build/resources/nylas && ls"
+alias n="cd ~/Code/N1 && ls"
+alias nd="cd ~/Code/N1 && ./N1.sh --dev --enable-logging"
+alias n1="cd ~/Code/N1 && ./N1.sh --dev --enable-logging"
+alias nt="cd ~/Code/N1 && ./N1.sh --test --enable-logging"
+alias vu="cd ~/Code/sync-engine && vagrant up && vagrant ssh"
+alias rw="cd ~/Code/share-redwood/redwood/web && mvim -O3 && cd ~/Code/share-redwood && source bin/activate && open http://localhost:7777 && INBOX_ENV=dev ./bin/start-web"
 alias vpn="gpg -d ~/.inbox-vpn.gpg | less"
+alias ol="gpg -d ~/.outlook-pass.gpg | less"
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 # source $HOME/Code/arcanist/resources/shell/bash-completion
