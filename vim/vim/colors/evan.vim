@@ -1,6 +1,5 @@
 " Evan's personalized color scheme
 " Maintainer: Evan Morikawa
-" Last Change: 2011 August 8
 "
 " Balanced theme to look good on dark backgrounds while providing strong
 " colors for key elements and weak, but balanced colors for more common
@@ -14,7 +13,7 @@
 " camel - #CF984F at 20% #463a2d
 "
 " The functions in this theme that convert hex color codes to the nearest
-" terminal color were developed by Henry So, Jr. 
+" terminal color were developed by Henry So, Jr.
 
 let red   = '#B35E4D'
 let green = '#558C57'
@@ -244,6 +243,8 @@ if &t_Co == 88 || &t_Co == 256
 
   " syntax highlighting groups
   call <SID>X("Normal",          "D9C7A8", "", "")
+  call <SID>X("javascriptArrayMethod", "D9C7A8", "", "")
+  call <SID>X("javascriptXHRMethod", "D9C7A8", "", "")
 
   call <SID>X("Pmenu",           "A39069", "333333", "")
   call <SID>X("PmenuSel",        "D9C7A8", "555555", "bold")
@@ -254,10 +255,15 @@ if &t_Co == 88 || &t_Co == 256
   call <SID>X("htmlTag",         "669991", "", "")
   call <SID>X("htmlEndTag",      "669991", "", "")
   call <SID>X("pythonBuiltin",   "669991", "", "")
+  call <SID>X("javascriptVariable", "669991", "", "")
+  call <SID>X("javascriptImport", "669991", "", "")
+  call <SID>X("javascriptExport", "669991", "", "")
+  call <SID>X("javascriptOpSymbol", "669991", "", "")
 
   call <SID>X("Identifier",      "558C57", "", "")
   call <SID>X("Special",         "558C57", "", "")
   call <SID>X("htmlArg",         "558C57", "", "")
+  call <SID>X("javaScriptIdentifier", "558C57", "", "")
   call <SID>X("javaScriptParens", "558C57", "", "")
   call <SID>X("javaScriptBraces", "558C57", "", "")
   call <SID>X("javaScriptEndColons", "558C57", "", "")
@@ -267,6 +273,7 @@ if &t_Co == 88 || &t_Co == 256
   call <SID>X("coffeeConstant",  "B35E4D", "", "")
   call <SID>X("djangoTagBlock",  "B35E4D", "", "")
   call <SID>X("djangoStatement", "B35E4D", "", "")
+  call <SID>X("javascriptArrowFunc", "B35E4D", "", "")
 
   call <SID>X("Comment",         "666666", "", "")
 
@@ -313,31 +320,55 @@ if &t_Co == 88 || &t_Co == 256
 endif
 
 " Set colors for GUI Version
+" White
 hi Normal   guifg=#D9C7A8 guibg=#222222
+
+" Off-white grey
+hi javaScriptDotNotation guifg=#aa9c84
+hi javascriptArrayMethod  guifg=#aa9c84
+hi javascriptXHRMethod  guifg=#aa9c84
+hi javascriptDOMElemProp  guifg=#aa9c84
+hi javascriptDOMNodeProp  guifg=#aa9c84
+hi javascriptDOMDocMethod  guifg=#aa9c84
+hi javascriptBOMWindowMethod  guifg=#aa9c84
+hi javascriptCacheMethod  guifg=#aa9c84
+hi javascriptDateStaticMethod guifg=#aa9c84
+hi javascriptMathStaticMethod guifg=#aa9c84
 
 hi Pmenu    guifg=#A39069 guibg=#333333
 hi PmenuSel guifg=#D9C7A8 guibg=#555555 gui=bold
 
+" Blue
 hi Statement     guifg=#669991 gui=bold
 hi Type          guifg=#669991
 hi PreProc       guifg=#669991
 hi htmlTag       guifg=#669991
 hi htmlEndTag    guifg=#669991
 hi pythonBuiltin guifg=#669991
+hi javascriptVariable guifg=#669991
+hi javascriptImport guifg=#669991
+hi javascriptExport guifg=#669991
+hi javascriptOpSymbol guifg=#669991
+hi javaScriptExceptions guifg=#669991
 
+" Green
 hi Identifier guifg=#558C57
 hi Special    guifg=#558C57
 hi htmlArg    guifg=#558C57
+hi javaScriptIdentifier guifg=#558C57
 hi javaScriptParens guifg=#558C57
 hi javaScriptBraces guifg=#558C57
 hi javaScriptEndColons guifg=#558C57
 
+" Red
 hi Function        guifg=#B35E4D
 hi coffeeObjAssign guifg=#B35E4D
 hi coffeeObject    guifg=#B35E4D
 hi coffeeConstant  guifg=#B35E4D
 hi djangoTagBlock  guifg=#B35E4D
 hi djangoStatement guifg=#B35E4D
+hi javascriptArrowFunc guifg=#B35E4D
+hi javascriptObjectLabel guifg=#B35E4D
 
 hi Comment  guifg=#666666
 

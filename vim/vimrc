@@ -111,9 +111,6 @@ Bundle 'mxw/vim-jsx'
 " HAML, SASS, SCSS support for Vim
 Bundle 'tpope/vim-haml'
 
-" Better ES6 support
-Bundle 'isRuslan/vim-es6'
-
 " Lean & mean status/tabline for vim that's light as air
 Bundle 'bling/vim-airline'
 
@@ -136,7 +133,9 @@ Bundle 'skammer/vim-css-color'
 Bundle 'hail2u/vim-css3-syntax'
 
 " Javascript & ES6 support for vim
-Bundle 'pangloss/vim-javascript'
+Bundle 'othree/yajs.vim'
+" Bundle 'isRuslan/vim-es6'
+" Bundle 'emorikawa/vim-javascript'
 
 " CoffeeScript support for vim
 Bundle 'kchmck/vim-coffee-script'
@@ -146,6 +145,10 @@ Bundle 'leafgarland/typescript-vim'
 
 " Shows indent level
 Bundle 'nathanaelkane/vim-indent-guides'
+
+" Solarized theme (only used for light-mode)
+" Use `evan` theme for dark mode
+Bundle 'altercation/vim-colors-solarized'
 
 " Literate CoffeeScript support for vim
 Bundle 'mintplant/vim-literate-coffeescript'
@@ -391,6 +394,7 @@ nnoremap <Leader>cse :call ConvertShouldToExpect()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on " Turn on filetype after Vundle is setup
 colorscheme evan
+" colorscheme solarized
 syntax enable
 
 set wrap " Wrap lines
@@ -748,6 +752,13 @@ inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 " Syntastic "
 """""""""""""
 let g:syntastic_ignore_files = ['\m.*_templates\.html\.erb']
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=0
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_javascript_checkers = ['eslint', 'jshint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " Airline "
 """""""""""
