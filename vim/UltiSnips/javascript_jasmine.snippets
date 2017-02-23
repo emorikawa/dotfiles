@@ -4,8 +4,16 @@
 #
 extends javascript
 
+snippet wp "waitsForPromise" b
+window.waitsForPromise(() => {
+	return ${1:async}.then(($2) => {
+		$3
+	});
+});
+endsnippet
+
 snippet des "Describe (js)" b
-describe('${1:description}', () => {
+describe("${1:description}", () => {
 	$0
 });
 endsnippet
@@ -23,13 +31,13 @@ it("${1:description}", (done) => {
 endsnippet
 
 snippet bef "before each (js)" b
-beforeEach(function() {
+beforeEach(() => {
 	$0
 });
 endsnippet
 
 snippet aft "after each (js)" b
-afterEach(function() {
+afterEach(() => {
 	$0
 });
 endsnippet
@@ -39,7 +47,7 @@ jasmine.any($1)
 endsnippet
 
 snippet ru "runs (js)" b
-runs(function() {
+runs(() => {
 	$0
 });
 endsnippet

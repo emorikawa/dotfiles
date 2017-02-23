@@ -267,6 +267,7 @@ if &t_Co == 88 || &t_Co == 256
   call <SID>X("javaScriptParens", "558C57", "", "")
   call <SID>X("javaScriptBraces", "558C57", "", "")
   call <SID>X("javaScriptEndColons", "558C57", "", "")
+  call <SID>X("javascriptArrowFuncDef", "558C57", "", "")
 
   call <SID>X("Function",        "B35E4D", "", "")
   call <SID>X("coffeeObjAssign", "B35E4D", "", "")
@@ -274,6 +275,7 @@ if &t_Co == 88 || &t_Co == 256
   call <SID>X("djangoTagBlock",  "B35E4D", "", "")
   call <SID>X("djangoStatement", "B35E4D", "", "")
   call <SID>X("javascriptArrowFunc", "B35E4D", "", "")
+  call <SID>X("javascriptClassProperty", "B35E4D", "", "bold")
 
   call <SID>X("Comment",         "666666", "", "")
 
@@ -359,6 +361,7 @@ hi javaScriptIdentifier guifg=#558C57
 hi javaScriptParens guifg=#558C57
 hi javaScriptBraces guifg=#558C57
 hi javaScriptEndColons guifg=#558C57
+hi javascriptArrowFuncDef guifg=#558C57
 
 " Red
 hi Function        guifg=#B35E4D
@@ -368,6 +371,7 @@ hi coffeeConstant  guifg=#B35E4D
 hi djangoTagBlock  guifg=#B35E4D
 hi djangoStatement guifg=#B35E4D
 hi javascriptArrowFunc guifg=#B35E4D
+hi javascriptClassProperty guifg=#B35E4D gui=bold
 hi javascriptObjectLabel guifg=#B35E4D
 
 hi Comment  guifg=#666666

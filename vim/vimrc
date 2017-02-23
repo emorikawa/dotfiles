@@ -106,7 +106,7 @@ end
 " Helps me see "
 """"""""""""""""
 " JSX files. React JSX
-Bundle 'mxw/vim-jsx'
+" Bundle 'mxw/vim-jsx'
 
 " HAML, SASS, SCSS support for Vim
 Bundle 'tpope/vim-haml'
@@ -134,7 +134,9 @@ Bundle 'hail2u/vim-css3-syntax'
 
 " Javascript & ES6 support for vim
 Bundle 'othree/yajs.vim'
-" Bundle 'isRuslan/vim-es6'
+Bundle 'othree/es.next.syntax.vim'
+" NOTE: As of 2/2/16 yajs indenting only worked if vim-javascript was
+" BundleInstall'ed first, then deactivated with the folder still present
 " Bundle 'emorikawa/vim-javascript'
 
 " CoffeeScript support for vim
@@ -298,7 +300,7 @@ nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 vnoremap <silent> * :call VisualSearch('f')<CR>n<S-n>
 vnoremap <silent> # :call VisualSearch('b')<CR>n<S-n>
 vnoremap <silent> <C-f> :call VisualSearch('f')<CR>n<S-n>
-vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Ag <C-r>"<CR>
+vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Gr <C-r>"<CR>
 
 " Search and highlight what's under the cursor. Also automatically copies
 " the word to both yank and the mac paste buffer thanks to
@@ -306,7 +308,7 @@ vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Ag <C-r>"<CR>
 nnoremap <C-f> yiw:Subvert/<C-r>"<CR><S-n>
 
 " Search via grep what's under the cursor.
-nnoremap <D-F> *<S-n>ye:Ag <C-r>"<CR>
+nnoremap <D-F> *<S-n>ye:Gr <C-r>"<CR>
 
 " Unhighlight
 noremap <S-Space> :nohl<CR>
@@ -398,9 +400,11 @@ colorscheme evan
 syntax enable
 
 set wrap " Wrap lines
+set exrc  " Allow per-project vimrc's
 set list " Show characters for tabs, spaces, end of line
 set ruler " Shows line & column numbers
 set number " Turn on line numbers
+set secure  " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they're owned by me
 set smarttab " <Tab> inserts correct number of spaces
 set wildmenu " Enhanced tab completion
 set autoread " Reload file when a file is changed from the outside
@@ -463,7 +467,7 @@ command! Whitespace %s/\s\+$//e
 command! -nargs=1 Gri Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
 
 " Grep case sensitive
-command! -nargs=1 Gr Grep -ErnI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=saved_state --exclude-dir=Electron.app <args> .
+command! -nargs=1 Gr Grep -ErnI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=saved_state --exclude-dir=Electron.app --exclude-dir=site-packages --exclude-dir=build/lib/maple --exclude-dir=fixtures --exclude-dir=maple/build --exclude=\*.min.js <args> .
 
 " Grep through coffeescript
 command! -nargs=1 Grc Grep -ErinI --include=\*.coffee --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
@@ -499,7 +503,7 @@ augroup filetype_python
     \ tabstop=4
     \ softtabstop=4
     \ shiftwidth=4
-    \ textwidth=80
+    \ textwidth=73
 
   autocmd BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
   let python_highlight_all = 1
@@ -755,10 +759,12 @@ let g:syntastic_ignore_files = ['\m.*_templates\.html\.erb']
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:syntastic_javascript_checkers = ['eslint', 'jshint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
+let g:syntastic_python_checkers = ['flake8']
+let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint_d')
+let g:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_coffee_checkers = ['coffeelint']
 
 " Airline "
 """""""""""

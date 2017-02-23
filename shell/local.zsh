@@ -6,13 +6,11 @@ EVAN_KEY=21CCB5B8
 alias c="cd ~/Code && ls"
 
 ##### Nylas
-alias e="cd ~/Code/N1/build/resources/nylas && ls"
-alias n="cd ~/Code/N1 && ls"
-alias nd="cd ~/Code/N1 && ./N1.sh --dev --enable-logging"
-alias n1="cd ~/Code/N1 && ./N1.sh --dev --enable-logging"
-alias nt="cd ~/Code/N1 && ./N1.sh --test --enable-logging"
+alias n="cd ~/Code/nylas-mail-all && ls"
+alias n1="cd ~/Code/nylas-mail-all && npm start"
+alias nt="cd ~/Code/nylas-mail-all && npm test"
+alias nc="cd ~/Code/nylas-mail-all && npm run start-cloud"
 alias vu="cd ~/Code/sync-engine && vagrant up && vagrant ssh"
-alias rw="cd ~/Code/share-redwood/redwood/web && mvim -O3 && cd ~/Code/share-redwood && source bin/activate && open http://localhost:7777 && INBOX_ENV=dev ./bin/start-web"
 alias vpn="gpg -d ~/.inbox-vpn.gpg | less"
 alias ol="gpg -d ~/.outlook-pass.gpg | less"
 export NVM_DIR=~/.nvm
@@ -29,3 +27,4 @@ alias prodconsole='gpg -d -o config/database.yml config/database-prod.yml.gpg &&
 
 alias f='foreman start -f Procfile.dev'
 alias rc='rails console'
+source ~/Code/git-subrepo/.rc
