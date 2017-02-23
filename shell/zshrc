@@ -21,7 +21,7 @@ export ZSH=$HOME/.oh-my-zsh
 export ZSH_THEME="evan"
 
 # Comment this out to disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
+export DISABLE_AUTO_UPDATE="true"
 export UPDATE_ZSH_DAYS=7
 
 # Set default editor
