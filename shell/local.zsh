@@ -1,5 +1,4 @@
 ##### GPG
-ROBB_KEY=43705ADD
 EVAN_KEY=21CCB5B8
 
 ##### General

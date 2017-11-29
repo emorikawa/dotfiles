@@ -5,39 +5,39 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""" Vundle Packages """""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Simply type :BundleInstall to install everything.
-
-set nocompatible " Does not use old vi quirks
-filetype off     " Required temporarily for vundle
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+" Simply type :PluginInstall to install everything.
+set nocompatible              " be iMproved, required
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 
 " Helps me move "
 """""""""""""""""
 " Unload/delete/wipe a buffer, keep its window(s)
-Bundle 'bufkill.vim'
+Plugin 'bufkill.vim'
 
 " Extends % operator to match html tags and others.
-Bundle 'tmhedberg/matchit'
+Plugin 'tmhedberg/matchit'
 
 " unimpaired.vim: pairs of handy bracket mappings
-Bundle 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-unimpaired'
 
 " A camel-case detecting motion
-Bundle 'bkad/CamelCaseMotion'
+Plugin 'bkad/CamelCaseMotion'
 
 " New text object for a function argument
-Bundle 'vim-scripts/argtextobj.vim'
+Plugin 'vim-scripts/argtextobj.vim'
 
-" Cursor editing in multiple locations
-Bundle 'terryma/vim-multiple-cursors'
+" Cursor editing in multiple locations (HAS DEPRECATION CONFLICT)
+" Plugin 'terryma/vim-multiple-cursors'
 
 " Peepopen quickly finds and open files
-Bundle 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
+Plugin 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
 
 " New text object at the same indent level
-Bundle 'michaeljsmith/vim-indent-object'
+Plugin 'michaeljsmith/vim-indent-object'
 
 
 
@@ -46,52 +46,52 @@ Bundle 'michaeljsmith/vim-indent-object'
 " Write snippets in vim.
 " <tab> after a snippet key
 " http://vimcasts.org/episodes/meet-ultisnips/
-Bundle 'SirVer/ultisnips'
+Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine.
-Bundle 'honza/vim-snippets'
+Plugin 'honza/vim-snippets'
 
 " Enable repeating supported plugin maps with '.'
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 
 " Quoting/parenthesizing made simple
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
 " Easily search for, substitute, & abbreviate multiple variants of a word
 " https://github.com/tpope/vim-abolish
 " http://vimcasts.org/episodes/enhanced-abbreviations-with-abolish/
-Bundle 'tpope/vim-abolish'
+Plugin 'tpope/vim-abolish'
 
 " Easily comment in and out lines
 " <leader>__
-Bundle 'tomtom/tcomment_vim'
+Plugin 'tomtom/tcomment_vim'
 
 " Convert ruby blocks
 " <leader>b
-Bundle 'jgdavey/vim-blockle'
+Plugin 'jgdavey/vim-blockle'
 
 " Automatically complete brackets
-Bundle 'jiangmiao/auto-pairs'
+Plugin 'jiangmiao/auto-pairs'
 
 " Syntax checking hacks for vim
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
 " Easy text exchange operator for Vim
 " Mapped to cx
 " http://vimcasts.org/episodes/swapping-two-regions-of-text-with-exchange-vim/
-Bundle 'tommcdo/vim-exchange'
+Plugin 'tommcdo/vim-exchange'
 
 " Vim motions on speed. Replaces the <number> in <number><motion>
 " <leader><leader><motion>
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'Lokaltog/vim-easymotion'
 
 " True Sublime Text style multiple selections for Vim
 " Mapped to C-n
-Bundle 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-multiple-cursors'
 
 " A parser for a condensed HTML format
 " <c-e> after a block of sparkup-formatted pre-html
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Awesome autocomplete
 " http://valloric.github.io/YouCompleteMe/
@@ -99,89 +99,90 @@ if has("gui_macvim")
   " Once installed you have to also run the install.sh script inside of
   " the plugin folder. If you are using pyenv, there are additional steps.
   " See below in the YouCompleteMe section
-  Bundle 'Valloric/YouCompleteMe'
+  Plugin 'Valloric/YouCompleteMe'
 end
 
 
 " Helps me see "
 """"""""""""""""
 " JSX files. React JSX
-" Bundle 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
 
 " HAML, SASS, SCSS support for Vim
-Bundle 'tpope/vim-haml'
+Plugin 'tpope/vim-haml'
 
 " Lean & mean status/tabline for vim that's light as air
-Bundle 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " CJSX files. Coffeescript with React JSX
-Bundle 'mtscout6/vim-cjsx'
+Plugin 'mtscout6/vim-cjsx'
 
 " Markdown syntax for vim
-Bundle 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown'
 
 " Less syntax support
-Bundle 'groenewege/vim-less'
+Plugin 'groenewege/vim-less'
 
 " Scala support
-Bundle 'derekwyatt/vim-scala'
+Plugin 'derekwyatt/vim-scala'
 
 " Colors CSS tags with the appropriate color.
-Bundle 'skammer/vim-css-color'
+Plugin 'skammer/vim-css-color'
 
 " Add CSS3 syntax support to vim's built-in `syntax/css.vim`
-Bundle 'hail2u/vim-css3-syntax'
+Plugin 'hail2u/vim-css3-syntax'
 
 " Javascript & ES6 support for vim
-Bundle 'othree/yajs.vim'
-Bundle 'othree/es.next.syntax.vim'
+Plugin 'othree/yajs.vim'
+Plugin 'othree/es.next.syntax.vim'
 " NOTE: As of 2/2/16 yajs indenting only worked if vim-javascript was
-" BundleInstall'ed first, then deactivated with the folder still present
-" Bundle 'emorikawa/vim-javascript'
+" PluginInstall'ed first, then deactivated with the folder still present
+" Plugin 'emorikawa/vim-javascript'
 
 " CoffeeScript support for vim
-Bundle 'kchmck/vim-coffee-script'
+Plugin 'kchmck/vim-coffee-script'
 
 " Typescript support"
-Bundle 'leafgarland/typescript-vim'
+Plugin 'leafgarland/typescript-vim'
 
 " Shows indent level
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " Solarized theme (only used for light-mode)
 " Use `evan` theme for dark mode
-Bundle 'altercation/vim-colors-solarized'
-
-" Literate CoffeeScript support for vim
-Bundle 'mintplant/vim-literate-coffeescript'
+Plugin 'altercation/vim-colors-solarized'
 
 
 " Helps my workflow "
 """""""""""""""""""""
 " Ruby on Rails power tools
-Bundle 'tpope/vim-rails'
+Plugin 'tpope/vim-rails'
 
 " Run Rspec specs from Vim
-Bundle 'thoughtbot/vim-rspec'
+Plugin 'thoughtbot/vim-rspec'
 
 
 " Helps me search "
 """""""""""""""""""
-Bundle 'grep.vim'
+Plugin 'grep.vim'
 
 " Faster, better search built on top of `ag` aka `the_silver_searcher`
-Bundle 'rking/ag.vim'
+Plugin 'rking/ag.vim'
 
 
 " Helps me collaborate "
 """"""""""""""""""""""""
 " A Git wrapper so awesome, it should be illegal
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
 " Helps me track my work "
 """"""""""""""""""""""""""
 " Awesome time/productivity tracker.
-Bundle 'wakatime/vim-wakatime'
+" Plugin 'wakatime/vim-wakatime'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -684,7 +685,7 @@ function! ConvertShouldToExpect()
         \ 'should_receive': 'to receive',
         \ 'should_not_receive': 'not_to receive',
         \ }
- 
+
   for [old, new] in items(rspec_conversions)
     execute "normal! " . ':%s/\v^(\s+)(.+)\.' . old . '>/\1expect(\2).' . new . '/ge' . "\<CR>"
   endfor
