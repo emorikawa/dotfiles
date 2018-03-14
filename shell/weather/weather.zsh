@@ -8,7 +8,7 @@ weather()
     if [[ -z "$w" ]]; then
       echo -ne ""
     else
-      temp=$(cut -d. -f1 ~/.weather/current_weather | awk '{ print $NF}')
+      temp=$(cut -d ° -f1 ~/.weather/current_weather | awk '{ print $NF}')
 
       color="%{$fg_bold[white]%}"
       if [[ $temp -gt 38 ]]; then

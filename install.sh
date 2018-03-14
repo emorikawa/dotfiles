@@ -33,6 +33,12 @@ if [ -d "/usr/local/share/fonts" ]; then
 fi
 
 # Installing vim
+# Ensuring required homebrew items installed
+brew install vim # we need the non-system vim
+brew install the_silver_searcher # to search faster and respect .gitignore
+brew install fzf # an awesome file fuzzy-finder
+$(brew --prefix)/opt/fzf/install  # adds cool command line integration
+brew install cmake # required for YouCompleteMe
 echo ""
 echo "===>  Installing VIM  <==="
 echo "--->  Backing up any previous .vimrc"
@@ -44,6 +50,9 @@ echo "--->  Linking .gvimrc"
 ln -sf $BASEDIR/vim/gvimrc $HOME/.gvimrc
 echo "--->  Linking .vim folder"
 ln -sf $BASEDIR/vim/vim $HOME/.vim
+echo "--->  Installing latest vim-plug"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+echo "--->  Linking snips"
 ln -sf $BASEDIR/vim/UltiSnips $HOME/.vim/UltiSnips
 
 # Installing tmux

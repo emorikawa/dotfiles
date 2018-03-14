@@ -1,43 +1,40 @@
 " The vimrc file of Evan Morikawa
 " evan@evanmorikawa.com
 " @e0m
+" See https://vimawesome.com/
+" See https://statico.github.io/vim3.html
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Vundle Packages """""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""" Packages """"""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Simply type :PluginInstall to install everything.
+" Simply type :PlugInstall to install everything.
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 
 " Helps me move "
 """""""""""""""""
 " Unload/delete/wipe a buffer, keep its window(s)
-Plugin 'bufkill.vim'
+Plug 'qpkorr/vim-bufkill'
 
 " Extends % operator to match html tags and others.
-Plugin 'tmhedberg/matchit'
+Plug 'tmhedberg/matchit'
 
 " unimpaired.vim: pairs of handy bracket mappings
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 
 " A camel-case detecting motion
-Plugin 'bkad/CamelCaseMotion'
+Plug 'bkad/CamelCaseMotion'
 
-" New text object for a function argument
-Plugin 'vim-scripts/argtextobj.vim'
-
-" Cursor editing in multiple locations (HAS DEPRECATION CONFLICT)
-" Plugin 'terryma/vim-multiple-cursors'
-
-" Peepopen quickly finds and open files
-Plugin 'topfunky/PeepOpen-EditorSupport', {'rtp': 'vim-peepopen/'}
+" A command-line fuzzy finder.
+" Requires brew install fzf to have been run first
+Plug '/usr/local/opt/fzf'
 
 " New text object at the same indent level
-Plugin 'michaeljsmith/vim-indent-object'
+Plug 'michaeljsmith/vim-indent-object'
 
 
 
@@ -46,144 +43,137 @@ Plugin 'michaeljsmith/vim-indent-object'
 " Write snippets in vim.
 " <tab> after a snippet key
 " http://vimcasts.org/episodes/meet-ultisnips/
-Plugin 'SirVer/ultisnips'
-
 " Snippets are separated from the engine.
-Plugin 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+
+" Yapf is the Python autoformatter.
+" See https://github.com/google/yapf/tree/master/plugins
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " Enable repeating supported plugin maps with '.'
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " Quoting/parenthesizing made simple
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " Easily search for, substitute, & abbreviate multiple variants of a word
 " https://github.com/tpope/vim-abolish
 " http://vimcasts.org/episodes/enhanced-abbreviations-with-abolish/
-Plugin 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish'
 
 " Easily comment in and out lines
 " <leader>__
-Plugin 'tomtom/tcomment_vim'
-
-" Convert ruby blocks
-" <leader>b
-Plugin 'jgdavey/vim-blockle'
+Plug 'tomtom/tcomment_vim'
 
 " Automatically complete brackets
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
-" Syntax checking hacks for vim
-Plugin 'scrooloose/syntastic'
+" The new and hotness for syntax checking and linting. Replaces syntastic
+Plug 'w0rp/ale'
 
 " Easy text exchange operator for Vim
 " Mapped to cx
 " http://vimcasts.org/episodes/swapping-two-regions-of-text-with-exchange-vim/
-Plugin 'tommcdo/vim-exchange'
+Plug 'tommcdo/vim-exchange'
 
 " Vim motions on speed. Replaces the <number> in <number><motion>
 " <leader><leader><motion>
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 
 " True Sublime Text style multiple selections for Vim
 " Mapped to C-n
-Plugin 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 
 " A parser for a condensed HTML format
 " <c-e> after a block of sparkup-formatted pre-html
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Awesome autocomplete
 " http://valloric.github.io/YouCompleteMe/
-if has("gui_macvim")
-  " Once installed you have to also run the install.sh script inside of
-  " the plugin folder. If you are using pyenv, there are additional steps.
-  " See below in the YouCompleteMe section
-  Plugin 'Valloric/YouCompleteMe'
-end
+" IMPORTANT: You must go to ~/.vim/plugged/YouCompleteMe and run ./install.py
+" You may need to do a `brew install cmake` first.
+Plug 'Valloric/YouCompleteMe'
 
 
 " Helps me see "
 """"""""""""""""
 " JSX files. React JSX
-" Plugin 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 
 " HAML, SASS, SCSS support for Vim
-Plugin 'tpope/vim-haml'
+Plug 'tpope/vim-haml'
 
 " Lean & mean status/tabline for vim that's light as air
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " CJSX files. Coffeescript with React JSX
-Plugin 'mtscout6/vim-cjsx'
+Plug 'mtscout6/vim-cjsx'
 
 " Markdown syntax for vim
-Plugin 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 
 " Less syntax support
-Plugin 'groenewege/vim-less'
+Plug 'groenewege/vim-less'
 
 " Scala support
-Plugin 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-scala'
 
 " Colors CSS tags with the appropriate color.
-Plugin 'skammer/vim-css-color'
+Plug 'skammer/vim-css-color'
 
 " Add CSS3 syntax support to vim's built-in `syntax/css.vim`
-Plugin 'hail2u/vim-css3-syntax'
+Plug 'hail2u/vim-css3-syntax'
 
 " Javascript & ES6 support for vim
-Plugin 'othree/yajs.vim'
-Plugin 'othree/es.next.syntax.vim'
-" NOTE: As of 2/2/16 yajs indenting only worked if vim-javascript was
-" PluginInstall'ed first, then deactivated with the folder still present
-" Plugin 'emorikawa/vim-javascript'
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
 
 " CoffeeScript support for vim
-Plugin 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 
 " Typescript support"
-Plugin 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim'
 
 " Shows indent level
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Solarized theme (only used for light-mode)
 " Use `evan` theme for dark mode
-Plugin 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 
 
 " Helps my workflow "
 """""""""""""""""""""
 " Ruby on Rails power tools
-Plugin 'tpope/vim-rails'
+" Plug 'tpope/vim-rails'
 
 " Run Rspec specs from Vim
-Plugin 'thoughtbot/vim-rspec'
+" Plug 'thoughtbot/vim-rspec'
 
 
 " Helps me search "
 """""""""""""""""""
-Plugin 'grep.vim'
-
 " Faster, better search built on top of `ag` aka `the_silver_searcher`
-Plugin 'rking/ag.vim'
+Plug 'rking/ag.vim'
+
+" A nice interface to searching via ack (now replaced by ag the silver
+" searcher). Completely replaces grep
+Plug 'mileszs/ack.vim'
 
 
 " Helps me collaborate "
 """"""""""""""""""""""""
 " A Git wrapper so awesome, it should be illegal
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Helps me track my work "
 """"""""""""""""""""""""""
 " Awesome time/productivity tracker.
-" Plugin 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""" KEY MAPPINGS """"""""""""""""""""""""""""""""
@@ -191,7 +181,6 @@ filetype plugin indent on    " required
 " Keymappings are ordered first by frequency of use.
 
 let mapleader = ","
-
 
 " Quick escaping
 inoremap jk <Esc>
@@ -271,6 +260,44 @@ nnoremap <leader>' ysiw'e
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
 
+""""" AWESOME SEARCHING
+" Fuzzy finding via fzf
+nnoremap <C-p> :FZF<CR>
+" Jumping to tags.
+" NOTE This must have ctags enabled for the project
+" By default <C-]> will jump into a tag.
+" This requires FZF in installed with utility fn below
+nnoremap <C-[> :pop<CR>
+nnoremap <C-T> :Tags<CR>
+nnoremap <Leader>t :BTags<CR>
+
+"In visual mode when you press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>n<S-n>
+vnoremap <silent> # :call VisualSearch('b')<CR>n<S-n>
+vnoremap <silent> <C-f> :call VisualSearch('f')<CR>n<S-n>
+vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Ack <C-r>"<CR>
+vnoremap <silent> <Leader>f :call VisualSearch('f')<CR>n<S-n>ygn:Ack <C-r>"<CR>
+
+" Search and highlight what's under the cursor. Also automatically copies
+" the word to both yank and the mac paste buffer thanks to
+" clipboard=unnamed
+nnoremap <C-f> yiw:Subvert/<C-r>"<CR><S-n>
+
+" Search via grep what's under the cursor.
+nnoremap <D-F> *<S-n>ye:Ack <C-r>"<CR>
+nnoremap <Leader>f *<S-n>ye:Ack <C-r>"<CR>
+
+" Unhighlight
+noremap <space> :nohl<CR>
+
+" Space bar searching via Subvert
+" Part of Tim Pope's Abolish plugin
+" http://vimcasts.org/episodes/smart-search-with-subvert/
+noremap / :Subvert/
+
+noremap <S-Space> :Ack 
+noremap <Leader><Space> :Ack 
+
 """"" FILE MANAGEMENT
 " Peep open to search between files
 if has("gui_macvim")
@@ -294,30 +321,6 @@ nnoremap <Leader>dd :call delete(expand('%'))<CR>:BD<CR>
 
 " Create (or edit) another file in the same directory as the current file
 nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
-
-
-""""" AWESOME SEARCHING
-"In visual mode when you press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>n<S-n>
-vnoremap <silent> # :call VisualSearch('b')<CR>n<S-n>
-vnoremap <silent> <C-f> :call VisualSearch('f')<CR>n<S-n>
-vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Gr <C-r>"<CR>
-
-" Search and highlight what's under the cursor. Also automatically copies
-" the word to both yank and the mac paste buffer thanks to
-" clipboard=unnamed
-nnoremap <C-f> yiw:Subvert/<C-r>"<CR><S-n>
-
-" Search via grep what's under the cursor.
-nnoremap <D-F> *<S-n>ye:Gr <C-r>"<CR>
-
-" Unhighlight
-noremap <S-Space> :nohl<CR>
-
-" Space bar searching via Subvert
-" Part of Tim Pope's Abolish plugin
-" http://vimcasts.org/episodes/smart-search-with-subvert/
-noremap <space> :Subvert/
 
 
 """"" GIT COMMANDS
@@ -350,6 +353,7 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 " Puts current file name in the mac paste buffer. Useful for operating on
 " the file from the command line.
 noremap <D-Y> :CopyTitle<CR><CR>
+noremap <Leader>y :CopyTitle<CR><CR>
 
 "Info about the character undernath cursor
 nnoremap gi ga
@@ -390,6 +394,10 @@ noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
 
 " Convert RSpec should to expect syntax
 nnoremap <Leader>cse :call ConvertShouldToExpect()<CR>
+
+""" Autoformat
+map <C-Y> :call yapf#YAPF()<cr>
+imap <C-Y> <c-o>:call yapf#YAPF()<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -436,45 +444,22 @@ set guioptions-=T " Removes GUI bars
 set guioptions-=l " Removes scrollbars
 set guioptions-=r " Removes scrollbars
 set guioptions-=b " Removes scrollbars
-set colorcolumn=75 " Have a line of at 75 characters.
+set colorcolumn=100 " Have a line of at 100 characters.
 set pastetoggle=<F2> " Binds F2 to pastetoggling
 set clipboard=unnamed " All yank commands now go to mac clipboard
 let &t_Sf="\<Esc>[3%dm" " Term foreground color
 let &t_Sb="\<Esc>[4%dm" " Term background color
 let &t_te="\<Esc>[?47l" " Output of termcap mode
 let &t_ti="\<Esc>[?47h" " Term in termcap mode
-if has("gui_macvim")
-  set backspace+=start,eol,indent " Make backspace work properly on vim
-endif
-set guifont=Menlo\ for\ Powerline " See Install folder
+set backspace+=start,eol,indent " Make backspace work properly on vim
 set wildmode=list:longest,full " Bash command line tab completion
 set listchars=tab:\|\ ,trail:●,extends:>,precedes:<,nbsp:+
-
-if has("gui_macvim")
-  match LineTooLong /\%>74v.\+/ " 74 character lines.
-endif
-
-" We use Airline now. These are kept here for future reference.
-" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""" CUSTOM COMMANDS """""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Removes all trailing whitespace
 command! Whitespace %s/\s\+$//e
-
-" Grep case insensitive
-command! -nargs=1 Gri Grep -ErinI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
-
-" Grep case sensitive
-command! -nargs=1 Gr Grep -ErnI --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=saved_state --exclude-dir=Electron.app --exclude-dir=site-packages --exclude-dir=build/lib/maple --exclude-dir=fixtures --exclude-dir=maple/build --exclude=\*.min.js <args> .
-
-" Grep through coffeescript
-command! -nargs=1 Grc Grep -ErinI --include=\*.coffee --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
-
-" Grep through ruby
-command! -nargs=1 Grr Grep -ErinI --include=\*.rb --exclude-dir=log --exclude-dir=tmp --exclude-dir=coverage --exclude-dir=.git <args> .
 
 command! CopyTitle !echo "%\c" | pbcopy
 
@@ -498,13 +483,14 @@ augroup END
 
 " Python "
 """"""""""
+" Suggesations here: https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
 augroup filetype_python
   autocmd!
   autocmd FileType python setlocal
     \ tabstop=4
     \ softtabstop=4
     \ shiftwidth=4
-    \ textwidth=73
+    \ textwidth=100
 
   autocmd BufWrite *.py :call DeleteTrailingWS() "Deletes trailing whitepace
   let python_highlight_all = 1
@@ -699,6 +685,12 @@ endfunction
 """""""""""
 let sparkupNextMapping = '<M-e>'
 
+" Searching "
+"""""""""""""
+" https://github.com/ggreer/the_silver_searcher#vim
+" You can use Ag with [ack.vim][] by adding the following line to your .vimrc:
+let g:ackprg = 'ag --vimgrep'
+
 " Vim Indent Guides "
 """""""""""""""""""""
 let g:indent_guides_auto_colors = 0
@@ -709,90 +701,152 @@ augroup END
 
 " YouCompleteMe and UltiSnips "
 """"""""""""""""""""""""""""""
-" https://github.com/Valloric/YouCompleteMe/issues/759
-" When compiling YCM, install.sh needs to be changed to point to
-" libpython and the python include directory. It by default can't detect
-" pyenv's path structure
+" " How to integrate UltiSnips and YouCompleteMe
+" let g:UltiSnipsExpandTrigger       = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+"
+" " Enable tabbing through list of results
+" function! g:UltiSnips_Complete()
+"     call UltiSnips#ExpandSnippet()
+"     if g:ulti_expand_res == 0
+"         if pumvisible()
+"             return "\<C-n>"
+"         else
+"             call UltiSnips#JumpForwards()
+"             if g:ulti_jump_forwards_res == 0
+"                return "\<TAB>"
+"             endif
+"         endif
+"     endif
+"     return ""
+" endfunction
+"
+" au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+"
+" " Expand snippet or return
+" let g:ulti_expand_res = 0
+" function! Ulti_ExpandOrEnter()
+"     call UltiSnips#ExpandSnippet()
+"     if g:ulti_expand_res
+"         return ''
+"     else
+"         return "\<return>"
+" endfunction
+"
+" " Set <space> as primary trigger
+" inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 
-" let g:ycm_path_to_python_interpreter = '/Users/evanmorikawa/.pyenv/versions/2.7.5/bin/python'
-" https://groups.google.com/forum/#!topic/ycm-users/l-d6Wfe-kgk
-" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+" Linting "
+"""""""""""
+let g:ale_linters = {
+\   'python': ['flake8', 'mypy'],
+\}
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 
-" How to integrate UltiSnips and YouCompleteMe
-let g:UltiSnipsExpandTrigger       = "<tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" Enable tabbing through list of results
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" Expand snippet or return
-let g:ulti_expand_res = 0
-function! Ulti_ExpandOrEnter()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res
-        return ''
-    else
-        return "\<return>"
-endfunction
-
-" Set <space> as primary trigger
-inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
-
-" Syntastic "
+" Ctags + FZF
 """""""""""""
-let g:syntastic_ignore_files = ['\m.*_templates\.html\.erb']
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump=0
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:syntastic_python_checkers = ['flake8']
-let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint_d')
-let g:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_coffee_checkers = ['coffeelint']
+" https://github.com/junegunn/fzf/wiki/Examples-(vim)#jump-to-tags
+function! s:tags_sink(line)
+  let parts = split(a:line, '\t\zs')
+  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
+  execute 'silent e' parts[1][:-2]
+  let [magic, &magic] = [&magic, 0]
+  execute excmd
+  let &magic = magic
+endfunction
+
+function! s:tags()
+  if empty(tagfiles())
+    echohl WarningMsg
+    echom 'Preparing tags'
+    echohl None
+    call system('ctags -R')
+  endif
+
+  call fzf#run({
+  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
+  \            '| grep -v -a ^!',
+  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+  \ 'down':    '40%',
+  \ 'sink':    function('s:tags_sink')})
+endfunction
+
+command! Tags call s:tags()
+
+" Jump to tags in the current buffer
+" https://github.com/junegunn/fzf/wiki/Examples-(vim)#jump-to-tags-in-the-current-buffer
+function! s:align_lists(lists)
+  let maxes = {}
+  for list in a:lists
+    let i = 0
+    while i < len(list)
+      let maxes[i] = max([get(maxes, i, 0), len(list[i])])
+      let i += 1
+    endwhile
+  endfor
+  for list in a:lists
+    call map(list, "printf('%-'.maxes[v:key].'s', v:val)")
+  endfor
+  return a:lists
+endfunction
+
+function! s:btags_source()
+  let lines = map(split(system(printf(
+    \ 'ctags -f - --sort=no --excmd=number --language-force=%s %s',
+    \ &filetype, expand('%:S'))), "\n"), 'split(v:val, "\t")')
+  if v:shell_error
+    throw 'failed to extract tags'
+  endif
+  return map(s:align_lists(lines), 'join(v:val, "\t")')
+endfunction
+
+function! s:btags_sink(line)
+  execute split(a:line, "\t")[2]
+endfunction
+
+function! s:btags()
+  try
+    call fzf#run({
+    \ 'source':  s:btags_source(),
+    \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+    \ 'down':    '40%',
+    \ 'sink':    function('s:btags_sink')})
+  catch
+    echohl WarningMsg
+    echom v:exception
+    echohl None
+  endtry
+endfunction
+
+command! BTags call s:btags()
 
 " Airline "
 """""""""""
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#checks = [ 'indent' ]
-let g:airline#extensions#fugitive#enabled = 1
-let g:airline_theme_patch_func = 'AirlineThemePatch'
-let g:airline_theme="tomorrow"
-function! AirlineThemePatch(palette)
-  " This is based off of the 'tomorrow' theme with some inspiration from
-  " zenburn
-  let s:IA = airline#themes#get_highlight('NonText')
-
-  let s:N1 = airline#themes#get_highlight2(['DbgCurrent', 'bg'], ['Folded', 'fg'], 'bold')
-  let s:N2 = airline#themes#get_highlight('Folded')
-  let s:N3 = airline#themes#get_highlight('NonText')
-  let a:palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
-
-  let a:palette.insert.airline_c = s:IA
-  let a:palette.insert.airline_x = s:IA
-  let a:palette.replace.airline_c = s:IA
-  let a:palette.replace.airline_x = s:IA
-  let a:palette.visual.airline_c = s:IA
-  let a:palette.visual.airline_x = s:IA
-
-  let s:MOD = airline#themes#get_highlight2(['Error','bg'], ['NonText', 'bg'])
-  let a:palette.normal_modified.airline_c = s:MOD
-
-  let a:palette.inactive = airline#themes#generate_color_map(s:IA, s:IA, s:IA)
-endfunction
+" let g:airline#extensions#whitespace#checks = [ 'indent' ]
+" let g:airline#extensions#fugitive#enabled = 1
+" let g:airline_theme_patch_func = 'AirlineThemePatch'
+" let g:airline_theme="tomorrow"
+" function! AirlineThemePatch(palette)
+"   " This is based off of the 'tomorrow' theme with some inspiration from
+"   " zenburn
+"   let s:IA = airline#themes#get_highlight('NonText')
+" 
+"   let s:N1 = airline#themes#get_highlight2(['DbgCurrent', 'bg'], ['Folded', 'fg'], 'bold')
+"   let s:N2 = airline#themes#get_highlight('Folded')
+"   let s:N3 = airline#themes#get_highlight('NonText')
+"   let a:palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
+" 
+"   let a:palette.insert.airline_c = s:IA
+"   let a:palette.insert.airline_x = s:IA
+"   let a:palette.replace.airline_c = s:IA
+"   let a:palette.replace.airline_x = s:IA
+"   let a:palette.visual.airline_c = s:IA
+"   let a:palette.visual.airline_x = s:IA
+" 
+"   let s:MOD = airline#themes#get_highlight2(['Error','bg'], ['NonText', 'bg'])
+"   let a:palette.normal_modified.airline_c = s:MOD
+" 
+"   let a:palette.inactive = airline#themes#generate_color_map(s:IA, s:IA, s:IA)
+" endfunction

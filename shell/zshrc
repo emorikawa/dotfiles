@@ -6,6 +6,8 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
+export PATH=$PATH:/usr/local/sbin
+
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="evan"
 export UPDATE_ZSH_DAYS=30
@@ -18,6 +20,8 @@ autoload -U colors && colors
 
 # Aliases #
 ###########
+alias clc='cd $HOME/Code/cloud-core'
+
 ## Zsh
 alias zrc='vim $HOME/.zshrc'
 alias zs='source ~/.zshrc'
@@ -42,10 +46,20 @@ alias gcl='git clone'
 alias ga='git add -A'
 alias gf='git fetch -p'
 alias gd='git difftool'
+alias gdl='git difftool HEAD~1..HEAD'
+alias gup='git fetch -a && git branch -f master origin/master && git rebase master'
 alias gdm='git difftool $(git log -1 --author=$(git config user.email) --pretty=format:"%h") HEAD'
 alias grem='git remote -v'
 alias gres='git reset'
 alias greb='git rebase'
+
+_yapflint() { yapf --in-place $1 && flake8 $1 && mypy $1; }
+alias yapflint="_yapflint"
+
+# Returns whether the given command is executable or aliased.
+_has() {
+  return $( whence $1 >/dev/null )
+}
 
 # Unicode Input #
 #################
@@ -60,3 +74,21 @@ source $HOME/.weather/weather.zsh
 
 # Initialize Scripts #
 ##########################
+source $(brew --prefix autoenv)/activate.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# fzf + ag configuration
+# Be sure to `brew install fzf the_silver_searcher`
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if _has fzf && _has ag; then
+  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS='
+  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+  '
+fi
