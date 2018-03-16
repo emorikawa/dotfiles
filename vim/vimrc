@@ -1,43 +1,3 @@
-" NYC Python 2018-03-15
-" The IDEs of March. Vim Edition
-"
-" 1. Vim as an IDE
-"   - Split panes
-"   - FZF fuzzy finding
-"     - in vim via ctrl
-"     - on terminal via ** or C-T, C-R
-"   - Searching with AG
-"     - C-F to search on page
-"     - C-N to mass replace
-"     - <Leader>f to site-wide search via the silver sercher
-"     - on terminal (yet again) as grep replacement
-"   - Ctags integration
-"     - C-] goto def
-"     - C-[ return from def
-"     - C-T site-wide tags & defs
-"     - <Leader>-T file defs
-"   - Autocomplete
-"     - via tab completion.
-"   - Linter and Yapf
-"     - automatic linting and yapf fixes (in the background)
-" 2. Vim being awesome
-"   - Vertical selection & editing
-"   - Macros
-" 3. Personal vim tricks
-"   - jk/df to escape
-" 4. Resources
-"   - emorikawa/dotfiles/vim
-"   - Tim Pope
-"   - Vimcasts
-"   - vim.wikia.com
-"   - vimeawesome.com
-"
-" one first example
-" two second example
-" three third example
-" four fourth example
-"
-"
 " The vimrc file of Evan Morikawa
 " evan@evanmorikawa.com
 " @e0m
@@ -307,7 +267,8 @@ nnoremap <C-p> :FZF<CR>
 " NOTE This must have ctags enabled for the project
 " By default <C-]> will jump into a tag.
 " This requires FZF in installed with utility fn below
-nnoremap <C-[> :pop<CR>
+" nnoremap <C-[> :pop<CR>
+nnoremap <C-\[> :pop<CR>
 nnoremap <C-T> :Tags<CR>
 nnoremap <Leader>t :BTags<CR>
 
@@ -339,11 +300,6 @@ noremap <S-Space> :Ack
 noremap <Leader><Space> :Ack 
 
 """"" FILE MANAGEMENT
-" Peep open to search between files
-if has("gui_macvim")
-  map <C-e> <Plug>PeepOpen
-end
-
 " Close buffer but keep split open
 " Uses bufkill.vim
 noremap <C-Q> :BD<CR>
