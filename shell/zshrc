@@ -92,3 +92,7 @@ if _has fzf && _has ag; then
   --color info:108,prompt:109,spinner:108,pointer:168,marker:168
   '
 fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

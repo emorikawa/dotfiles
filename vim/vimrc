@@ -44,12 +44,15 @@ Plug 'michaeljsmith/vim-indent-object'
 " <tab> after a snippet key
 " http://vimcasts.org/episodes/meet-ultisnips/
 " Snippets are separated from the engine.
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Yapf is the Python autoformatter.
 " See https://github.com/google/yapf/tree/master/plugins
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+
+" The Javascript autoformatter
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Enable repeating supported plugin maps with '.'
 Plug 'tpope/vim-repeat'
@@ -93,7 +96,7 @@ Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 " http://valloric.github.io/YouCompleteMe/
 " IMPORTANT: You must go to ~/.vim/plugged/YouCompleteMe and run ./install.py
 " You may need to do a `brew install cmake` first.
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 
 " Helps me see "
@@ -121,7 +124,8 @@ Plug 'groenewege/vim-less'
 Plug 'derekwyatt/vim-scala'
 
 " Colors CSS tags with the appropriate color.
-Plug 'skammer/vim-css-color'
+" NOTE: As of 2018-07-13 this dramatically slows down loading of html files. Disabled
+" Plug 'skammer/vim-css-color'
 
 " Add CSS3 syntax support to vim's built-in `syntax/css.vim`
 Plug 'hail2u/vim-css3-syntax'
@@ -155,9 +159,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 " Helps me search "
 """""""""""""""""""
-" Faster, better search built on top of `ag` aka `the_silver_searcher`
-Plug 'rking/ag.vim'
-
 " A nice interface to searching via ack (now replaced by ag the silver
 " searcher). Completely replaces grep
 Plug 'mileszs/ack.vim'
@@ -167,6 +168,8 @@ Plug 'mileszs/ack.vim'
 """"""""""""""""""""""""
 " A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-fugitive'
+" Needed by Fugitive to open on GitHub.com
+Plug 'tpope/vim-rhubarb'
 
 " Helps me track my work "
 """"""""""""""""""""""""""
@@ -256,6 +259,8 @@ noremap <c-l> <c-w>l
 nnoremap <leader>" ysiw"e
 nnoremap <leader>' ysiw'e
 
+nnoremap <leader>j :join<CR>
+
 " A new motion that selects in the next or prev set of parenthesis
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
@@ -267,8 +272,6 @@ nnoremap <C-p> :FZF<CR>
 " NOTE This must have ctags enabled for the project
 " By default <C-]> will jump into a tag.
 " This requires FZF in installed with utility fn below
-" nnoremap <C-[> :pop<CR>
-nnoremap <C-\[> :pop<CR>
 nnoremap <C-T> :Tags<CR>
 nnoremap <Leader>t :BTags<CR>
 
@@ -740,6 +743,10 @@ let g:ale_linters = {
 \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+let g:airline#extensions#ale#enabled = 1
+" let g:ale_python_flake8_executable='/bin/sh -c "cd $(dirname %) && flake8"'
+" let g:ale_python_mypy_executable='/bin/sh -c "cd $(dirname %) && mypy"'
+let g:ale_python_mypy_options='--config-file=/Users/evanmorikawa/Code/cloud-core/mypy.ini'
 
 " Ctags + FZF
 """""""""""""

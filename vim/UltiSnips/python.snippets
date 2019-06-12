@@ -524,4 +524,40 @@ class Test${1:Class}(${2:unittest.TestCase}):
 		${7:pass}
 endsnippet
 
+snippet fff "import header"
+# coding=utf-8
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
+
+
+endsnippet
+
+snippet uses "unsharded session scope"
+from nylas.db.unsharded.models.session import session_scope as unsharded_session_scope
+
+endsnippet
+
+snippet wuses "with unsharded session scope"
+with unsharded_session_scope() as unsharded_session:
+    
+endsnippet
+
+########
+# MYPY #
+########
+snippet tses "import Sesssion"
+from sqlalchemy.orm.session import Session  # noqa
+endsnippet
+
+snippet monk "import Monkeypatch"
+from nylas.common.types import Monkeypatch  # noqa
+endsnippet
+
+snippet tif "if TYPE_CHECKING"
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    
+endsnippet
+
 # vim:ft=snippets:
