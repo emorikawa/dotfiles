@@ -18,6 +18,8 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 autoload -U colors && colors
 
+eval "$(hub alias -s)"
+
 # Aliases #
 ###########
 alias clc='cd $HOME/Code/cloud-core'
@@ -71,11 +73,11 @@ zle -N insert-unicode-char
 # Weather Utility #
 ##################
 source $HOME/.weather/weather.zsh
-
-# Initialize Scripts #
-##########################
-source $(brew --prefix autoenv)/activate.sh
-
+#
+# # Initialize Scripts #
+# ##########################
+# source $(brew --prefix autoenv)/activate.sh
+#
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -94,5 +96,18 @@ if _has fzf && _has ag; then
 fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# export PATH="$PATH:$HOME/.rvm/bin"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+# Setup pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+export ANSIBLE_VAULT_PASSWORD_FILE=/Users/evanmorikawa/.ssh/vault-password-file.txt

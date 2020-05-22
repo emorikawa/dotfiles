@@ -47,9 +47,9 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-" Yapf is the Python autoformatter.
-" See https://github.com/google/yapf/tree/master/plugins
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+" Black is a Python autoformatter.
+" See https://github.com/psf/black
+Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' }
 
 " The Javascript autoformatter
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -91,6 +91,9 @@ Plug 'terryma/vim-multiple-cursors'
 " A parser for a condensed HTML format
 " <c-e> after a block of sparkup-formatted pre-html
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Sort python packages
+Plug 'fisadev/vim-isort'
 
 " Awesome autocomplete
 " http://valloric.github.io/YouCompleteMe/
@@ -146,6 +149,10 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Solarized theme (only used for light-mode)
 " Use `evan` theme for dark mode
 " Plug 'altercation/vim-colors-solarized'
+
+" Terraform plugin
+" See https://github.com/hashivim/vim-terraform
+Plug 'hashivim/vim-terraform'
 
 
 " Helps my workflow "
@@ -395,8 +402,9 @@ noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
 nnoremap <Leader>cse :call ConvertShouldToExpect()<CR>
 
 """ Autoformat
-map <C-Y> :call yapf#YAPF()<cr>
-imap <C-Y> <c-o>:call yapf#YAPF()<cr>
+map <C-B> :Black<cr>
+map <Leader>i :Isort<cr>
+let g:vim_isort_map = ''
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -744,9 +752,12 @@ let g:ale_linters = {
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:airline#extensions#ale#enabled = 1
+let g:ale_python_mypy_options='--python-version 2.7 --ignore-missing-imports --disallow-untyped-defs --show-error-codes --warn-redundant-casts --warn-unused-ignores'
 " let g:ale_python_flake8_executable='/bin/sh -c "cd $(dirname %) && flake8"'
 " let g:ale_python_mypy_executable='/bin/sh -c "cd $(dirname %) && mypy"'
-let g:ale_python_mypy_options='--config-file=/Users/evanmorikawa/Code/cloud-core/mypy.ini'
+" let g:ale_python_mypy_executable='/usr/local/bin/mypy'
+let g:ale_python_mypy_use_global = 1
+let g:ale_python_mypy_change_directory=0
 
 " Ctags + FZF
 """""""""""""
