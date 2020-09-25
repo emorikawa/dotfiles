@@ -38,7 +38,6 @@ brew install vim # we need the non-system vim
 brew install the_silver_searcher # to search faster and respect .gitignore
 brew install fzf # an awesome file fuzzy-finder
 $(brew --prefix)/opt/fzf/install  # adds cool command line integration
-brew install cmake # required for YouCompleteMe
 echo ""
 echo "===>  Installing VIM  <==="
 echo "--->  Backing up any previous .vimrc"
@@ -70,6 +69,7 @@ ln -sf $BASEDIR/vim/UltiSnips $HOME/.vim/UltiSnips
 # Installing zsh
 echo ""
 echo "===>  Installing zsh  <==="
+brew install zsh
 zshpath=$(which zsh)
 if [ $? -eq 1 ]; then
   echo "XXX>  Please install zsh <XXX"
@@ -88,10 +88,10 @@ else
   ln -sf $BASEDIR/shell/oh-my-zsh $HOME/.oh-my-zsh
 
   echo "--->  Installing weather plugin"
-  ln -sf $BASEDIR/shell/weather $HOME/.weather
-  if [[ -d $HOME/Library/LaunchAgents ]]; then
-    cp $BASEDIR/shell/weather/e0m.weather.plist $HOME/Library/LaunchAgents
-  fi
+  # ln -sf $BASEDIR/shell/weather $HOME/.weather
+  # if [[ -d $HOME/Library/LaunchAgents ]]; then
+  #   cp $BASEDIR/shell/weather/e0m.weather.plist $HOME/Library/LaunchAgents
+  # fi
 
   echo "--->  Installing customized theme"
   cp $BASEDIR/shell/evan.zsh-theme $BASEDIR/shell/oh-my-zsh/themes

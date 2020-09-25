@@ -49,7 +49,7 @@ Plug 'honza/vim-snippets'
 
 " Black is a Python autoformatter.
 " See https://github.com/psf/black
-Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' }
+Plug 'psf/black'
 
 " The Javascript autoformatter
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -153,6 +153,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Terraform plugin
 " See https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
+let g:terraform_fmt_on_save=1
 
 
 " Helps my workflow "
@@ -402,7 +403,9 @@ noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
 nnoremap <Leader>cse :call ConvertShouldToExpect()<CR>
 
 """ Autoformat
+" See https://black.readthedocs.io/en/stable/editor_integration.html#vim
 map <C-B> :Black<cr>
+autocmd BufWritePre *.py execute ':Black'
 map <Leader>i :Isort<cr>
 let g:vim_isort_map = ''
 

@@ -22,7 +22,14 @@ eval "$(hub alias -s)"
 
 # Aliases #
 ###########
+alias k='kubectl'
+
 alias clc='cd $HOME/Code/cloud-core'
+alias ctf='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws'
+alias usw2='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws/us-west-2/nylas/cloudcore'
+alias cac1='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws/ca-central-1/nylas'
+alias euw1='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws/eu-west-1/nylas'
+alias ctm='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws/modules/nylas'
 
 ## Zsh
 alias zrc='vim $HOME/.zshrc'
@@ -42,21 +49,18 @@ alias gla='git lga'
 alias gpl='git pull'
 alias yolo='git push --force'
 alias gs='git status'
-alias gmb='git merge-base HEAD master'
+alias gmb='git merge-base HEAD main'
 alias gc='git commit -a'
 alias gcl='git clone'
 alias ga='git add -A'
 alias gf='git fetch -p'
 alias gd='git difftool'
 alias gdl='git difftool HEAD~1..HEAD'
-alias gup='git fetch -a && git branch -f master origin/master && git rebase master'
+alias gup='git fetch -a && git branch -f main origin/main && git rebase main'
 alias gdm='git difftool $(git log -1 --author=$(git config user.email) --pretty=format:"%h") HEAD'
 alias grem='git remote -v'
 alias gres='git reset'
 alias greb='git rebase'
-
-_yapflint() { yapf --in-place $1 && flake8 $1 && mypy $1; }
-alias yapflint="_yapflint"
 
 # Returns whether the given command is executable or aliased.
 _has() {
@@ -72,15 +76,15 @@ zle -N insert-unicode-char
 
 # Weather Utility #
 ##################
-source $HOME/.weather/weather.zsh
+# source $HOME/.weather/weather.zsh
 #
 # # Initialize Scripts #
 # ##########################
 # source $(brew --prefix autoenv)/activate.sh
 #
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # fzf + ag configuration
 # Be sure to `brew install fzf the_silver_searcher`
@@ -98,13 +102,6 @@ fi
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 # export PATH="$PATH:$HOME/.rvm/bin"
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# Added by serverless binary installer
-export PATH="$HOME/.serverless/bin:$PATH"
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 # Setup pyenv
 eval "$(pyenv init -)"
