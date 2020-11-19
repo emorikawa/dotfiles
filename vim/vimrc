@@ -14,6 +14,9 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
+" Helps setup Vim properly "
+"""""""""""""""""
+Plug 'lambdalisue/vim-pyenv'
 
 " Helps me move "
 """""""""""""""""
@@ -95,6 +98,10 @@ Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Sort python packages
 Plug 'fisadev/vim-isort'
 
+" Vim Go
+Plug 'fatih/vim-go'
+" let g:go_metalinter_autosave = 1
+
 " Awesome autocomplete
 " http://valloric.github.io/YouCompleteMe/
 " IMPORTANT: You must go to ~/.vim/plugged/YouCompleteMe and run ./install.py
@@ -153,7 +160,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Terraform plugin
 " See https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
-let g:terraform_fmt_on_save=1
+let g:terraform_fmt_on_save=0
 
 
 " Helps my workflow "
@@ -329,6 +336,9 @@ nnoremap <Leader>dd :call delete(expand('%'))<CR>:BD<CR>
 " Create (or edit) another file in the same directory as the current file
 nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
+" Load scratchpad file
+nnoremap <leader>sp :e ~/.scratchpad.sh<CR>
+
 
 """"" GIT COMMANDS
 noremap gd :Gdiff<CR>
@@ -391,13 +401,13 @@ noremap <c-x> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 "Change to light bg
-noremap <leader>l :set background=light<cr>:colorscheme solarized<cr>
+" noremap <leader>l :set background=light<cr>:colorscheme solarized<cr>
 
 "Change to dark bg
-noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
+" noremap <leader>d :set background=dark<cr>:colorscheme evan<cr>
 
 " Convert RSpec should to expect syntax
 nnoremap <Leader>cse :call ConvertShouldToExpect()<CR>
@@ -405,9 +415,19 @@ nnoremap <Leader>cse :call ConvertShouldToExpect()<CR>
 """ Autoformat
 " See https://black.readthedocs.io/en/stable/editor_integration.html#vim
 map <C-B> :Black<cr>
-autocmd BufWritePre *.py execute ':Black'
+" autocmd BufWritePre *.py execute ':Black'
 map <Leader>i :Isort<cr>
 let g:vim_isort_map = ''
+
+"" Go Debugger from faith/vim-go
+" See https://github.com/fatih/vim-go/blob/master/doc/vim-go.txt#L2299
+" See :help GoDebug
+map <Leader>gdr :GoDebugStart . -listen_host localhost:5001 -staging<CR>
+map <Leader><Down> :GoDebugNext<CR>
+map <Leader><Right> :GoDebugStep<CR>
+map <Leader><Up> :GoDebugStepOut<CR>
+map <Leader><Left> :GoDebugBreakpoint<CR>
+map <Leader>c :GoDebugContinue<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -585,7 +605,8 @@ function! ExecuteFile()
   \   'sh': 'sh'
   \ }
   let cmd = get(filetype_to_command, &filetype, &filetype)
-  call RunShellCommand(cmd." %s")
+  call RunShellCommand(cmd." %s
+")
 endfunction
 
 " Enter any shell command and have the output appear in a new buffer
@@ -755,7 +776,7 @@ let g:ale_linters = {
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:airline#extensions#ale#enabled = 1
-let g:ale_python_mypy_options='--python-version 2.7 --ignore-missing-imports --disallow-untyped-defs --show-error-codes --warn-redundant-casts --warn-unused-ignores'
+let g:ale_python_mypy_options='--ignore-missing-imports --show-error-codes --warn-redundant-casts --warn-unused-ignores'
 " let g:ale_python_flake8_executable='/bin/sh -c "cd $(dirname %) && flake8"'
 " let g:ale_python_mypy_executable='/bin/sh -c "cd $(dirname %) && mypy"'
 " let g:ale_python_mypy_executable='/usr/local/bin/mypy'

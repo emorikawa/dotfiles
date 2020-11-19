@@ -6,7 +6,11 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
-export PATH=$PATH:/usr/local/sbin
+export GOPATH=$HOME/go
+
+export PATH=$PATH:/usr/local/sbin:$GOPATH/bin
+
+setopt HIST_IGNORE_SPACE
 
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="evan"
@@ -22,14 +26,11 @@ eval "$(hub alias -s)"
 
 # Aliases #
 ###########
-alias k='kubectl'
+alias kc='kubectl'
 
-alias clc='cd $HOME/Code/cloud-core'
-alias ctf='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws'
-alias usw2='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws/us-west-2/nylas/cloudcore'
-alias cac1='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws/ca-central-1/nylas'
-alias euw1='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws/eu-west-1/nylas'
-alias ctm='cd $HOME/Code/cloud-core/nylas/infrastructure/terraform/aws/modules/nylas'
+alias ai='cd $HOME/openai'
+alias api='cd $HOME/openai/api'
+alias tf='cd $HOME/openai/terraform-config-api'
 
 ## Zsh
 alias zrc='vim $HOME/.zshrc'
@@ -49,14 +50,14 @@ alias gla='git lga'
 alias gpl='git pull'
 alias yolo='git push --force'
 alias gs='git status'
-alias gmb='git merge-base HEAD main'
+alias gmb='git merge-base HEAD master'
 alias gc='git commit -a'
 alias gcl='git clone'
 alias ga='git add -A'
 alias gf='git fetch -p'
 alias gd='git difftool'
 alias gdl='git difftool HEAD~1..HEAD'
-alias gup='git fetch -a && git branch -f main origin/main && git rebase main'
+alias gup='git fetch -a && git branch -f master origin/master && git rebase master'
 alias gdm='git difftool $(git log -1 --author=$(git config user.email) --pretty=format:"%h") HEAD'
 alias grem='git remote -v'
 alias gres='git reset'
@@ -80,12 +81,6 @@ zle -N insert-unicode-char
 #
 # # Initialize Scripts #
 # ##########################
-# source $(brew --prefix autoenv)/activate.sh
-#
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # fzf + ag configuration
 # Be sure to `brew install fzf the_silver_searcher`
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -99,12 +94,39 @@ if _has fzf && _has ag; then
   '
 fi
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-# export PATH="$PATH:$HOME/.rvm/bin"
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 # Setup pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-export ANSIBLE_VAULT_PASSWORD_FILE=/Users/evanmorikawa/.ssh/vault-password-file.txt
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/em/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/em/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/em/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/em/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+
+# Open AI shell configs
+eval $(python -m rcall.shell)
+export API_REPO_PATH="/Users/em/openai/api"
+source ~/.api_shell_include
+source ~/.openai_keys
+docify() {
+    env="$1"
+    if [[ "$env" = "" ]] ; then
+        env=gce
+    fi
+    if [[ "$env" = api ]] ; then
+        export DOCKER_HOST=build-box.internal.api.openai.org:2376
+        export DOCKER_TLS_VERIFY=1
+        export DOCKER_CERT_PATH=~/.docker/build-box
+    elif [[ "$env" = local ]] ; then
+        unset DOCKER_API_VERSION
+        unset DOCKER_HOST DOCKER_CERT_PATH DOCKER_TLS_VERIFY DOCKER_MACHINE_NAME
+        unset OCEAN_REMOTE
+        export DOCKER_IP=127.0.0.1
+    else
+        echo "No such env: $env"
+    fi
+}
+docify api
