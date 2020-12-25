@@ -111,22 +111,6 @@ eval $(python -m rcall.shell)
 export API_REPO_PATH="/Users/em/openai/api"
 source ~/.api_shell_include
 source ~/.openai_keys
-docify() {
-    env="$1"
-    if [[ "$env" = "" ]] ; then
-        env=gce
-    fi
-    if [[ "$env" = api ]] ; then
-        export DOCKER_HOST=build-box.internal.api.openai.org:2376
-        export DOCKER_TLS_VERIFY=1
-        export DOCKER_CERT_PATH=~/.docker/build-box
-    elif [[ "$env" = local ]] ; then
-        unset DOCKER_API_VERSION
-        unset DOCKER_HOST DOCKER_CERT_PATH DOCKER_TLS_VERIFY DOCKER_MACHINE_NAME
-        unset OCEAN_REMOTE
-        export DOCKER_IP=127.0.0.1
-    else
-        echo "No such env: $env"
-    fi
-}
-docify api
+export DOCKER_HOST=build-box.internal.api.openai.org:2376
+export DOCKER_TLS_VERIFY=1
+export DOCKER_CERT_PATH=~/.docker/build-box
