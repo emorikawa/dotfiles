@@ -37,6 +37,9 @@ fi
 brew install vim # we need the non-system vim
 brew install the_silver_searcher # to search faster and respect .gitignore
 brew install fzf # an awesome file fuzzy-finder
+brew install hub
+brew install pyenv
+brew install pyenv-virtualenv
 $(brew --prefix)/opt/fzf/install  # adds cool command line integration
 echo ""
 echo "===>  Installing VIM  <==="

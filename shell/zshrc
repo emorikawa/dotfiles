@@ -28,9 +28,10 @@ eval "$(hub alias -s)"
 ###########
 alias kc='kubectl'
 
-alias ai='cd $HOME/openai'
-alias api='cd $HOME/openai/api'
-alias tf='cd $HOME/openai/terraform-config-api'
+alias c='cd $HOME/code'
+alias api='cd $HOME/code/api'
+alias tf='cd $HOME/code/terraform-config-api'
+alias mono='cd $HOME/code/openai'
 
 ## Zsh
 alias zrc='vim $HOME/.zshrc'
@@ -107,7 +108,6 @@ if [ -f '/Users/em/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Us
 
 
 # Open AI shell configs
-eval $(python -m rcall.shell)
 export API_REPO_PATH="/Users/em/openai/api"
 source ~/.api_shell_include
 source ~/.openai_keys
