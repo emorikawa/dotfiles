@@ -1,0 +1,22 @@
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[merge]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+[alias]
+  lga = "! git log --color --graph --branches --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  lg = "!git log --color --graph --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  update = "!f() { git fetch -a && if [ $(git rev-parse --abbrev-ref HEAD) == $1 ]; then git reset --hard origin/$1; else git branch -f $1 origin/$1; fi; }; f"
+  showtool = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev;  }; showci $1"
+  diff-log = "!f() { git log --oneline --format='%h %an %cr %s' $1; }; f"
+[user]
+	name = Evan Morikawa
+	email = em@openai.com

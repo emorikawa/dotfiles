@@ -57,6 +57,12 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 echo "--->  Linking snips"
 ln -sf $BASEDIR/vim/UltiSnips $HOME/.vim/UltiSnips
 
+echo "===>  Linking in gitconfig  <==="
+echo "--->  Backing up any previous .gitconfig"
+cp $HOME/.gitconfig $HOME/.gitconfig.bak
+echo "--->  Linking .gitconfig"
+ln -sf $BASEDIR/gitconfig $HOME/.gitconfig
+
 # Installing tmux
 # echo ""
 # echo "===>  Installing tmux <==="
