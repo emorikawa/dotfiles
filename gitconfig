@@ -19,4 +19,4 @@
   diff-log = "!f() { git log --oneline --format='%h %an %cr %s' $1; }; f"
 [user]
 	name = Evan Morikawa
-	email = em@openai.com
+	email = evan@evanmorikawa.com

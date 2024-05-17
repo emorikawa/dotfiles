@@ -34,7 +34,7 @@ Plug 'bkad/CamelCaseMotion'
 
 " A command-line fuzzy finder.
 " Requires brew install fzf to have been run first
-Plug '/usr/local/opt/fzf'
+" Plug '/usr/local/opt/fzf'
 
 " New text object at the same indent level
 Plug 'michaeljsmith/vim-indent-object'
@@ -47,15 +47,15 @@ Plug 'michaeljsmith/vim-indent-object'
 " <tab> after a snippet key
 " http://vimcasts.org/episodes/meet-ultisnips/
 " Snippets are separated from the engine.
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 " Black is a Python autoformatter.
 " See https://github.com/psf/black
-Plug 'psf/black'
+" Plug 'psf/black'
 
 " The Javascript autoformatter
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Enable repeating supported plugin maps with '.'
 Plug 'tpope/vim-repeat'
@@ -76,12 +76,12 @@ Plug 'tomtom/tcomment_vim'
 Plug 'jiangmiao/auto-pairs'
 
 " The new and hotness for syntax checking and linting. Replaces syntastic
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Easy text exchange operator for Vim
 " Mapped to cx
 " http://vimcasts.org/episodes/swapping-two-regions-of-text-with-exchange-vim/
-Plug 'tommcdo/vim-exchange'
+" Plug 'tommcdo/vim-exchange'
 
 " Vim motions on speed. Replaces the <number> in <number><motion>
 " <leader><leader><motion>
@@ -93,13 +93,13 @@ Plug 'terryma/vim-multiple-cursors'
 
 " A parser for a condensed HTML format
 " <c-e> after a block of sparkup-formatted pre-html
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Sort python packages
-Plug 'fisadev/vim-isort'
+" Plug 'fisadev/vim-isort'
 
 " Vim Go
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 " let g:go_metalinter_autosave = 1
 
 " Awesome autocomplete
@@ -115,40 +115,40 @@ Plug 'fatih/vim-go'
 " Plug 'mxw/vim-jsx'
 
 " HAML, SASS, SCSS support for Vim
-Plug 'tpope/vim-haml'
+" Plug 'tpope/vim-haml'
 
 " Lean & mean status/tabline for vim that's light as air
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " CJSX files. Coffeescript with React JSX
-Plug 'mtscout6/vim-cjsx'
+" Plug 'mtscout6/vim-cjsx'
 
 " Markdown syntax for vim
 Plug 'tpope/vim-markdown'
 
 " Less syntax support
-Plug 'groenewege/vim-less'
+" Plug 'groenewege/vim-less'
 
 " Scala support
-Plug 'derekwyatt/vim-scala'
+" Plug 'derekwyatt/vim-scala'
 
 " Colors CSS tags with the appropriate color.
 " NOTE: As of 2018-07-13 this dramatically slows down loading of html files. Disabled
 " Plug 'skammer/vim-css-color'
 
 " Add CSS3 syntax support to vim's built-in `syntax/css.vim`
-Plug 'hail2u/vim-css3-syntax'
+" Plug 'hail2u/vim-css3-syntax'
 
 " Javascript & ES6 support for vim
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
+" Plug 'othree/yajs.vim'
+" Plug 'othree/es.next.syntax.vim'
 
 " CoffeeScript support for vim
-Plug 'kchmck/vim-coffee-script'
+" Plug 'kchmck/vim-coffee-script'
 
 " Typescript support"
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
 
 " Shows indent level
 Plug 'nathanaelkane/vim-indent-guides'
@@ -176,15 +176,15 @@ let g:terraform_fmt_on_save=0
 """""""""""""""""""
 " A nice interface to searching via ack (now replaced by ag the silver
 " searcher). Completely replaces grep
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 
 
 " Helps me collaborate "
 """"""""""""""""""""""""
 " A Git wrapper so awesome, it should be illegal
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 " Needed by Fugitive to open on GitHub.com
-Plug 'tpope/vim-rhubarb'
+" Plug 'tpope/vim-rhubarb'
 
 " Helps me track my work "
 """"""""""""""""""""""""""
@@ -282,13 +282,13 @@ onoremap il( :<c-u>normal! F)vi(<cr>
 
 """"" AWESOME SEARCHING
 " Fuzzy finding via fzf
-nnoremap <C-p> :FZF<CR>
+" nnoremap <C-p> :FZF<CR>
 " Jumping to tags.
 " NOTE This must have ctags enabled for the project
 " By default <C-]> will jump into a tag.
 " This requires FZF in installed with utility fn below
-nnoremap <C-T> :Tags<CR>
-nnoremap <Leader>t :BTags<CR>
+" nnoremap <C-T> :Tags<CR>
+" nnoremap <Leader>t :BTags<CR>
 
 "In visual mode when you press * or # to search for the current selection
 vnoremap <silent> * :call VisualSearch('f')<CR>n<S-n>
@@ -303,8 +303,8 @@ vnoremap <silent> <Leader>f :call VisualSearch('f')<CR>n<S-n>ygn:Ack <C-r>"<CR>
 nnoremap <C-f> yiw:Subvert/<C-r>"<CR><S-n>
 
 " Search via grep what's under the cursor.
-nnoremap <D-F> *<S-n>ye:Ack <C-r>"<CR>
-nnoremap <Leader>f *<S-n>ye:Ack <C-r>"<CR>
+" nnoremap <D-F> *<S-n>ye:Ack <C-r>"<CR>
+" nnoremap <Leader>f *<S-n>ye:Ack <C-r>"<CR>
 
 " Unhighlight
 noremap <space> :nohl<CR>
@@ -341,16 +341,16 @@ nnoremap <leader>sp :e ~/.scratchpad.sh<CR>
 
 
 """"" GIT COMMANDS
-noremap gd :Gdiff<CR>
-noremap ga :Gwrite<CR>
-noremap gb :Gbrowse<CR>
-noremap gs :Gstatus<CR>
-noremap gc :Gcommit -a<CR>
-noremap gl :Gdiff HEAD~1<CR>
+" noremap gd :Gdiff<CR>
+" noremap ga :Gwrite<CR>
+" noremap gb :Gbrowse<CR>
+" noremap gs :Gstatus<CR>
+" noremap gc :Gcommit -a<CR>
+" noremap gl :Gdiff HEAD~1<CR>
 
 "Reselect visual block after indent/outdent
-vnoremap < <gv
-vnoremap > >gv
+" vnoremap < <gv
+" vnoremap > >gv
 
 " Edit Vimrc
 " $MYVIMRC points to the ~/.vimrc file
@@ -387,7 +387,7 @@ nnoremap <silent> zz @=(foldlevel('.')?'za':'l')<CR>
 vnoremap zz zf
 
 "Sparkup to create HTML
-let g:sparkupExecuteMapping = '<c-t>'
+" let g:sparkupExecuteMapping = '<c-t>'
 
 " How to create repeatable mappings
 " http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
@@ -422,12 +422,12 @@ let g:vim_isort_map = ''
 "" Go Debugger from faith/vim-go
 " See https://github.com/fatih/vim-go/blob/master/doc/vim-go.txt#L2299
 " See :help GoDebug
-map <Leader>gdr :GoDebugStart . -listen_host localhost:5001 -staging<CR>
-map <Leader><Down> :GoDebugNext<CR>
-map <Leader><Right> :GoDebugStep<CR>
-map <Leader><Up> :GoDebugStepOut<CR>
-map <Leader><Left> :GoDebugBreakpoint<CR>
-map <Leader>c :GoDebugContinue<CR>
+" map <Leader>gdr :GoDebugStart . -listen_host localhost:5001 -staging<CR>
+" map <Leader><Down> :GoDebugNext<CR>
+" map <Leader><Right> :GoDebugStep<CR>
+" map <Leader><Up> :GoDebugStepOut<CR>
+" map <Leader><Left> :GoDebugBreakpoint<CR>
+" map <Leader>c :GoDebugContinue<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -498,17 +498,17 @@ command! CopyTitle !echo "%\c" | pbcopy
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Coffeescript "
 """"""""""""""""
-augroup filetype_coffee
-  autocmd!
-  autocmd BufRead,BufNewFile *.coffee set ft=coffee
-augroup END
+" augroup filetype_coffee
+"   autocmd!
+"   autocmd BufRead,BufNewFile *.coffee set ft=coffee
+" augroup END
 
 " ES6 "
 """"""""""""""""
-augroup filetype_es6
-  autocmd!
-  autocmd BufRead,BufNewFile *.es6 set ft=javascript.jsx
-augroup END
+" augroup filetype_es6
+"   autocmd!
+"   autocmd BufRead,BufNewFile *.es6 set ft=javascript.jsx
+" augroup END
 
 
 " Python "
@@ -548,22 +548,22 @@ augroup END
 
 " Rabl "
 """"""""
-augroup filetype_rabl
-  autocmd!
-  autocmd BufRead,BufNewFile *.rabl set ft=ruby
-  autocmd BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
-  autocmd BufRead,BufNewFile *.rabl hi def link rubyRabl Function
-augroup END
+" augroup filetype_rabl
+"   autocmd!
+"   autocmd BufRead,BufNewFile *.rabl set ft=ruby
+"   autocmd BufRead,BufNewFile *.rabl syn keyword rubyRabl node attribute object child collection attributes glue extends
+"   autocmd BufRead,BufNewFile *.rabl hi def link rubyRabl Function
+" augroup END
 
 " RSpec "
 """"""""
-augroup filetype_rspec
-  autocmd!
-  autocmd BufRead,BufNewFile *_spec.rb syn keyword rubyRspecFn describe context expect is_expected before after shared_examples include_examples it_behaves_like
-  autocmd BufRead,BufNewFile *_spec.rb syn keyword rubyRspecKw it let to to_not subject
-  autocmd BufRead,BufNewFile *_spec.rb hi def link rubyRspecFn Function
-  autocmd BufRead,BufNewFile *_spec.rb hi def link rubyRspecKw Statement
-augroup END
+" augroup filetype_rspec
+"   autocmd!
+"   autocmd BufRead,BufNewFile *_spec.rb syn keyword rubyRspecFn describe context expect is_expected before after shared_examples include_examples it_behaves_like
+"   autocmd BufRead,BufNewFile *_spec.rb syn keyword rubyRspecKw it let to to_not subject
+"   autocmd BufRead,BufNewFile *_spec.rb hi def link rubyRspecFn Function
+"   autocmd BufRead,BufNewFile *_spec.rb hi def link rubyRspecKw Statement
+" augroup END
 
 " Markdown "
 """"""""""""
@@ -770,95 +770,95 @@ augroup END
 
 " Linting "
 """""""""""
-let g:ale_linters = {
-\   'python': ['flake8', 'mypy'],
-\}
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:airline#extensions#ale#enabled = 1
-let g:ale_python_mypy_options='--ignore-missing-imports --show-error-codes --warn-redundant-casts --warn-unused-ignores'
-" let g:ale_python_flake8_executable='/bin/sh -c "cd $(dirname %) && flake8"'
-" let g:ale_python_mypy_executable='/bin/sh -c "cd $(dirname %) && mypy"'
-" let g:ale_python_mypy_executable='/usr/local/bin/mypy'
-let g:ale_python_mypy_use_global = 1
-let g:ale_python_mypy_change_directory=0
+" let g:ale_linters = {
+" \   'python': ['flake8', 'mypy'],
+" \}
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_enter = 0
+" let g:airline#extensions#ale#enabled = 1
+" let g:ale_python_mypy_options='--ignore-missing-imports --show-error-codes --warn-redundant-casts --warn-unused-ignores'
+" " let g:ale_python_flake8_executable='/bin/sh -c "cd $(dirname %) && flake8"'
+" " let g:ale_python_mypy_executable='/bin/sh -c "cd $(dirname %) && mypy"'
+" " let g:ale_python_mypy_executable='/usr/local/bin/mypy'
+" let g:ale_python_mypy_use_global = 1
+" let g:ale_python_mypy_change_directory=0
 
 " Ctags + FZF
 """""""""""""
 " https://github.com/junegunn/fzf/wiki/Examples-(vim)#jump-to-tags
-function! s:tags_sink(line)
-  let parts = split(a:line, '\t\zs')
-  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
-  execute 'silent e' parts[1][:-2]
-  let [magic, &magic] = [&magic, 0]
-  execute excmd
-  let &magic = magic
-endfunction
-
-function! s:tags()
-  if empty(tagfiles())
-    echohl WarningMsg
-    echom 'Preparing tags'
-    echohl None
-    call system('ctags -R')
-  endif
-
-  call fzf#run({
-  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
-  \            '| grep -v -a ^!',
-  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-  \ 'down':    '40%',
-  \ 'sink':    function('s:tags_sink')})
-endfunction
-
-command! Tags call s:tags()
-
-" Jump to tags in the current buffer
-" https://github.com/junegunn/fzf/wiki/Examples-(vim)#jump-to-tags-in-the-current-buffer
-function! s:align_lists(lists)
-  let maxes = {}
-  for list in a:lists
-    let i = 0
-    while i < len(list)
-      let maxes[i] = max([get(maxes, i, 0), len(list[i])])
-      let i += 1
-    endwhile
-  endfor
-  for list in a:lists
-    call map(list, "printf('%-'.maxes[v:key].'s', v:val)")
-  endfor
-  return a:lists
-endfunction
-
-function! s:btags_source()
-  let lines = map(split(system(printf(
-    \ 'ctags -f - --sort=no --excmd=number --language-force=%s %s',
-    \ &filetype, expand('%:S'))), "\n"), 'split(v:val, "\t")')
-  if v:shell_error
-    throw 'failed to extract tags'
-  endif
-  return map(s:align_lists(lines), 'join(v:val, "\t")')
-endfunction
-
-function! s:btags_sink(line)
-  execute split(a:line, "\t")[2]
-endfunction
-
-function! s:btags()
-  try
-    call fzf#run({
-    \ 'source':  s:btags_source(),
-    \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-    \ 'down':    '40%',
-    \ 'sink':    function('s:btags_sink')})
-  catch
-    echohl WarningMsg
-    echom v:exception
-    echohl None
-  endtry
-endfunction
-
-command! BTags call s:btags()
+" function! s:tags_sink(line)
+"   let parts = split(a:line, '\t\zs')
+"   let excmd = matchstr(parts[2:], '^.*\ze;"\t')
+"   execute 'silent e' parts[1][:-2]
+"   let [magic, &magic] = [&magic, 0]
+"   execute excmd
+"   let &magic = magic
+" endfunction
+" 
+" function! s:tags()
+"   if empty(tagfiles())
+"     echohl WarningMsg
+"     echom 'Preparing tags'
+"     echohl None
+"     call system('ctags -R')
+"   endif
+" 
+"   call fzf#run({
+"   \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
+"   \            '| grep -v -a ^!',
+"   \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+"   \ 'down':    '40%',
+"   \ 'sink':    function('s:tags_sink')})
+" endfunction
+" 
+" command! Tags call s:tags()
+" 
+" " Jump to tags in the current buffer
+" " https://github.com/junegunn/fzf/wiki/Examples-(vim)#jump-to-tags-in-the-current-buffer
+" function! s:align_lists(lists)
+"   let maxes = {}
+"   for list in a:lists
+"     let i = 0
+"     while i < len(list)
+"       let maxes[i] = max([get(maxes, i, 0), len(list[i])])
+"       let i += 1
+"     endwhile
+"   endfor
+"   for list in a:lists
+"     call map(list, "printf('%-'.maxes[v:key].'s', v:val)")
+"   endfor
+"   return a:lists
+" endfunction
+" 
+" function! s:btags_source()
+"   let lines = map(split(system(printf(
+"     \ 'ctags -f - --sort=no --excmd=number --language-force=%s %s',
+"     \ &filetype, expand('%:S'))), "\n"), 'split(v:val, "\t")')
+"   if v:shell_error
+"     throw 'failed to extract tags'
+"   endif
+"   return map(s:align_lists(lines), 'join(v:val, "\t")')
+" endfunction
+" 
+" function! s:btags_sink(line)
+"   execute split(a:line, "\t")[2]
+" endfunction
+" 
+" function! s:btags()
+"   try
+"     call fzf#run({
+"     \ 'source':  s:btags_source(),
+"     \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+"     \ 'down':    '40%',
+"     \ 'sink':    function('s:btags_sink')})
+"   catch
+"     echohl WarningMsg
+"     echom v:exception
+"     echohl None
+"   endtry
+" endfunction
+" 
+" command! BTags call s:btags()
 
 " Airline "
 """""""""""
